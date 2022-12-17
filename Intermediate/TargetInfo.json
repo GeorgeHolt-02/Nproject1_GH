@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "Nproject1_GH",
+			"Path": "D:\\Geo_Work\\Geo_NUA_Work_Year_3\\Unit_3b\\UE5\\Nproject1_GH\\Source\\Nproject1_GH.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "Nproject1_GHEditor",
+			"Path": "D:\\Geo_Work\\Geo_NUA_Work_Year_3\\Unit_3b\\UE5\\Nproject1_GH\\Source\\Nproject1_GHEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

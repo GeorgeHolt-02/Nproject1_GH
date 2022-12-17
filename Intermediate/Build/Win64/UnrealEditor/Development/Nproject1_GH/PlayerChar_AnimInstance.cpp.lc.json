@@ -1,0 +1,29 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\source\\nproject1_gh\\playerchar_animinstance.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\intermediate\\build\\win64\\nproject1_gheditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\intermediate\\build\\win64\\unrealeditor\\development\\nproject1_gh\\definitions.nproject1_gh.h",
+            "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\source\\nproject1_gh\\playerchar_animinstance.h",
+            "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\intermediate\\build\\win64\\unrealeditor\\inc\\nproject1_gh\\playerchar_animinstance.generated.h",
+            "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\source\\nproject1_gh\\playerchar.h",
+            "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\source\\nproject1_gh\\playerblaster.h",
+            "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\intermediate\\build\\win64\\unrealeditor\\inc\\nproject1_gh\\playerblaster.generated.h",
+            "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\source\\nproject1_gh\\playershot.h",
+            "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\intermediate\\build\\win64\\unrealeditor\\inc\\nproject1_gh\\playershot.generated.h",
+            "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\intermediate\\build\\win64\\unrealeditor\\inc\\nproject1_gh\\playerchar.generated.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\pawnmovementcomponent.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\navmovementcomponent.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\ai\\navigation\\pathfollowingagentinterface.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\pathfollowingagentinterface.generated.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\movementcomponent.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\movementcomponent.generated.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\navmovementcomponent.generated.h",
+            "c:\\program files\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\pawnmovementcomponent.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

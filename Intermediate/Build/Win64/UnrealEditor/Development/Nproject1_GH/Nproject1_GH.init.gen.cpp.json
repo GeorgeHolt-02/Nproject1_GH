@@ -1,0 +1,13 @@
+{
+    "Version": "1.1",
+    "Data": {
+        "Source": "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\intermediate\\build\\win64\\unrealeditor\\inc\\nproject1_gh\\nproject1_gh.init.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\intermediate\\build\\win64\\nproject1_gheditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\intermediate\\build\\win64\\unrealeditor\\development\\nproject1_gh\\definitions.nproject1_gh.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
