@@ -5,6 +5,7 @@
 
 #include "PlayerChar.h"
 #include "Components/BoxComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABaseEnemy::ABaseEnemy()
@@ -93,9 +94,9 @@ void ABaseEnemy::InvulnPeriod(float DeltaTime)
 	}
 	else
 	{
-		if(EnemyCollider->GetCollisionObjectType() != ECC_GameTraceChannel8)
+		if(EnemyCollider->GetCollisionObjectType() != ECC_GameTraceChannel7)
 		{
-			EnemyCollider->SetCollisionObjectType(ECC_GameTraceChannel8);
+			EnemyCollider->SetCollisionObjectType(ECC_GameTraceChannel7);
 		}
 		if(bStopFlashing)
 		{
@@ -161,7 +162,7 @@ UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHi
 			{
 				if(!MyPlayer->bPositioningSweep)
 				{
-					MyPlayer->Destroy();
+					UGameplayStatics::OpenLevel(GetWorld(), FName(GetWorld()->GetCurrentLevel()->GetFullName()), true);
 				}
 			}
 		}

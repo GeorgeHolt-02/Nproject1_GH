@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "BaseEnemy.h"
+#include "PlayerChar.h"
 #include "Enemy_MuscleGrunt.generated.h"
 
 /**
@@ -34,6 +35,18 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
 	float Gravity;
 
+	/** What the Z-speed was on the previous frame */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement")
+	float OriginalZSpeed;
+
+	//** Translation vectors */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	FVector ForwardVector;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	FVector RightVector;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	FVector UpVector;
+
 	//** Terminal falling speed - the speed that the enemy caps at when falling */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
 	float TerminalFallSpeed;
@@ -41,6 +54,14 @@ public:
 	/** Whether or not a given sweep is done purely for positioning purposes */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool bPositioningSweep;
+
+	/** Player character reference */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	APlayerChar* Player;
+
+	/** Whether or not a player character is present */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool bPlayerPresent;
 	
 protected:
 	// Called when the game starts or when spawned
@@ -56,4 +77,20 @@ public:
 	virtual void VisibilityFlashing(float DeltaTime) override;
 	virtual void MainBehaviour(float DeltaTime) override;
 	virtual void DamageFunction(float Damage) override;
+
+	// Enemy gravity
+	void EnemyGravity(float DeltaTime);
+
+	// Called to cause ground collision effects
+	void GroundCollision(float DeltaTime);
+	// Called to cause ceiling collision effects
+	void CeilingCollision(float DeltaTime);
+
+	// Called to cap falling speed
+	void FallSpeedCap();
+
+	// Called on a hit
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+		FVector NormalImpulse, const FHitResult& HitResult);
 };
