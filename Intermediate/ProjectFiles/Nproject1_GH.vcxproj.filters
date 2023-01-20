@@ -12,6 +12,7 @@
       <Filter>Source</Filter>
     </None>
     <None Include="..\..\.gitattributes" />
+    <None Include="..\..\.gitignore" />
     <None Include="..\..\README.md" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
@@ -1448,6 +1449,12 @@
       <Filter>Source\Nproject1_GH</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\Nproject1_GH\BaseEnemy.h">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Nproject1_GH\Enemy_MuscleGrunt.cpp">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Nproject1_GH\Enemy_MuscleGrunt.h">
       <Filter>Source\Nproject1_GH</Filter>
     </ClInclude>
     <None Include="..\..\Source\Nproject1_GH\Nproject1_GH.Build.cs">

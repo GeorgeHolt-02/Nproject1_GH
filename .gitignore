@@ -21,3 +21,4 @@
 *.rst
 Plugins/Developer/RiderLink/Resources/checksum
 *.old
+*.png
