@@ -106,6 +106,8 @@ APlayerChar::APlayerChar()
 
 	InvulnTime = 0.0f;
 
+	bPositioningSweep = false;
+
 #pragma region ANIMATION VARIABLES
 
 	Anim_MovementInput = FVector2D(0.0f, 0.0f);
@@ -206,6 +208,8 @@ void APlayerChar::PlayerGroundMovement(float DeltaTime)
 void APlayerChar::PlayerGroundCollision(float DeltaTime)
 {
 	FVector OriginalPosition = GetActorLocation();
+
+	bPositioningSweep = true;
 	
 	bool GroundCheck = SetActorLocation((GetActorLocation() - FVector(0.0f, 0.0f, (((UpVector.Z * DeltaTime) * -1) + Gravity))), true);
 	
@@ -226,11 +230,15 @@ void APlayerChar::PlayerGroundCollision(float DeltaTime)
 		Anim_bInAir = false;
 		SetActorLocation(OriginalPosition);
 	}
+
+	bPositioningSweep = false;
 }
 
 void APlayerChar::PlayerCeilingCollision(float DeltaTime)
 {
 	FVector OriginalPosition = GetActorLocation();
+
+	bPositioningSweep = true;
 	
 	bool CeilingCheck = SetActorLocation((GetActorLocation() + FVector(0.0f, 0.0f, ((UpVector.Z * DeltaTime) + Gravity))), true);
 	
@@ -244,6 +252,8 @@ void APlayerChar::PlayerCeilingCollision(float DeltaTime)
 		UpVector = FVector(0.0f, 0.0f, 0.0f);
 		SetActorLocation(OriginalPosition);
 	}
+
+	bPositioningSweep = false;
 }
 
 void APlayerChar::PlayerFallSpeedCap()
@@ -274,17 +284,20 @@ void APlayerChar::PlayerGravity(float DeltaTime)
 void APlayerChar::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	FVector NormalImpulse, const FHitResult& HitResult)
 {
-	if(HitResult.bStartPenetrating)
+	if(!bPositioningSweep)
 	{
-		SetActorLocation(GetActorLocation() + HitResult.ImpactNormal);
-		UpVector = FVector(0.0f, 0.0f, (OriginalZSpeed - (FMath::Square(Gravity) * GetWorld()->GetDeltaSeconds())));
-		SetActorLocation((GetActorLocation() + (UpVector * GetWorld()->GetDeltaSeconds())), true);
-		//DrawDebugLine(GetWorld(), HitResult.ImpactPoint, HitResult.ImpactPoint + (HitResult.ImpactNormal * 100.0f), FColor::Green, false, 0.016667f, 0, 1);
-	}
+		if(HitResult.bStartPenetrating)
+		{
+			SetActorLocation(GetActorLocation() + HitResult.ImpactNormal);
+			UpVector = FVector(0.0f, 0.0f, (OriginalZSpeed - (FMath::Square(Gravity) * GetWorld()->GetDeltaSeconds())));
+			SetActorLocation((GetActorLocation() + (UpVector * GetWorld()->GetDeltaSeconds())), true);
+			//DrawDebugLine(GetWorld(), HitResult.ImpactPoint, HitResult.ImpactPoint + (HitResult.ImpactNormal * 100.0f), FColor::Green, false, 0.016667f, 0, 1);
+		}
 	
-	if(OtherComp)
-	{
-		AttachToComponent(OtherComp, FAttachmentTransformRules::KeepWorldTransform);
+		if(OtherComp)
+		{
+			AttachToComponent(OtherComp, FAttachmentTransformRules::KeepWorldTransform);
+		}
 	}
 }
 

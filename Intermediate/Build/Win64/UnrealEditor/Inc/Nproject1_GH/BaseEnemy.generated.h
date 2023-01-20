@@ -8,14 +8,25 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class UPrimitiveComponent;
+class AActor;
+struct FHitResult;
 #ifdef NPROJECT1_GH_BaseEnemy_generated_h
 #error "BaseEnemy.generated.h already included, missing '#pragma once' in BaseEnemy.h"
 #endif
 #define NPROJECT1_GH_BaseEnemy_generated_h
 
 #define FID_Nproject1_GH_Source_Nproject1_GH_BaseEnemy_h_12_SPARSE_DATA
-#define FID_Nproject1_GH_Source_Nproject1_GH_BaseEnemy_h_12_RPC_WRAPPERS
-#define FID_Nproject1_GH_Source_Nproject1_GH_BaseEnemy_h_12_RPC_WRAPPERS_NO_PURE_DECLS
+#define FID_Nproject1_GH_Source_Nproject1_GH_BaseEnemy_h_12_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execOnOverlapStart);
+
+
+#define FID_Nproject1_GH_Source_Nproject1_GH_BaseEnemy_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execOnOverlapStart);
+
+
 #define FID_Nproject1_GH_Source_Nproject1_GH_BaseEnemy_h_12_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesABaseEnemy(); \

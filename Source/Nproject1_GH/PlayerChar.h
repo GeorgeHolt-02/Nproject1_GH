@@ -157,6 +157,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	float InvulnTime;
+
+	/** Whether or not a given sweep is done purely for positioning purposes */
+	bool bPositioningSweep;
 	
 #pragma region ANIMATION VARIABLES
 
