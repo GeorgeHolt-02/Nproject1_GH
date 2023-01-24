@@ -2,6 +2,9 @@
 
 
 #include "Enemy_MuscleGrunt.h"
+
+#include "ComponentUtils.h"
+#include "../../Plugins/Developer/RiderLink/Source/RD/thirdparty/clsocket/src/ActiveSocket.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
@@ -30,6 +33,9 @@ AEnemy_MuscleGrunt::AEnemy_MuscleGrunt()
 
 	bPositioningSweep = false;
 
+	YawRotator = FRotator(0.0f, 0.0f, 0.0f);
+	Direction = FVector(0.0f, 0.0f, 0.0f);
+
 	Player = nullptr;
 
 	bPlayerPresent = false;
@@ -43,7 +49,7 @@ void AEnemy_MuscleGrunt::BeginPlay()
 
 	if (GetWorld()->GetFirstPlayerController()->GetPawn() != nullptr)
 	{
-		bPlayerPresent = true;
+		Player = GetWorld()->GetFirstPlayerController()->GetPawn();
 	}
 }
 
@@ -61,6 +67,8 @@ void AEnemy_MuscleGrunt::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	OriginalZSpeed = UpVector.Z;
+	
 	EnemyGravity(DeltaTime);
 	
 	FallSpeedCap();
@@ -122,16 +130,52 @@ void AEnemy_MuscleGrunt::VisibilityFlashing(float DeltaTime)
 
 void AEnemy_MuscleGrunt::MainBehaviour(float DeltaTime)
 {
-	if(bPlayerPresent)
+	if(Player)
 	{
 		SetActorRotation(FRotator(
 			GetActorRotation().Pitch,
-			UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation()).Yaw - 90.0f,
+			UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), Player->GetActorLocation()).Yaw,
 			GetActorRotation().Roll
 		));	
 	}
 
-	SetActorLocation((GetActorLocation() + (FVector(0.0f, 1.0f, 0.0f) * DeltaTime * MovementSpeed)), true);
+	FHitResult GroundCheckHit;
+
+	bool GroundCheck = GetWorld()->LineTraceSingleByChannel(GroundCheckHit, GetActorLocation(),
+		GetActorLocation() + FVector(FVector(Direction * MovementSpeed).X, FVector(Direction * MovementSpeed).Y, -(EnemyCollider->GetScaledBoxExtent().Z * 2)),
+		ECC_GameTraceChannel1, FCollisionQueryParams::DefaultQueryParam, FCollisionResponseParams::DefaultResponseParam);
+	// DrawDebugLine(GetWorld(), GetActorLocation(),GetActorLocation() + FVector(FVector(Direction * MovementSpeed).X, FVector(Direction * MovementSpeed).Y,
+	// 	-(EnemyCollider->GetScaledBoxExtent().Z * 2)), FColor::Yellow, false, -1, 0, 1.0f);
+
+	if(!GroundCheck)
+	{
+		SetActorRotation(FRotator(
+			GetActorRotation().Pitch,
+			(GetActorRotation().Yaw - 180.0f),
+			GetActorRotation().Roll
+		));
+	}
+	YawRotator = FRotator(0.0f, GetActorRotation().Yaw, 0.0f);
+	Direction = FRotationMatrix(YawRotator).GetUnitAxis(EAxis::X);
+
+	FHitResult* CollisionCheck = new FHitResult;
+	
+	bool Move = SetActorLocation((GetActorLocation() + (Direction * DeltaTime * MovementSpeed)), true);
+
+	if(CollisionCheck->bStartPenetrating)
+	{
+		SetActorLocation(GetActorLocation() + CollisionCheck->ImpactNormal);
+		UpVector = FVector(0.0f, 0.0f, (OriginalZSpeed - (FMath::Square(Gravity) * DeltaTime)));
+		SetActorLocation((GetActorLocation() + (UpVector * DeltaTime)), true);
+		//DrawDebugLine(GetWorld(), HitResult.ImpactPoint, HitResult.ImpactPoint + (HitResult.ImpactNormal * 100.0f), FColor::Green, false, 0.016667f, 0, 1);
+	}
+
+	if(CollisionCheck->Component != nullptr)
+	{
+		AttachToComponent(Cast<USceneComponent>(CollisionCheck->Component), FAttachmentTransformRules::KeepWorldTransform);
+	}
+	
+	delete CollisionCheck;
 }
 
 void AEnemy_MuscleGrunt::DamageFunction(float Damage)
@@ -149,8 +193,25 @@ void AEnemy_MuscleGrunt::DamageFunction(float Damage)
 void AEnemy_MuscleGrunt::EnemyGravity(float DeltaTime)
 {
 	UpVector -= FVector(0.0f, 0.0f, (FMath::Square(Gravity)) * DeltaTime);
+
+	FHitResult* CollisionCheck = new FHitResult;
 	
-	SetActorLocation((GetActorLocation() + (UpVector * DeltaTime)), true);
+	bool Move = SetActorLocation((GetActorLocation() + (UpVector * DeltaTime)), true, CollisionCheck);
+
+	if(CollisionCheck->bStartPenetrating)
+	{
+		SetActorLocation(GetActorLocation() + CollisionCheck->ImpactNormal);
+		UpVector = FVector(0.0f, 0.0f, (OriginalZSpeed - (FMath::Square(Gravity) * DeltaTime)));
+		SetActorLocation((GetActorLocation() + (UpVector * DeltaTime)), true);
+		//DrawDebugLine(GetWorld(), HitResult.ImpactPoint, HitResult.ImpactPoint + (HitResult.ImpactNormal * 100.0f), FColor::Green, false, 0.016667f, 0, 1);
+	}
+
+	if(CollisionCheck->Component != nullptr)
+	{
+		AttachToComponent(Cast<USceneComponent>(CollisionCheck->Component), FAttachmentTransformRules::KeepWorldTransform);
+	}
+	
+	delete CollisionCheck;
 }
 
 void AEnemy_MuscleGrunt::GroundCollision(float DeltaTime)
@@ -218,19 +279,46 @@ void AEnemy_MuscleGrunt::FallSpeedCap()
 void AEnemy_MuscleGrunt::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	FVector NormalImpulse, const FHitResult& HitResult)
 {
-	if(!bPositioningSweep)
+	// if(!bPositioningSweep)
+	// {
+	// 	// if(HitResult.bStartPenetrating)
+	// 	// {
+	// 	// 	SetActorLocation(GetActorLocation() + HitResult.ImpactNormal);
+	// 	// 	UpVector = FVector(0.0f, 0.0f, (OriginalZSpeed - (FMath::Square(Gravity) * GetWorld()->GetDeltaSeconds())));
+	// 	// 	SetActorLocation((GetActorLocation() + (UpVector * GetWorld()->GetDeltaSeconds())), true);
+	// 	// 	//DrawDebugLine(GetWorld(), HitResult.ImpactPoint, HitResult.ImpactPoint + (HitResult.ImpactNormal * 100.0f), FColor::Green, false, 0.016667f, 0, 1);
+	// 	// }
+	//
+	// 	// if(OtherComp)
+	// 	// {
+	// 	// 	AttachToComponent(OtherComp, FAttachmentTransformRules::KeepWorldTransform);
+	// 	// }
+	// }
+}
+
+void AEnemy_MuscleGrunt::OnOverlapStart(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if(OtherActor)
 	{
-		if(HitResult.bStartPenetrating)
+		APlayerChar* MyPlayer = Cast<APlayerChar>(OtherActor);
+		if(MyPlayer)
 		{
-			SetActorLocation(GetActorLocation() + HitResult.ImpactNormal);
-			UpVector = FVector(0.0f, 0.0f, (OriginalZSpeed - (FMath::Square(Gravity) * GetWorld()->GetDeltaSeconds())));
-			SetActorLocation((GetActorLocation() + (UpVector * GetWorld()->GetDeltaSeconds())), true);
-			//DrawDebugLine(GetWorld(), HitResult.ImpactPoint, HitResult.ImpactPoint + (HitResult.ImpactNormal * 100.0f), FColor::Green, false, 0.016667f, 0, 1);
+			if(bKillOnContact)
+			{
+				if((!MyPlayer->bPositioningSweep) && (!bPositioningSweep))
+				{
+					MyPlayer->Destroy();
+				}
+			}
 		}
-	
-		if(OtherComp)
+		else
 		{
-			AttachToComponent(OtherComp, FAttachmentTransformRules::KeepWorldTransform);
+			APlayerShot* MyShot = Cast<APlayerShot>(OtherActor);
+			if(MyShot)
+			{
+				DamageFunction(MyShot->Damage);
+			}
 		}
 	}
 }

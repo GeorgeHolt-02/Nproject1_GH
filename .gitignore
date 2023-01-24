@@ -22,3 +22,5 @@
 Plugins/Developer/RiderLink/Resources/checksum
 *.old
 *.png
+*.runtime-xml
+*.dmp

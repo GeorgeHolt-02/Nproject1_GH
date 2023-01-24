@@ -55,9 +55,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool bPositioningSweep;
 
+	/** The enemy's current yaw rotator */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	FRotator YawRotator;
+
+	/** The direction the enemy is facing */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	FVector Direction;
+
 	/** Player character reference */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	APlayerChar* Player;
+	APawn* Player;
 
 	/** Whether or not a player character is present */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
@@ -93,4 +101,7 @@ public:
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 		FVector NormalImpulse, const FHitResult& HitResult);
+	
+	virtual void OnOverlapStart(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+		int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult) override;
 };

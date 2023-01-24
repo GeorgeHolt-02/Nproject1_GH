@@ -61,6 +61,8 @@ void ABaseEnemy::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	EnableCollision();
+
+	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	
 	VisibilityFlashing(DeltaTime);
 	InvulnPeriod(DeltaTime);
@@ -162,7 +164,7 @@ UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHi
 			{
 				if(!MyPlayer->bPositioningSweep)
 				{
-					UGameplayStatics::OpenLevel(GetWorld(), FName(GetWorld()->GetCurrentLevel()->GetFullName()), true);
+					MyPlayer->Destroy();
 				}
 			}
 		}
