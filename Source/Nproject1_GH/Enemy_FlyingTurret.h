@@ -34,14 +34,6 @@ public:
 	float MovementSpeed_Horizontal;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
 	float MovementSpeed_Vertical;
-
-	//** Projectile Blueprint */
-	// UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Shooting")
-	// TSubclassOf<APlayerShot> ShotBP;
-
-	/** Speed to set each projectile to */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Shooting")
-	float ProjectileSpeed;
 	
 	//** The amount of distance a projectile can travel before it despawns */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Shooting")

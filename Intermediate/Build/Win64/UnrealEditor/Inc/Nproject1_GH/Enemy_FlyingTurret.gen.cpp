@@ -56,10 +56,6 @@ void EmptyLinkFunctionForGeneratedCodeEnemy_FlyingTurret() {}
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_MovementSpeed_Vertical;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_ProjectileSpeed_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_ProjectileSpeed;
-#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_MaxProjTravelDistance_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_MaxProjTravelDistance;
@@ -157,15 +153,6 @@ void EmptyLinkFunctionForGeneratedCodeEnemy_FlyingTurret() {}
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_MovementSpeed_Vertical = { "MovementSpeed_Vertical", nullptr, (EPropertyFlags)0x0010000000010005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AEnemy_FlyingTurret, MovementSpeed_Vertical), METADATA_PARAMS(Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_MovementSpeed_Vertical_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_MovementSpeed_Vertical_MetaData)) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_ProjectileSpeed_MetaData[] = {
-		{ "Category", "Shooting" },
-		{ "Comment", "/** Speed to set each projectile to */" },
-		{ "ModuleRelativePath", "Enemy_FlyingTurret.h" },
-		{ "ToolTip", "Speed to set each projectile to" },
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_ProjectileSpeed = { "ProjectileSpeed", nullptr, (EPropertyFlags)0x0010000000010005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AEnemy_FlyingTurret, ProjectileSpeed), METADATA_PARAMS(Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_ProjectileSpeed_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_ProjectileSpeed_MetaData)) };
-#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_MaxProjTravelDistance_MetaData[] = {
 		{ "Category", "Shooting" },
 		{ "Comment", "//** The amount of distance a projectile can travel before it despawns */\n" },
@@ -257,7 +244,6 @@ void EmptyLinkFunctionForGeneratedCodeEnemy_FlyingTurret() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_ShotTransform,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_MovementSpeed_Horizontal,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_MovementSpeed_Vertical,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_ProjectileSpeed,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_MaxProjTravelDistance,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_ShotTag,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_FlyingTurret_Statics::NewProp_bCanShoot,
@@ -305,9 +291,9 @@ void EmptyLinkFunctionForGeneratedCodeEnemy_FlyingTurret() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AEnemy_FlyingTurret, AEnemy_FlyingTurret::StaticClass, TEXT("AEnemy_FlyingTurret"), &Z_Registration_Info_UClass_AEnemy_FlyingTurret, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemy_FlyingTurret), 2721153857U) },
+		{ Z_Construct_UClass_AEnemy_FlyingTurret, AEnemy_FlyingTurret::StaticClass, TEXT("AEnemy_FlyingTurret"), &Z_Registration_Info_UClass_AEnemy_FlyingTurret, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemy_FlyingTurret), 3659551716U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_1612512613(TEXT("/Script/Nproject1_GH"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_1229195150(TEXT("/Script/Nproject1_GH"),
 		Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

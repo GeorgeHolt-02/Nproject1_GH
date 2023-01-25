@@ -23,8 +23,6 @@ AEnemy_FlyingTurret::AEnemy_FlyingTurret()
 
 	MovementSpeed_Horizontal = 500.0f;
 	MovementSpeed_Vertical = -250.0f;
-
-	ProjectileSpeed = 1000.0f;
 	
 	MaxProjTravelDistance = 500.0f;
 
@@ -98,7 +96,10 @@ void AEnemy_FlyingTurret::InvulnPeriod(float DeltaTime)
 			{
 				EnemyCannonMesh->SetVisibility(true);
 			}
-			bCanShoot = true;
+			if (MovementSpeed_Vertical < 0.0f)
+			{
+				Shoot();
+			}
 			bShouldFlash = false;
 			bStopFlashing = false;
 		}
@@ -134,6 +135,14 @@ void AEnemy_FlyingTurret::MainBehaviour(float DeltaTime)
 			
 			if (TurretInterval_TimeLeft <= 0.0f)
 			{
+				if((InvulnTime_Current <= 0.0f) && (!bCanShoot))
+				{
+					bCanShoot = true;
+				}
+				if (MovementSpeed_Vertical < 0.0f)
+				{
+					Shoot();
+				}
 				YawRotator = FRotator(0.0f, GetActorRotation().Yaw, 0.0f);
 				Direction = FRotationMatrix(YawRotator).GetUnitAxis(EAxis::X);
 				MovementSpeed_Vertical *= -1;
@@ -170,9 +179,7 @@ void AEnemy_FlyingTurret::Shoot()
 		{
 			const FActorSpawnParameters SpawnParams;
 
-			AEnemyProjectile_FlyingTurret* ShotProjectile = (GetWorld()->SpawnActor<AEnemyProjectile_FlyingTurret>
-				(ShotBP, ShotLocation, ShotRotation, SpawnParams));
-			ShotProjectile->ShotMovement->InitialSpeed = ProjectileSpeed; 
+			AEnemyProjectile_FlyingTurret* ShotProjectile = (GetWorld()->SpawnActor<AEnemyProjectile_FlyingTurret>(ShotBP, ShotLocation, ShotRotation, SpawnParams));
 			ShotProjectile->Tags.Add(ShotTag);
 		}
 	}

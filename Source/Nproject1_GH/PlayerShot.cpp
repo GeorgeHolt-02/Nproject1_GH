@@ -78,5 +78,12 @@ void APlayerShot::OnOverlapStart(UPrimitiveComponent* OverlappedComponent, AActo
 void APlayerShot::OnOverlapFinish(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	
+	if (IsValid(OtherComp))
+	{
+		Destroy();
+	}
+	else if (IsValid(OtherActor))
+	{
+		Destroy();
+	}
 }
