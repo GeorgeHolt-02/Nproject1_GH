@@ -148,7 +148,7 @@ void AEnemy_MuscleGrunt::MainBehaviour(float DeltaTime)
 
 	FHitResult* CollisionCheck = new FHitResult;
 	
-	bool Move = SetActorLocation((GetActorLocation() + (Direction * DeltaTime * MovementSpeed)), true);
+	bool Move = SetActorLocation((GetActorLocation() + (Direction * DeltaTime * MovementSpeed)), true, CollisionCheck);
 
 	if(Player)
 	{

@@ -15,7 +15,7 @@ AEnemy_FlyingTurret::AEnemy_FlyingTurret()
 	EnemyBaseMesh->SetupAttachment(RootComponent);
 	EnemyCannonMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EnemyCannonMesh"));
 	EnemyCannonMesh->SetupAttachment(EnemyBaseMesh);
-
+	
 	ShotTransform = CreateDefaultSubobject<USceneComponent>(TEXT("ShotTransform"));
 	ShotTransform->SetupAttachment(EnemyCannonMesh);
 

@@ -1409,6 +1409,18 @@
     <ClInclude Include="..\..\Source\Nproject1_GH\EnemyProjectile_FlyingTurret.h">
       <Filter>Source\Nproject1_GH</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\Nproject1_GH\EnemySpawner.cpp">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Nproject1_GH\EnemySpawner.h">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Nproject1_GH\EnemyWaveSpline.cpp">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Nproject1_GH\EnemyWaveSpline.h">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\Nproject1_GH\Enemy_FlyingTurret.cpp">
       <Filter>Source\Nproject1_GH</Filter>
     </ClCompile>
