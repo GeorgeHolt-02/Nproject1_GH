@@ -13,10 +13,10 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define NPROJECT1_GH_Enemy_FlyingTurret_generated_h
 
-#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_SPARSE_DATA
-#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_RPC_WRAPPERS
-#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_RPC_WRAPPERS_NO_PURE_DECLS
-#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_INCLASS_NO_PURE_DECLS \
+#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_SPARSE_DATA
+#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_RPC_WRAPPERS
+#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_RPC_WRAPPERS_NO_PURE_DECLS
+#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAEnemy_FlyingTurret(); \
 	friend struct Z_Construct_UClass_AEnemy_FlyingTurret_Statics; \
@@ -25,7 +25,7 @@ public: \
 	DECLARE_SERIALIZER(AEnemy_FlyingTurret)
 
 
-#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_INCLASS \
+#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_INCLASS \
 private: \
 	static void StaticRegisterNativesAEnemy_FlyingTurret(); \
 	friend struct Z_Construct_UClass_AEnemy_FlyingTurret_Statics; \
@@ -34,9 +34,9 @@ public: \
 	DECLARE_SERIALIZER(AEnemy_FlyingTurret)
 
 
-#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_STANDARD_CONSTRUCTORS \
+#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
-	NO_API AEnemy_FlyingTurret(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
+	NO_API AEnemy_FlyingTurret(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AEnemy_FlyingTurret) \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AEnemy_FlyingTurret); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AEnemy_FlyingTurret); \
@@ -47,9 +47,7 @@ private: \
 public:
 
 
-#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_ENHANCED_CONSTRUCTORS \
-	/** Standard constructor, called after all reflected properties have been initialized */ \
-	NO_API AEnemy_FlyingTurret() { }; \
+#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API AEnemy_FlyingTurret(AEnemy_FlyingTurret&&); \
@@ -60,25 +58,25 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AEnemy_FlyingTurret)
 
 
-#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_12_PROLOG
-#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_GENERATED_BODY_LEGACY \
+#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_13_PROLOG
+#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_SPARSE_DATA \
-	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_RPC_WRAPPERS \
-	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_INCLASS \
-	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_STANDARD_CONSTRUCTORS \
+	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_SPARSE_DATA \
+	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_RPC_WRAPPERS \
+	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_INCLASS \
+	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_GENERATED_BODY \
+#define FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_SPARSE_DATA \
-	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_INCLASS_NO_PURE_DECLS \
-	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_15_ENHANCED_CONSTRUCTORS \
+	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_SPARSE_DATA \
+	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_INCLASS_NO_PURE_DECLS \
+	FID_Nproject1_GH_Source_Nproject1_GH_Enemy_FlyingTurret_h_16_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

@@ -19,7 +19,6 @@ void EmptyLinkFunctionForGeneratedCodeEnemy_MuscleGrunt() {}
 	ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FHitResult();
 	ENGINE_API UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FRotator();
-	ENGINE_API UClass* Z_Construct_UClass_APawn_NoRegister();
 // End Cross Module References
 	DEFINE_FUNCTION(AEnemy_MuscleGrunt::execOnHit)
 	{
@@ -136,10 +135,6 @@ void EmptyLinkFunctionForGeneratedCodeEnemy_MuscleGrunt() {}
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_MovementSpeed;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_RotationRate_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_RotationRate;
-#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Gravity_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_Gravity;
@@ -176,15 +171,6 @@ void EmptyLinkFunctionForGeneratedCodeEnemy_MuscleGrunt() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Direction_MetaData[];
 #endif
 		static const UECodeGen_Private::FStructPropertyParams NewProp_Direction;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_Player_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_Player;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_bPlayerPresent_MetaData[];
-#endif
-		static void NewProp_bPlayerPresent_SetBit(void* Obj);
-		static const UECodeGen_Private::FBoolPropertyParams NewProp_bPlayerPresent;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -222,15 +208,6 @@ void EmptyLinkFunctionForGeneratedCodeEnemy_MuscleGrunt() {}
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_MovementSpeed = { "MovementSpeed", nullptr, (EPropertyFlags)0x0010000000010005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AEnemy_MuscleGrunt, MovementSpeed), METADATA_PARAMS(Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_MovementSpeed_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_MovementSpeed_MetaData)) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_RotationRate_MetaData[] = {
-		{ "Category", "Movement" },
-		{ "Comment", "//** Rotation rate */\n" },
-		{ "ModuleRelativePath", "Enemy_MuscleGrunt.h" },
-		{ "ToolTip", "/ Rotation rate" },
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_RotationRate = { "RotationRate", nullptr, (EPropertyFlags)0x0010000000010005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AEnemy_MuscleGrunt, RotationRate), METADATA_PARAMS(Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_RotationRate_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_RotationRate_MetaData)) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_Gravity_MetaData[] = {
 		{ "Category", "Movement" },
@@ -312,32 +289,9 @@ void EmptyLinkFunctionForGeneratedCodeEnemy_MuscleGrunt() {}
 	};
 #endif
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_Direction = { "Direction", nullptr, (EPropertyFlags)0x0010000000020015, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AEnemy_MuscleGrunt, Direction), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_Direction_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_Direction_MetaData)) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_Player_MetaData[] = {
-		{ "Category", "Enemy_MuscleGrunt" },
-		{ "Comment", "/** Player character reference */" },
-		{ "ModuleRelativePath", "Enemy_MuscleGrunt.h" },
-		{ "ToolTip", "Player character reference" },
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_Player = { "Player", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AEnemy_MuscleGrunt, Player), Z_Construct_UClass_APawn_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_Player_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_Player_MetaData)) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_bPlayerPresent_MetaData[] = {
-		{ "Category", "Enemy_MuscleGrunt" },
-		{ "Comment", "/** Whether or not a player character is present */" },
-		{ "ModuleRelativePath", "Enemy_MuscleGrunt.h" },
-		{ "ToolTip", "Whether or not a player character is present" },
-	};
-#endif
-	void Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_bPlayerPresent_SetBit(void* Obj)
-	{
-		((AEnemy_MuscleGrunt*)Obj)->bPlayerPresent = 1;
-	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_bPlayerPresent = { "bPlayerPresent", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(AEnemy_MuscleGrunt), &Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_bPlayerPresent_SetBit, METADATA_PARAMS(Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_bPlayerPresent_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_bPlayerPresent_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_EnemyMesh,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_MovementSpeed,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_RotationRate,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_Gravity,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_OriginalZSpeed,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_ForwardVector,
@@ -347,8 +301,6 @@ void EmptyLinkFunctionForGeneratedCodeEnemy_MuscleGrunt() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_bPositioningSweep,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_YawRotator,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_Direction,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_Player,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::NewProp_bPlayerPresent,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AEnemy_MuscleGrunt_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AEnemy_MuscleGrunt>::IsAbstract,
@@ -386,9 +338,9 @@ void EmptyLinkFunctionForGeneratedCodeEnemy_MuscleGrunt() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Enemy_MuscleGrunt_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AEnemy_MuscleGrunt, AEnemy_MuscleGrunt::StaticClass, TEXT("AEnemy_MuscleGrunt"), &Z_Registration_Info_UClass_AEnemy_MuscleGrunt, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemy_MuscleGrunt), 1030180912U) },
+		{ Z_Construct_UClass_AEnemy_MuscleGrunt, AEnemy_MuscleGrunt::StaticClass, TEXT("AEnemy_MuscleGrunt"), &Z_Registration_Info_UClass_AEnemy_MuscleGrunt, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEnemy_MuscleGrunt), 238092765U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Enemy_MuscleGrunt_h_2906390141(TEXT("/Script/Nproject1_GH"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Enemy_MuscleGrunt_h_1367076023(TEXT("/Script/Nproject1_GH"),
 		Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Enemy_MuscleGrunt_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Enemy_MuscleGrunt_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

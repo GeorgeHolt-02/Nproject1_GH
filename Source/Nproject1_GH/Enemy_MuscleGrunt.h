@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "BaseEnemy.h"
-#include "PlayerChar.h"
 #include "Enemy_MuscleGrunt.generated.h"
 
 /**
@@ -26,10 +25,6 @@ public:
 	//** Movement speed */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
 	float MovementSpeed;
-
-	//** Rotation rate */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
-	float RotationRate;
 	
 	//** Gravity (rate of increase in downward speed when in mid-air (unless overridden) */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Movement")
@@ -62,14 +57,6 @@ public:
 	/** The direction the enemy is facing */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FVector Direction;
-
-	/** Player character reference */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	APawn* Player;
-
-	/** Whether or not a player character is present */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	bool bPlayerPresent;
 	
 protected:
 	// Called when the game starts or when spawned

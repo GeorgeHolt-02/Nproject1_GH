@@ -31,6 +31,8 @@ ABaseEnemy::ABaseEnemy()
 
 	bStopFlashing = false;
 	bShouldFlash = true;
+
+	Player = nullptr;
 }
 
 // Called when the game starts or when spawned
@@ -39,6 +41,11 @@ void ABaseEnemy::BeginPlay()
 	Super::BeginPlay();
 
 	EnemyCollider->OnComponentBeginOverlap.AddDynamic(this, &ABaseEnemy::OnOverlapStart);
+
+	if (GetWorld()->GetFirstPlayerController()->GetPawn() != nullptr)
+	{
+		Player = GetWorld()->GetFirstPlayerController()->GetPawn();
+	}
 
 	Health_Current = Health_Max;
 	

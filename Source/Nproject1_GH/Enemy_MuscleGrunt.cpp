@@ -2,11 +2,10 @@
 
 
 #include "Enemy_MuscleGrunt.h"
-
 #include "ComponentUtils.h"
-#include "../../Plugins/Developer/RiderLink/Source/RD/thirdparty/clsocket/src/ActiveSocket.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "PlayerChar.h"
 
 AEnemy_MuscleGrunt::AEnemy_MuscleGrunt()
 {
@@ -18,8 +17,6 @@ AEnemy_MuscleGrunt::AEnemy_MuscleGrunt()
 	Health_Max = 10.0f;
 
 	MovementSpeed = 50.0f;
-
-	RotationRate = 720.0f;
 
 	Gravity = 10.0f;
 
@@ -35,10 +32,6 @@ AEnemy_MuscleGrunt::AEnemy_MuscleGrunt()
 
 	YawRotator = FRotator(0.0f, 0.0f, 0.0f);
 	Direction = FVector(0.0f, 0.0f, 0.0f);
-
-	Player = nullptr;
-
-	bPlayerPresent = false;
 }
 
 void AEnemy_MuscleGrunt::BeginPlay()
@@ -46,11 +39,6 @@ void AEnemy_MuscleGrunt::BeginPlay()
 	Super::BeginPlay();
 
 	EnemyCollider->OnComponentHit.AddDynamic(this, &AEnemy_MuscleGrunt::OnHit);
-
-	if (GetWorld()->GetFirstPlayerController()->GetPawn() != nullptr)
-	{
-		Player = GetWorld()->GetFirstPlayerController()->GetPawn();
-	}
 }
 
 void AEnemy_MuscleGrunt::StartInvulnPeriod()
@@ -161,6 +149,15 @@ void AEnemy_MuscleGrunt::MainBehaviour(float DeltaTime)
 	FHitResult* CollisionCheck = new FHitResult;
 	
 	bool Move = SetActorLocation((GetActorLocation() + (Direction * DeltaTime * MovementSpeed)), true);
+
+	if(Player)
+	{
+		SetActorRotation(FRotator(
+			GetActorRotation().Pitch,
+			UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), Player->GetActorLocation()).Yaw,
+			GetActorRotation().Roll
+		));	
+	}
 
 	if(CollisionCheck->bStartPenetrating)
 	{

@@ -1397,6 +1397,18 @@
     <ClInclude Include="..\..\Source\Nproject1_GH\BaseEnemy.h">
       <Filter>Source\Nproject1_GH</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\Nproject1_GH\BaseEnemyProjectile.cpp">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Nproject1_GH\BaseEnemyProjectile.h">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Nproject1_GH\EnemyProjectile_FlyingTurret.cpp">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Nproject1_GH\EnemyProjectile_FlyingTurret.h">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\Nproject1_GH\Enemy_FlyingTurret.cpp">
       <Filter>Source\Nproject1_GH</Filter>
     </ClCompile>

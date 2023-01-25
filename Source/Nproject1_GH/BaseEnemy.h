@@ -48,6 +48,10 @@ public:
 	//* Whether or not to stop flashing via the invuln period */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool bStopFlashing;
+
+	/** Player character reference */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	APawn* Player;
 	
 protected:
 	// Called when the game starts or when spawned
