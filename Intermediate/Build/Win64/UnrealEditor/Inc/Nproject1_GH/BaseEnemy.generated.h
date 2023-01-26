@@ -8,8 +8,8 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-class UPrimitiveComponent;
 class AActor;
+class UPrimitiveComponent;
 struct FHitResult;
 #ifdef NPROJECT1_GH_BaseEnemy_generated_h
 #error "BaseEnemy.generated.h already included, missing '#pragma once' in BaseEnemy.h"
@@ -19,11 +19,13 @@ struct FHitResult;
 #define FID_Nproject1_GH_Source_Nproject1_GH_BaseEnemy_h_12_SPARSE_DATA
 #define FID_Nproject1_GH_Source_Nproject1_GH_BaseEnemy_h_12_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execOnDeath); \
 	DECLARE_FUNCTION(execOnOverlapStart);
 
 
 #define FID_Nproject1_GH_Source_Nproject1_GH_BaseEnemy_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execOnDeath); \
 	DECLARE_FUNCTION(execOnOverlapStart);
 
 

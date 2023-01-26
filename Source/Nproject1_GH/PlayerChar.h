@@ -181,6 +181,10 @@ public:
 	bool Anim_bInAir;
 
 #pragma endregion
+
+	//Current game instance
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	class UMyGameInstance* CurrentGameInstance;
 	
 protected:
 	
@@ -256,7 +260,7 @@ public:
 	
 	// Restarts the level when the player dies
 	UFUNCTION()
-	void RestartLevelOnDeath(AActor* DestroyedActor);
+	void OnDeath(AActor* DestroyedActor);
 
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }

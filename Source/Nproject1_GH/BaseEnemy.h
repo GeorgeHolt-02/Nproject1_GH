@@ -19,6 +19,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	class UBoxComponent* EnemyCollider;
 
+	//* Number of points to award the player upon death */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	int PointsToAward;
+	
 	//* Enemy health (maximum and current, respectively) */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float Health_Max;
@@ -52,6 +56,10 @@ public:
 	/** Player character reference */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	APawn* Player;
+
+	/** Game instance reference */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	class UMyGameInstance* CurrentGameInstance;
 	
 protected:
 	// Called when the game starts or when spawned
@@ -86,4 +94,8 @@ public:
 	UFUNCTION()
 	virtual void OnOverlapStart(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult);
+
+	//Adds points upon death
+	UFUNCTION()
+	void OnDeath(AActor* DestroyedActor);
 };

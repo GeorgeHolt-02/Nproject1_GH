@@ -19,14 +19,14 @@ struct FHitResult;
 #define FID_Nproject1_GH_Source_Nproject1_GH_PlayerChar_h_14_SPARSE_DATA
 #define FID_Nproject1_GH_Source_Nproject1_GH_PlayerChar_h_14_RPC_WRAPPERS \
  \
-	DECLARE_FUNCTION(execRestartLevelOnDeath); \
+	DECLARE_FUNCTION(execOnDeath); \
 	DECLARE_FUNCTION(execOnHit); \
 	DECLARE_FUNCTION(execTakeHeavyDamage);
 
 
 #define FID_Nproject1_GH_Source_Nproject1_GH_PlayerChar_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
  \
-	DECLARE_FUNCTION(execRestartLevelOnDeath); \
+	DECLARE_FUNCTION(execOnDeath); \
 	DECLARE_FUNCTION(execOnHit); \
 	DECLARE_FUNCTION(execTakeHeavyDamage);
 

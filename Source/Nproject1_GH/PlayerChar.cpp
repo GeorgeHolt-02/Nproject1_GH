@@ -2,6 +2,8 @@
 
 
 #include "PlayerChar.h"
+
+#include "MyGameInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Components/ArrowComponent.h"
 #include "Components/BoxComponent.h"
@@ -115,7 +117,9 @@ APlayerChar::APlayerChar()
 	Anim_bHasJumped = false;
 	Anim_bInAir = true;
 
-#pragma endregion	
+#pragma endregion
+
+	CurrentGameInstance = nullptr;
 }
 
 // Called when the game starts or when spawned
@@ -123,6 +127,11 @@ void APlayerChar::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if(GetGameInstance())
+	{
+		CurrentGameInstance = Cast<UMyGameInstance>(GetGameInstance());
+	}
+	
 	if (BlasterMesh)
 	{
 		const FActorSpawnParameters BlasterSpawnParams;
@@ -133,7 +142,7 @@ void APlayerChar::BeginPlay()
 	OriginalZSpeed = UpVector.Z;
 	
 	PlayerCollider->OnComponentHit.AddDynamic(this, &APlayerChar::OnHit);
-	OnDestroyed.AddDynamic(this, &APlayerChar::RestartLevelOnDeath);
+	OnDestroyed.AddDynamic(this, &APlayerChar::OnDeath);
 }
 
 // Called every frame
@@ -164,6 +173,12 @@ void APlayerChar::Tick(float DeltaTime)
 	
 	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Green,
 	FString::Printf(TEXT("PLAYER HEALTH: %f/%f"), CurrentHealth, MaxHealth));
+
+	if(CurrentGameInstance)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Yellow,
+	FString::Printf(TEXT("SCORE: %i"), CurrentGameInstance->PlayerScore));
+	}
 
 	// if (Anim_bHasFired == true)
 	// {
@@ -301,9 +316,13 @@ void APlayerChar::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 	}
 }
 
-void APlayerChar::RestartLevelOnDeath(AActor* DestroyedActor)
+void APlayerChar::OnDeath(AActor* DestroyedActor)
 {
-	UGameplayStatics::OpenLevel(GetWorld(), FName(GetWorld()->GetCurrentLevel()->GetFullName()), true);
+	if(CurrentGameInstance)
+	{
+		CurrentGameInstance->LoadSpecifiedLevel(FName(GetWorld()->GetCurrentLevel()->GetFullName()));
+	}
+	//UGameplayStatics::OpenLevel(GetWorld(), FName(GetWorld()->GetCurrentLevel()->GetFullName()), true);
 }
 
 void APlayerChar::MoveForward(float Value)

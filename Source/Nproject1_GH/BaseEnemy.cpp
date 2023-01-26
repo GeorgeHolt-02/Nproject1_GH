@@ -3,6 +3,7 @@
 
 #include "BaseEnemy.h"
 
+#include "MyGameInstance.h"
 #include "PlayerChar.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -18,6 +19,8 @@ ABaseEnemy::ABaseEnemy()
 	EnemyCollider->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	EnemyCollider->SetCollisionObjectType(ECC_GameTraceChannel9);
 
+	PointsToAward = 50;
+	
 	Health_Max = 3.0f;
 	Health_Current = Health_Max;
 
@@ -33,6 +36,7 @@ ABaseEnemy::ABaseEnemy()
 	bShouldFlash = true;
 
 	Player = nullptr;
+	CurrentGameInstance = nullptr;
 }
 
 // Called when the game starts or when spawned
@@ -40,7 +44,13 @@ void ABaseEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if(GetGameInstance())
+	{
+		CurrentGameInstance = Cast<UMyGameInstance>(GetGameInstance());
+	}
+	
 	EnemyCollider->OnComponentBeginOverlap.AddDynamic(this, &ABaseEnemy::OnOverlapStart);
+	OnDestroyed.AddDynamic(this, &ABaseEnemy::OnDeath);
 
 	if (GetWorld()->GetFirstPlayerController()->GetPawn() != nullptr)
 	{
@@ -160,7 +170,7 @@ void ABaseEnemy::Death()
 }
 
 void ABaseEnemy::OnOverlapStart(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+                                UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if(OtherActor)
 	{
@@ -186,3 +196,10 @@ UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHi
 	}
 }
 
+void ABaseEnemy::OnDeath(AActor* DestroyedActor)
+{
+	if(CurrentGameInstance)
+	{
+		CurrentGameInstance->PlayerScore += PointsToAward;
+	}
+}

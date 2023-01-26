@@ -13,8 +13,8 @@ void EmptyLinkFunctionForGeneratedCodePlayerChar() {}
 	NPROJECT1_GH_API UClass* Z_Construct_UClass_APlayerChar();
 	ENGINE_API UClass* Z_Construct_UClass_APawn();
 	UPackage* Z_Construct_UPackage__Script_Nproject1_GH();
-	ENGINE_API UClass* Z_Construct_UClass_UPrimitiveComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_UPrimitiveComponent_NoRegister();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FHitResult();
 	ENGINE_API UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
@@ -28,13 +28,14 @@ void EmptyLinkFunctionForGeneratedCodePlayerChar() {}
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FRotator();
 	NPROJECT1_GH_API UClass* Z_Construct_UClass_APlayerShot_NoRegister();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
+	NPROJECT1_GH_API UClass* Z_Construct_UClass_UMyGameInstance_NoRegister();
 // End Cross Module References
-	DEFINE_FUNCTION(APlayerChar::execRestartLevelOnDeath)
+	DEFINE_FUNCTION(APlayerChar::execOnDeath)
 	{
 		P_GET_OBJECT(AActor,Z_Param_DestroyedActor);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->RestartLevelOnDeath(Z_Param_DestroyedActor);
+		P_THIS->OnDeath(Z_Param_DestroyedActor);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(APlayerChar::execOnHit)
@@ -61,11 +62,45 @@ void EmptyLinkFunctionForGeneratedCodePlayerChar() {}
 	{
 		UClass* Class = APlayerChar::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "OnDeath", &APlayerChar::execOnDeath },
 			{ "OnHit", &APlayerChar::execOnHit },
-			{ "RestartLevelOnDeath", &APlayerChar::execRestartLevelOnDeath },
 			{ "TakeHeavyDamage", &APlayerChar::execTakeHeavyDamage },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_APlayerChar_OnDeath_Statics
+	{
+		struct PlayerChar_eventOnDeath_Parms
+		{
+			AActor* DestroyedActor;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_DestroyedActor;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_APlayerChar_OnDeath_Statics::NewProp_DestroyedActor = { "DestroyedActor", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(PlayerChar_eventOnDeath_Parms, DestroyedActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_APlayerChar_OnDeath_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_APlayerChar_OnDeath_Statics::NewProp_DestroyedActor,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_APlayerChar_OnDeath_Statics::Function_MetaDataParams[] = {
+		{ "Comment", "// Restarts the level when the player dies\n" },
+		{ "ModuleRelativePath", "PlayerChar.h" },
+		{ "ToolTip", "Restarts the level when the player dies" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APlayerChar_OnDeath_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_APlayerChar, nullptr, "OnDeath", nullptr, nullptr, sizeof(Z_Construct_UFunction_APlayerChar_OnDeath_Statics::PlayerChar_eventOnDeath_Parms), Z_Construct_UFunction_APlayerChar_OnDeath_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APlayerChar_OnDeath_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_APlayerChar_OnDeath_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_APlayerChar_OnDeath_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_APlayerChar_OnDeath()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_APlayerChar_OnDeath_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_APlayerChar_OnHit_Statics
 	{
@@ -138,40 +173,6 @@ void EmptyLinkFunctionForGeneratedCodePlayerChar() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_APlayerChar_OnHit_Statics::FuncParams);
-		}
-		return ReturnFunction;
-	}
-	struct Z_Construct_UFunction_APlayerChar_RestartLevelOnDeath_Statics
-	{
-		struct PlayerChar_eventRestartLevelOnDeath_Parms
-		{
-			AActor* DestroyedActor;
-		};
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_DestroyedActor;
-		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
-#endif
-		static const UECodeGen_Private::FFunctionParams FuncParams;
-	};
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_APlayerChar_RestartLevelOnDeath_Statics::NewProp_DestroyedActor = { "DestroyedActor", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(PlayerChar_eventRestartLevelOnDeath_Parms, DestroyedActor), Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_APlayerChar_RestartLevelOnDeath_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_APlayerChar_RestartLevelOnDeath_Statics::NewProp_DestroyedActor,
-	};
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_APlayerChar_RestartLevelOnDeath_Statics::Function_MetaDataParams[] = {
-		{ "Comment", "// Restarts the level when the player dies\n" },
-		{ "ModuleRelativePath", "PlayerChar.h" },
-		{ "ToolTip", "Restarts the level when the player dies" },
-	};
-#endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_APlayerChar_RestartLevelOnDeath_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_APlayerChar, nullptr, "RestartLevelOnDeath", nullptr, nullptr, sizeof(Z_Construct_UFunction_APlayerChar_RestartLevelOnDeath_Statics::PlayerChar_eventRestartLevelOnDeath_Parms), Z_Construct_UFunction_APlayerChar_RestartLevelOnDeath_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_APlayerChar_RestartLevelOnDeath_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_APlayerChar_RestartLevelOnDeath_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_APlayerChar_RestartLevelOnDeath_Statics::Function_MetaDataParams)) };
-	UFunction* Z_Construct_UFunction_APlayerChar_RestartLevelOnDeath()
-	{
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_APlayerChar_RestartLevelOnDeath_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -391,6 +392,10 @@ void EmptyLinkFunctionForGeneratedCodePlayerChar() {}
 #endif
 		static void NewProp_Anim_bInAir_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_Anim_bInAir;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_CurrentGameInstance_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_CurrentGameInstance;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -400,8 +405,8 @@ void EmptyLinkFunctionForGeneratedCodePlayerChar() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_Nproject1_GH,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_APlayerChar_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_APlayerChar_OnDeath, "OnDeath" }, // 3330195962
 		{ &Z_Construct_UFunction_APlayerChar_OnHit, "OnHit" }, // 4277259193
-		{ &Z_Construct_UFunction_APlayerChar_RestartLevelOnDeath, "RestartLevelOnDeath" }, // 1939978686
 		{ &Z_Construct_UFunction_APlayerChar_TakeHeavyDamage, "TakeHeavyDamage" }, // 884189298
 	};
 #if WITH_METADATA
@@ -803,6 +808,15 @@ void EmptyLinkFunctionForGeneratedCodePlayerChar() {}
 		((APlayerChar*)Obj)->Anim_bInAir = 1;
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_APlayerChar_Statics::NewProp_Anim_bInAir = { "Anim_bInAir", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(APlayerChar), &Z_Construct_UClass_APlayerChar_Statics::NewProp_Anim_bInAir_SetBit, METADATA_PARAMS(Z_Construct_UClass_APlayerChar_Statics::NewProp_Anim_bInAir_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_APlayerChar_Statics::NewProp_Anim_bInAir_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_APlayerChar_Statics::NewProp_CurrentGameInstance_MetaData[] = {
+		{ "Category", "PlayerChar" },
+		{ "Comment", "//Current game instance\n" },
+		{ "ModuleRelativePath", "PlayerChar.h" },
+		{ "ToolTip", "Current game instance" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APlayerChar_Statics::NewProp_CurrentGameInstance = { "CurrentGameInstance", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(APlayerChar, CurrentGameInstance), Z_Construct_UClass_UMyGameInstance_NoRegister, METADATA_PARAMS(Z_Construct_UClass_APlayerChar_Statics::NewProp_CurrentGameInstance_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_APlayerChar_Statics::NewProp_CurrentGameInstance_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_APlayerChar_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerChar_Statics::NewProp_CameraBoom,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerChar_Statics::NewProp_PlayerCamera,
@@ -846,6 +860,7 @@ void EmptyLinkFunctionForGeneratedCodePlayerChar() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerChar_Statics::NewProp_Anim_bHasFired,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerChar_Statics::NewProp_Anim_bHasJumped,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerChar_Statics::NewProp_Anim_bInAir,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerChar_Statics::NewProp_CurrentGameInstance,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_APlayerChar_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<APlayerChar>::IsAbstract,
@@ -883,9 +898,9 @@ void EmptyLinkFunctionForGeneratedCodePlayerChar() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_PlayerChar_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_APlayerChar, APlayerChar::StaticClass, TEXT("APlayerChar"), &Z_Registration_Info_UClass_APlayerChar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APlayerChar), 1440348144U) },
+		{ Z_Construct_UClass_APlayerChar, APlayerChar::StaticClass, TEXT("APlayerChar"), &Z_Registration_Info_UClass_APlayerChar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APlayerChar), 1337222100U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_PlayerChar_h_1161543782(TEXT("/Script/Nproject1_GH"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_PlayerChar_h_3344028326(TEXT("/Script/Nproject1_GH"),
 		Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_PlayerChar_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_PlayerChar_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
