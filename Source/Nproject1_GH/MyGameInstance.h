@@ -28,16 +28,36 @@ public:
 	/** Player's current score */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int PlayerScore;
+
+	/** Level name array */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TArray<TSoftObjectPtr<UWorld>> Levels;
+
+	/** Next level's index */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int NextLevelIndex;
+	
+	/** Total number of enemies to fight in the current level */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int EnemyNum;
+	
+	/** Whether or not to load next level when EnemyNum <= 0 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool bCanLoadNextLevel;
 	
 protected:
 
 
 public:
-
+	
 	
 	void Init() override;
 	
 	//Loads the specified level
 	UFUNCTION()
-	void LoadSpecifiedLevel(FName LevelName);
+	void LoadSpecifiedLevel(TSoftObjectPtr<UWorld> Level);
+
+	//Loads the specified level by name
+	UFUNCTION()
+	void LoadSpecifiedLevelByName(FName LevelName);
 };

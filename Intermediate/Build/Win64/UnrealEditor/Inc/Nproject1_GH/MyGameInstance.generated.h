@@ -8,6 +8,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class UWorld;
 #ifdef NPROJECT1_GH_MyGameInstance_generated_h
 #error "MyGameInstance.generated.h already included, missing '#pragma once' in MyGameInstance.h"
 #endif
@@ -16,11 +17,13 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_16_SPARSE_DATA
 #define FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_16_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execLoadSpecifiedLevelByName); \
 	DECLARE_FUNCTION(execLoadSpecifiedLevel);
 
 
 #define FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execLoadSpecifiedLevelByName); \
 	DECLARE_FUNCTION(execLoadSpecifiedLevel);
 
 

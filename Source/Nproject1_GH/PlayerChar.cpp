@@ -320,7 +320,7 @@ void APlayerChar::OnDeath(AActor* DestroyedActor)
 {
 	if(CurrentGameInstance)
 	{
-		CurrentGameInstance->LoadSpecifiedLevel(FName(GetWorld()->GetCurrentLevel()->GetFullName()));
+		CurrentGameInstance->LoadSpecifiedLevelByName(FName(GetWorld()->GetCurrentLevel()->GetFullName()));
 	}
 	//UGameplayStatics::OpenLevel(GetWorld(), FName(GetWorld()->GetCurrentLevel()->GetFullName()), true);
 }

@@ -13,13 +13,22 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 	NPROJECT1_GH_API UClass* Z_Construct_UClass_UMyGameInstance();
 	ENGINE_API UClass* Z_Construct_UClass_UGameInstance();
 	UPackage* Z_Construct_UPackage__Script_Nproject1_GH();
+	ENGINE_API UClass* Z_Construct_UClass_UWorld_NoRegister();
 // End Cross Module References
-	DEFINE_FUNCTION(UMyGameInstance::execLoadSpecifiedLevel)
+	DEFINE_FUNCTION(UMyGameInstance::execLoadSpecifiedLevelByName)
 	{
 		P_GET_PROPERTY(FNameProperty,Z_Param_LevelName);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->LoadSpecifiedLevel(Z_Param_LevelName);
+		P_THIS->LoadSpecifiedLevelByName(Z_Param_LevelName);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UMyGameInstance::execLoadSpecifiedLevel)
+	{
+		P_GET_SOFTOBJECT(TSoftObjectPtr<UWorld>,Z_Param_Level);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->LoadSpecifiedLevel(Z_Param_Level);
 		P_NATIVE_END;
 	}
 	void UMyGameInstance::StaticRegisterNativesUMyGameInstance()
@@ -27,6 +36,7 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 		UClass* Class = UMyGameInstance::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
 			{ "LoadSpecifiedLevel", &UMyGameInstance::execLoadSpecifiedLevel },
+			{ "LoadSpecifiedLevelByName", &UMyGameInstance::execLoadSpecifiedLevelByName },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -34,18 +44,18 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 	{
 		struct MyGameInstance_eventLoadSpecifiedLevel_Parms
 		{
-			FName LevelName;
+			TSoftObjectPtr<UWorld> Level;
 		};
-		static const UECodeGen_Private::FNamePropertyParams NewProp_LevelName;
+		static const UECodeGen_Private::FSoftObjectPropertyParams NewProp_Level;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevel_Statics::NewProp_LevelName = { "LevelName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyGameInstance_eventLoadSpecifiedLevel_Parms, LevelName), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FSoftObjectPropertyParams Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevel_Statics::NewProp_Level = { "Level", nullptr, (EPropertyFlags)0x0014000000000080, UECodeGen_Private::EPropertyGenFlags::SoftObject, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyGameInstance_eventLoadSpecifiedLevel_Parms, Level), Z_Construct_UClass_UWorld_NoRegister, METADATA_PARAMS(nullptr, 0) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevel_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevel_Statics::NewProp_LevelName,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevel_Statics::NewProp_Level,
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevel_Statics::Function_MetaDataParams[] = {
@@ -61,6 +71,40 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevel_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName_Statics
+	{
+		struct MyGameInstance_eventLoadSpecifiedLevelByName_Parms
+		{
+			FName LevelName;
+		};
+		static const UECodeGen_Private::FNamePropertyParams NewProp_LevelName;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName_Statics::NewProp_LevelName = { "LevelName", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyGameInstance_eventLoadSpecifiedLevelByName_Parms, LevelName), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName_Statics::NewProp_LevelName,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName_Statics::Function_MetaDataParams[] = {
+		{ "Comment", "//Loads the specified level by name\n" },
+		{ "ModuleRelativePath", "MyGameInstance.h" },
+		{ "ToolTip", "Loads the specified level by name" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UMyGameInstance, nullptr, "LoadSpecifiedLevelByName", nullptr, nullptr, sizeof(Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName_Statics::MyGameInstance_eventLoadSpecifiedLevelByName_Parms), Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -88,6 +132,24 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_PlayerScore_MetaData[];
 #endif
 		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_PlayerScore;
+		static const UECodeGen_Private::FSoftObjectPropertyParams NewProp_Levels_Inner;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Levels_MetaData[];
+#endif
+		static const UECodeGen_Private::FArrayPropertyParams NewProp_Levels;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_NextLevelIndex_MetaData[];
+#endif
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_NextLevelIndex;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_EnemyNum_MetaData[];
+#endif
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_EnemyNum;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bCanLoadNextLevel_MetaData[];
+#endif
+		static void NewProp_bCanLoadNextLevel_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bCanLoadNextLevel;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -97,7 +159,8 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_Nproject1_GH,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UMyGameInstance_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevel, "LoadSpecifiedLevel" }, // 1729750253
+		{ &Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevel, "LoadSpecifiedLevel" }, // 2190585500
+		{ &Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName, "LoadSpecifiedLevelByName" }, // 199089372
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::Class_MetaDataParams[] = {
@@ -131,10 +194,56 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 	};
 #endif
 	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerScore = { "PlayerScore", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyGameInstance, PlayerScore), METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerScore_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerScore_MetaData)) };
+	const UECodeGen_Private::FSoftObjectPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_Levels_Inner = { "Levels", nullptr, (EPropertyFlags)0x0004000000000000, UECodeGen_Private::EPropertyGenFlags::SoftObject, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_UWorld_NoRegister, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::NewProp_Levels_MetaData[] = {
+		{ "Category", "MyGameInstance" },
+		{ "Comment", "/** Level name array */" },
+		{ "ModuleRelativePath", "MyGameInstance.h" },
+		{ "ToolTip", "Level name array" },
+	};
+#endif
+	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_Levels = { "Levels", nullptr, (EPropertyFlags)0x0014000000010015, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyGameInstance, Levels), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_Levels_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_Levels_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::NewProp_NextLevelIndex_MetaData[] = {
+		{ "Category", "MyGameInstance" },
+		{ "Comment", "/** Next level's index */" },
+		{ "ModuleRelativePath", "MyGameInstance.h" },
+		{ "ToolTip", "Next level's index" },
+	};
+#endif
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_NextLevelIndex = { "NextLevelIndex", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyGameInstance, NextLevelIndex), METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_NextLevelIndex_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_NextLevelIndex_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::NewProp_EnemyNum_MetaData[] = {
+		{ "Category", "MyGameInstance" },
+		{ "Comment", "/** Total number of enemies to fight in the current level */" },
+		{ "ModuleRelativePath", "MyGameInstance.h" },
+		{ "ToolTip", "Total number of enemies to fight in the current level" },
+	};
+#endif
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_EnemyNum = { "EnemyNum", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyGameInstance, EnemyNum), METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_EnemyNum_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_EnemyNum_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel_MetaData[] = {
+		{ "Category", "MyGameInstance" },
+		{ "Comment", "/** Whether or not to load next level when EnemyNum <= 0 */" },
+		{ "ModuleRelativePath", "MyGameInstance.h" },
+		{ "ToolTip", "Whether or not to load next level when EnemyNum <= 0" },
+	};
+#endif
+	void Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel_SetBit(void* Obj)
+	{
+		((UMyGameInstance*)Obj)->bCanLoadNextLevel = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel = { "bCanLoadNextLevel", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(UMyGameInstance), &Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel_SetBit, METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UMyGameInstance_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Max,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Current,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerScore,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_Levels_Inner,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_Levels,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_NextLevelIndex,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_EnemyNum,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UMyGameInstance_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UMyGameInstance>::IsAbstract,
@@ -172,9 +281,9 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UMyGameInstance, UMyGameInstance::StaticClass, TEXT("UMyGameInstance"), &Z_Registration_Info_UClass_UMyGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMyGameInstance), 1607827292U) },
+		{ Z_Construct_UClass_UMyGameInstance, UMyGameInstance::StaticClass, TEXT("UMyGameInstance"), &Z_Registration_Info_UClass_UMyGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMyGameInstance), 2737909367U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_1363947212(TEXT("/Script/Nproject1_GH"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_1411451878(TEXT("/Script/Nproject1_GH"),
 		Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

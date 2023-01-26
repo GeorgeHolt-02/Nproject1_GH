@@ -38,6 +38,10 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int WavesIndex;
 
+	/** Game instance reference */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UMyGameInstance* CurrentGameInstance;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

@@ -201,5 +201,24 @@ void ABaseEnemy::OnDeath(AActor* DestroyedActor)
 	if(CurrentGameInstance)
 	{
 		CurrentGameInstance->PlayerScore += PointsToAward;
+		CurrentGameInstance->EnemyNum -= 1;
+		if((CurrentGameInstance->EnemyNum <= 0) && (CurrentGameInstance->bCanLoadNextLevel))
+		{
+			if(CurrentGameInstance->Levels.IsValidIndex(CurrentGameInstance->NextLevelIndex))
+			{
+				CurrentGameInstance->LoadSpecifiedLevel(CurrentGameInstance->Levels[CurrentGameInstance->NextLevelIndex]);
+				CurrentGameInstance->NextLevelIndex++;
+				CurrentGameInstance->bCanLoadNextLevel = false;
+			}
+			else
+			{
+				if(CurrentGameInstance->Levels.IsValidIndex(0))
+				{
+					CurrentGameInstance->LoadSpecifiedLevel(CurrentGameInstance->Levels[0]);
+					CurrentGameInstance->NextLevelIndex = 1;
+					CurrentGameInstance->bCanLoadNextLevel = false;
+				}
+			}
+		}
 	}
 }

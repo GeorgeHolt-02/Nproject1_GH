@@ -3,6 +3,8 @@
 
 #include "EnemySpawner.h"
 
+#include "MyGameInstance.h"
+
 // Sets default values
 AEnemySpawner::AEnemySpawner()
 {
@@ -26,12 +28,27 @@ AEnemySpawner::AEnemySpawner()
 	SpawnInterval_Current = SpawnInterval_Max;
 
 	WavesIndex = 0;
+
+	CurrentGameInstance = nullptr;
 }
 
 // Called when the game starts or when spawned
 void AEnemySpawner::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	if(GetGameInstance())
+	{
+		CurrentGameInstance = Cast<UMyGameInstance>(GetGameInstance());
+	}
+	if(CurrentGameInstance)
+	{
+		for(int i = 0; i < Waves.Num(); i++)
+		{
+			CurrentGameInstance->EnemyNum += Waves[i]->GetNumberOfSplinePoints();
+		}
+		CurrentGameInstance->bCanLoadNextLevel = true;
+	}
 
 	SpawnEnemies();
 	
