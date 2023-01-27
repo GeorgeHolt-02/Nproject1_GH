@@ -171,13 +171,25 @@ void APlayerChar::Tick(float DeltaTime)
 
 	UpdateInvulnTimer(DeltaTime);
 	
-	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Green,
-	FString::Printf(TEXT("PLAYER HEALTH: %f/%f"), CurrentHealth, MaxHealth));
+	// GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Green,
+	// FString::Printf(TEXT("PLAYER HEALTH: %f/%f"), CurrentHealth, MaxHealth));
 
 	if(CurrentGameInstance)
 	{
+		GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Green,
+	FString::Printf(TEXT("LIVES: %i"), CurrentGameInstance->PlayerLives_Current));
 		GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Yellow,
 	FString::Printf(TEXT("SCORE: %i"), CurrentGameInstance->PlayerScore));
+		
+		// UE_LOG(LogTemp, Warning, TEXT("%i"), CurrentGameInstance->EnemyNum);
+		// if(CurrentGameInstance->bCanLoadNextLevel)
+		// {
+		// 	UE_LOG(LogTemp, Warning, TEXT("true"));
+		// }
+		// else
+		// {
+		// 	UE_LOG(LogTemp, Warning, TEXT("false"));
+		// }
 	}
 
 	// if (Anim_bHasFired == true)
@@ -320,7 +332,29 @@ void APlayerChar::OnDeath(AActor* DestroyedActor)
 {
 	if(CurrentGameInstance)
 	{
-		CurrentGameInstance->LoadSpecifiedLevelByName(FName(GetWorld()->GetCurrentLevel()->GetFullName()));
+		if(CurrentGameInstance->bCanLoadNextLevel)
+		{
+			if(CurrentGameInstance->PlayerLives_Current > 0)
+			{
+				CurrentGameInstance->LoadSpecifiedLevelByName(FName(GetWorld()->GetCurrentLevel()->GetFullName()));
+				CurrentGameInstance->PlayerLives_Current--;
+			}
+			else
+			{
+				CurrentGameInstance->PlayerScore = 0;
+				//CurrentGameInstance->ScoreSinceLastXtraLife = 0;
+				CurrentGameInstance->ScoreForXtraLives = CurrentGameInstance->ScoreForFirstXtraLife;
+				if(CurrentGameInstance->Levels.IsValidIndex(0))
+				{
+					CurrentGameInstance->LoadSpecifiedLevel(CurrentGameInstance->Levels[0]);
+					CurrentGameInstance->NextLevelIndex = 1;
+				}
+				CurrentGameInstance->PlayerLives_Current = CurrentGameInstance->PlayerLives_Starting;
+			}
+			CurrentGameInstance->bCanLoadNextLevel = false;
+		}
+		
+		
 	}
 	//UGameplayStatics::OpenLevel(GetWorld(), FName(GetWorld()->GetCurrentLevel()->GetFullName()), true);
 }
@@ -454,16 +488,20 @@ bool APlayerChar::bCanShoot()
 
 void APlayerChar::PlayerDeath()
 {
-	if(CurrentHealth <= 0)
-	{
-		Destroy();
-	}
+	// if(CurrentHealth <= 0)
+	// {
+	// 	Destroy();
+	// }
 	if(GetActorLocation().Z > 5000.0f)
 	{
+		CurrentGameInstance->EnemyNum = 0;
+		CurrentGameInstance->bCanLoadNextLevel = true;
 		Destroy();
 	}
 	if(GetActorLocation().Z < -5000.0f)
 	{
+		CurrentGameInstance->EnemyNum = 0;
+		CurrentGameInstance->bCanLoadNextLevel = true;
 		Destroy();
 	}
 }

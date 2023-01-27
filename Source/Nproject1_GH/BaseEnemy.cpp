@@ -6,7 +6,6 @@
 #include "MyGameInstance.h"
 #include "PlayerChar.h"
 #include "Components/BoxComponent.h"
-#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABaseEnemy::ABaseEnemy()
@@ -165,7 +164,14 @@ void ABaseEnemy::DamageFunction(float Damage)
 
 void ABaseEnemy::Death()
 {
-	//insert any code that is meant to occur before destroy here
+	if(CurrentGameInstance)
+	{
+		CurrentGameInstance->PlayerScore += PointsToAward;
+		//CurrentGameInstance->ScoreSinceLastXtraLife += PointsToAward;
+		CurrentGameInstance->AddXtraLives();
+		CurrentGameInstance->EnemyNum--;
+		UE_LOG(LogTemp, Warning, TEXT("Enemy Num2: %i"), CurrentGameInstance->EnemyNum);
+	}
 	Destroy();
 }
 
@@ -181,6 +187,11 @@ void ABaseEnemy::OnOverlapStart(UPrimitiveComponent* OverlappedComponent, AActor
 			{
 				if(!MyPlayer->bPositioningSweep)
 				{
+					if(CurrentGameInstance)
+					{
+						CurrentGameInstance->EnemyNum = 0;
+						CurrentGameInstance->bCanLoadNextLevel = true;
+					}
 					MyPlayer->Destroy();
 				}
 			}
@@ -198,27 +209,5 @@ void ABaseEnemy::OnOverlapStart(UPrimitiveComponent* OverlappedComponent, AActor
 
 void ABaseEnemy::OnDeath(AActor* DestroyedActor)
 {
-	if(CurrentGameInstance)
-	{
-		CurrentGameInstance->PlayerScore += PointsToAward;
-		CurrentGameInstance->EnemyNum -= 1;
-		if((CurrentGameInstance->EnemyNum <= 0) && (CurrentGameInstance->bCanLoadNextLevel))
-		{
-			if(CurrentGameInstance->Levels.IsValidIndex(CurrentGameInstance->NextLevelIndex))
-			{
-				CurrentGameInstance->LoadSpecifiedLevel(CurrentGameInstance->Levels[CurrentGameInstance->NextLevelIndex]);
-				CurrentGameInstance->NextLevelIndex++;
-				CurrentGameInstance->bCanLoadNextLevel = false;
-			}
-			else
-			{
-				if(CurrentGameInstance->Levels.IsValidIndex(0))
-				{
-					CurrentGameInstance->LoadSpecifiedLevel(CurrentGameInstance->Levels[0]);
-					CurrentGameInstance->NextLevelIndex = 1;
-					CurrentGameInstance->bCanLoadNextLevel = false;
-				}
-			}
-		}
-	}
+	
 }

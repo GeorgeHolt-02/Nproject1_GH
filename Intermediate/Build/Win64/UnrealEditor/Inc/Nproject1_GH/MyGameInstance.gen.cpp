@@ -15,6 +15,13 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 	UPackage* Z_Construct_UPackage__Script_Nproject1_GH();
 	ENGINE_API UClass* Z_Construct_UClass_UWorld_NoRegister();
 // End Cross Module References
+	DEFINE_FUNCTION(UMyGameInstance::execAddXtraLives)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->AddXtraLives();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UMyGameInstance::execLoadSpecifiedLevelByName)
 	{
 		P_GET_PROPERTY(FNameProperty,Z_Param_LevelName);
@@ -35,10 +42,35 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 	{
 		UClass* Class = UMyGameInstance::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "AddXtraLives", &UMyGameInstance::execAddXtraLives },
 			{ "LoadSpecifiedLevel", &UMyGameInstance::execLoadSpecifiedLevel },
 			{ "LoadSpecifiedLevelByName", &UMyGameInstance::execLoadSpecifiedLevelByName },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_UMyGameInstance_AddXtraLives_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UMyGameInstance_AddXtraLives_Statics::Function_MetaDataParams[] = {
+		{ "Comment", "//Grants the player 1-Ups based on score\n" },
+		{ "ModuleRelativePath", "MyGameInstance.h" },
+		{ "ToolTip", "Grants the player 1-Ups based on score" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UMyGameInstance_AddXtraLives_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UMyGameInstance, nullptr, "AddXtraLives", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UMyGameInstance_AddXtraLives_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UMyGameInstance_AddXtraLives_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UMyGameInstance_AddXtraLives()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UMyGameInstance_AddXtraLives_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevel_Statics
 	{
@@ -121,6 +153,10 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PlayerLives_Starting_MetaData[];
+#endif
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_PlayerLives_Starting;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_PlayerLives_Max_MetaData[];
 #endif
 		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_PlayerLives_Max;
@@ -132,6 +168,22 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_PlayerScore_MetaData[];
 #endif
 		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_PlayerScore;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ScoreForXtraLives_MetaData[];
+#endif
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_ScoreForXtraLives;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ScoreForFirstXtraLife_MetaData[];
+#endif
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_ScoreForFirstXtraLife;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ScoreForSubsequentXtraLives_MetaData[];
+#endif
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_ScoreForSubsequentXtraLives;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ScoreSinceLastXtraLife_MetaData[];
+#endif
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_ScoreSinceLastXtraLife;
 		static const UECodeGen_Private::FSoftObjectPropertyParams NewProp_Levels_Inner;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Levels_MetaData[];
@@ -159,6 +211,7 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_Nproject1_GH,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UMyGameInstance_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_UMyGameInstance_AddXtraLives, "AddXtraLives" }, // 4205036381
 		{ &Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevel, "LoadSpecifiedLevel" }, // 2190585500
 		{ &Z_Construct_UFunction_UMyGameInstance_LoadSpecifiedLevelByName, "LoadSpecifiedLevelByName" }, // 199089372
 	};
@@ -170,11 +223,18 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 	};
 #endif
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Starting_MetaData[] = {
+		{ "Category", "MyGameInstance" },
+		{ "Comment", "/** Player's lives (starting, max and current, respectively */" },
+		{ "ModuleRelativePath", "MyGameInstance.h" },
+		{ "ToolTip", "Player's lives (starting, max and current, respectively" },
+	};
+#endif
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Starting = { "PlayerLives_Starting", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyGameInstance, PlayerLives_Starting), METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Starting_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Starting_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Max_MetaData[] = {
 		{ "Category", "MyGameInstance" },
-		{ "Comment", "/** Player's lives (max and current, respectively */" },
 		{ "ModuleRelativePath", "MyGameInstance.h" },
-		{ "ToolTip", "Player's lives (max and current, respectively" },
 	};
 #endif
 	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Max = { "PlayerLives_Max", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyGameInstance, PlayerLives_Max), METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Max_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Max_MetaData)) };
@@ -194,6 +254,42 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 	};
 #endif
 	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerScore = { "PlayerScore", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyGameInstance, PlayerScore), METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerScore_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerScore_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForXtraLives_MetaData[] = {
+		{ "Category", "MyGameInstance" },
+		{ "Comment", "/**Current score required for score 1-Ups */" },
+		{ "ModuleRelativePath", "MyGameInstance.h" },
+		{ "ToolTip", "Current score required for score 1-Ups" },
+	};
+#endif
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForXtraLives = { "ScoreForXtraLives", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyGameInstance, ScoreForXtraLives), METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForXtraLives_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForXtraLives_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForFirstXtraLife_MetaData[] = {
+		{ "Category", "MyGameInstance" },
+		{ "Comment", "/** Score required for the player's first score 1-Up */" },
+		{ "ModuleRelativePath", "MyGameInstance.h" },
+		{ "ToolTip", "Score required for the player's first score 1-Up" },
+	};
+#endif
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForFirstXtraLife = { "ScoreForFirstXtraLife", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyGameInstance, ScoreForFirstXtraLife), METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForFirstXtraLife_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForFirstXtraLife_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForSubsequentXtraLives_MetaData[] = {
+		{ "Category", "MyGameInstance" },
+		{ "Comment", "/** Score required for subsequent score 1-Ups */" },
+		{ "ModuleRelativePath", "MyGameInstance.h" },
+		{ "ToolTip", "Score required for subsequent score 1-Ups" },
+	};
+#endif
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForSubsequentXtraLives = { "ScoreForSubsequentXtraLives", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyGameInstance, ScoreForSubsequentXtraLives), METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForSubsequentXtraLives_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForSubsequentXtraLives_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreSinceLastXtraLife_MetaData[] = {
+		{ "Category", "MyGameInstance" },
+		{ "Comment", "/** Score accumulated since last score 1-Up */" },
+		{ "ModuleRelativePath", "MyGameInstance.h" },
+		{ "ToolTip", "Score accumulated since last score 1-Up" },
+	};
+#endif
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreSinceLastXtraLife = { "ScoreSinceLastXtraLife", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyGameInstance, ScoreSinceLastXtraLife), METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreSinceLastXtraLife_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreSinceLastXtraLife_MetaData)) };
 	const UECodeGen_Private::FSoftObjectPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_Levels_Inner = { "Levels", nullptr, (EPropertyFlags)0x0004000000000000, UECodeGen_Private::EPropertyGenFlags::SoftObject, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UClass_UWorld_NoRegister, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::NewProp_Levels_MetaData[] = {
@@ -236,9 +332,14 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel = { "bCanLoadNextLevel", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(UMyGameInstance), &Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel_SetBit, METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UMyGameInstance_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Starting,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Max,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Current,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerScore,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForXtraLives,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForFirstXtraLife,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreForSubsequentXtraLives,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_ScoreSinceLastXtraLife,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_Levels_Inner,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_Levels,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_NextLevelIndex,
@@ -281,9 +382,9 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UMyGameInstance, UMyGameInstance::StaticClass, TEXT("UMyGameInstance"), &Z_Registration_Info_UClass_UMyGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMyGameInstance), 2737909367U) },
+		{ Z_Construct_UClass_UMyGameInstance, UMyGameInstance::StaticClass, TEXT("UMyGameInstance"), &Z_Registration_Info_UClass_UMyGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMyGameInstance), 387915840U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_1411451878(TEXT("/Script/Nproject1_GH"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_3747397774(TEXT("/Script/Nproject1_GH"),
 		Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

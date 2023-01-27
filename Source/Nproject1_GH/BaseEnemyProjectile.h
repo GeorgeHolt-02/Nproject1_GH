@@ -18,6 +18,10 @@ public:
 	/** Projectile movement component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement")
 	class UProjectileMovementComponent* ShotMovement;
+
+	/** Game instance reference */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	class UMyGameInstance* CurrentGameInstance;
 	
 protected:
 	// Called when the game starts or when spawned

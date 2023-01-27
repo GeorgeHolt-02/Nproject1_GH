@@ -2,6 +2,8 @@
 
 
 #include "PlayerShot.h"
+
+#include "BaseEnemy.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
 // Sets default values

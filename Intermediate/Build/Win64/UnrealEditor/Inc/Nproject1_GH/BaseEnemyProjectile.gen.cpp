@@ -17,6 +17,7 @@ void EmptyLinkFunctionForGeneratedCodeBaseEnemyProjectile() {}
 	ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 	ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FHitResult();
 	ENGINE_API UClass* Z_Construct_UClass_UProjectileMovementComponent_NoRegister();
+	NPROJECT1_GH_API UClass* Z_Construct_UClass_UMyGameInstance_NoRegister();
 // End Cross Module References
 	DEFINE_FUNCTION(ABaseEnemyProjectile::execOnOverlapStart)
 	{
@@ -138,6 +139,10 @@ void EmptyLinkFunctionForGeneratedCodeBaseEnemyProjectile() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_ShotMovement_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_ShotMovement;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_CurrentGameInstance_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_CurrentGameInstance;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -165,8 +170,18 @@ void EmptyLinkFunctionForGeneratedCodeBaseEnemyProjectile() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseEnemyProjectile_Statics::NewProp_ShotMovement = { "ShotMovement", nullptr, (EPropertyFlags)0x00100000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABaseEnemyProjectile, ShotMovement), Z_Construct_UClass_UProjectileMovementComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABaseEnemyProjectile_Statics::NewProp_ShotMovement_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABaseEnemyProjectile_Statics::NewProp_ShotMovement_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ABaseEnemyProjectile_Statics::NewProp_CurrentGameInstance_MetaData[] = {
+		{ "Category", "BaseEnemyProjectile" },
+		{ "Comment", "/** Game instance reference */" },
+		{ "ModuleRelativePath", "BaseEnemyProjectile.h" },
+		{ "ToolTip", "Game instance reference" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseEnemyProjectile_Statics::NewProp_CurrentGameInstance = { "CurrentGameInstance", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ABaseEnemyProjectile, CurrentGameInstance), Z_Construct_UClass_UMyGameInstance_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ABaseEnemyProjectile_Statics::NewProp_CurrentGameInstance_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ABaseEnemyProjectile_Statics::NewProp_CurrentGameInstance_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ABaseEnemyProjectile_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseEnemyProjectile_Statics::NewProp_ShotMovement,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseEnemyProjectile_Statics::NewProp_CurrentGameInstance,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ABaseEnemyProjectile_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ABaseEnemyProjectile>::IsAbstract,
@@ -204,9 +219,9 @@ void EmptyLinkFunctionForGeneratedCodeBaseEnemyProjectile() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_BaseEnemyProjectile_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ABaseEnemyProjectile, ABaseEnemyProjectile::StaticClass, TEXT("ABaseEnemyProjectile"), &Z_Registration_Info_UClass_ABaseEnemyProjectile, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABaseEnemyProjectile), 1805470731U) },
+		{ Z_Construct_UClass_ABaseEnemyProjectile, ABaseEnemyProjectile::StaticClass, TEXT("ABaseEnemyProjectile"), &Z_Registration_Info_UClass_ABaseEnemyProjectile, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABaseEnemyProjectile), 3526460303U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_BaseEnemyProjectile_h_1730118925(TEXT("/Script/Nproject1_GH"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_BaseEnemyProjectile_h_749604696(TEXT("/Script/Nproject1_GH"),
 		Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_BaseEnemyProjectile_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_BaseEnemyProjectile_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

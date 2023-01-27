@@ -2,6 +2,7 @@
 
 
 #include "EnemyProjectile_FlyingTurret.h"
+#include "MyGameInstance.h"
 
 AEnemyProjectile_FlyingTurret::AEnemyProjectile_FlyingTurret()
 {
@@ -15,6 +16,11 @@ void AEnemyProjectile_FlyingTurret::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if(GetGameInstance())
+	{
+		CurrentGameInstance = Cast<UMyGameInstance>(GetGameInstance());
+	}
+	
 	ShotMesh->OnComponentBeginOverlap.AddDynamic(this, &AEnemyProjectile_FlyingTurret::OnOverlapStart);
 }
 

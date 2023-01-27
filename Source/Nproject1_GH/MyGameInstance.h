@@ -19,7 +19,9 @@ public:
 	//Sets default values
 	UMyGameInstance();
 
-	/** Player's lives (max and current, respectively */
+	/** Player's lives (starting, max and current, respectively */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	int PlayerLives_Starting;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	int PlayerLives_Max;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
@@ -28,6 +30,22 @@ public:
 	/** Player's current score */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int PlayerScore;
+
+	/**Current score required for score 1-Ups */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int ScoreForXtraLives;
+	
+	/** Score required for the player's first score 1-Up */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	int ScoreForFirstXtraLife;
+
+	/** Score required for subsequent score 1-Ups */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	int ScoreForSubsequentXtraLives;
+
+	/** Score accumulated since last score 1-Up */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int ScoreSinceLastXtraLife;
 
 	/** Level name array */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
@@ -49,8 +67,6 @@ protected:
 
 
 public:
-	
-	
 	void Init() override;
 	
 	//Loads the specified level
@@ -60,4 +76,8 @@ public:
 	//Loads the specified level by name
 	UFUNCTION()
 	void LoadSpecifiedLevelByName(FName LevelName);
+
+	//Grants the player 1-Ups based on score
+	UFUNCTION()
+	void AddXtraLives();
 };

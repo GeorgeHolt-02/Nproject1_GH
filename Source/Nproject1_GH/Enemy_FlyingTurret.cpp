@@ -2,6 +2,7 @@
 
 
 #include "Enemy_FlyingTurret.h"
+
 #include "Components/BoxComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -40,7 +41,7 @@ AEnemy_FlyingTurret::AEnemy_FlyingTurret()
 void AEnemy_FlyingTurret::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	TurretInterval_TimeLeft = TurretInterval;
 }
 

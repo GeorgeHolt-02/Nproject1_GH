@@ -43,11 +43,11 @@ void AEnemySpawner::BeginPlay()
 	}
 	if(CurrentGameInstance)
 	{
+		CurrentGameInstance->EnemyNum = 0;
 		for(int i = 0; i < Waves.Num(); i++)
 		{
 			CurrentGameInstance->EnemyNum += Waves[i]->GetNumberOfSplinePoints();
 		}
-		CurrentGameInstance->bCanLoadNextLevel = true;
 	}
 
 	SpawnEnemies();
@@ -60,6 +60,35 @@ void AEnemySpawner::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	UE_LOG(LogTemp, Warning, TEXT("%i"), CurrentGameInstance->EnemyNum);
+	
+	if(CurrentGameInstance)
+	{
+		if(CurrentGameInstance->EnemyNum <= 0)
+		{
+			if(CurrentGameInstance->Levels.IsValidIndex(CurrentGameInstance->NextLevelIndex))
+			{
+				CurrentGameInstance->LoadSpecifiedLevel(CurrentGameInstance->Levels[CurrentGameInstance->NextLevelIndex]);
+				CurrentGameInstance->NextLevelIndex++;
+				CurrentGameInstance->bCanLoadNextLevel = false;
+			}
+			else
+			{
+				if(CurrentGameInstance->Levels.IsValidIndex(0))
+				{
+					CurrentGameInstance->LoadSpecifiedLevel(CurrentGameInstance->Levels[0]);
+					CurrentGameInstance->NextLevelIndex = 1;
+					CurrentGameInstance->bCanLoadNextLevel = false;
+				}
+			}
+			CurrentGameInstance->EnemyNum = 0;
+			for(int i = 0; i < Waves.Num(); i++)
+			{
+				CurrentGameInstance->EnemyNum += Waves[i]->GetNumberOfSplinePoints();
+			}
+		}
+	}
+	
 	SpawnTimer(DeltaTime);
 }
 

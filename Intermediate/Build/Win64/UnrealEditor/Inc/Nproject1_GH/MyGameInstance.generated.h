@@ -17,12 +17,14 @@ class UWorld;
 #define FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_16_SPARSE_DATA
 #define FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_16_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execAddXtraLives); \
 	DECLARE_FUNCTION(execLoadSpecifiedLevelByName); \
 	DECLARE_FUNCTION(execLoadSpecifiedLevel);
 
 
 #define FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execAddXtraLives); \
 	DECLARE_FUNCTION(execLoadSpecifiedLevelByName); \
 	DECLARE_FUNCTION(execLoadSpecifiedLevel);
 

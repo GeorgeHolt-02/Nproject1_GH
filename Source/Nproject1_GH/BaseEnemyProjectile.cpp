@@ -2,7 +2,7 @@
 
 
 #include "BaseEnemyProjectile.h"
-
+#include "MyGameInstance.h"
 #include "PlayerChar.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
@@ -22,7 +22,7 @@ ABaseEnemyProjectile::ABaseEnemyProjectile()
 	ShotMovement->SetPlaneConstraintNormal(FVector(0.0f, 0.0f, 0.0f));
 	ShotMovement->bConstrainToPlane = false;
 
-	
+	CurrentGameInstance = nullptr;
 }
 
 // Called when the game starts or when spawned
@@ -37,7 +37,10 @@ void ABaseEnemyProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	
+	if(GetGameInstance())
+	{
+		CurrentGameInstance = Cast<UMyGameInstance>(GetGameInstance());
+	}
 }
 
 void ABaseEnemyProjectile::OnOverlapStart(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -50,6 +53,11 @@ void ABaseEnemyProjectile::OnOverlapStart(UPrimitiveComponent* OverlappedCompone
 		{
 			if(!MyPlayer->bPositioningSweep)
 			{
+				if(CurrentGameInstance)
+				{
+					CurrentGameInstance->EnemyNum = 0;
+					CurrentGameInstance->bCanLoadNextLevel = true;
+				}
 				MyPlayer->Destroy();
 			}
 		}

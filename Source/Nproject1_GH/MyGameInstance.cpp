@@ -7,7 +7,8 @@
 
 UMyGameInstance::UMyGameInstance()
 {
-	PlayerLives_Max = 3;
+	PlayerLives_Starting = 2;
+	PlayerLives_Max = 9;
 	PlayerLives_Current = PlayerLives_Max;
 
 	PlayerScore = 0;
@@ -17,15 +18,24 @@ UMyGameInstance::UMyGameInstance()
 	EnemyNum = 0;
 	
 	bCanLoadNextLevel = false;
+
+	ScoreForFirstXtraLife = 50;
+	ScoreForSubsequentXtraLives = 100;
+
+	ScoreForXtraLives = ScoreForFirstXtraLife;
+	ScoreSinceLastXtraLife = 0;
 }
 
 void UMyGameInstance::Init()
 {
 	Super::Init();
 
-	PlayerLives_Current = PlayerLives_Max;
+	PlayerLives_Current = PlayerLives_Starting;
 	
 	PlayerScore = 0;
+
+	ScoreForXtraLives = ScoreForFirstXtraLife;
+	ScoreSinceLastXtraLife = 0;
 }
 
 void UMyGameInstance::LoadSpecifiedLevel(TSoftObjectPtr<UWorld> Level)
@@ -36,4 +46,18 @@ void UMyGameInstance::LoadSpecifiedLevel(TSoftObjectPtr<UWorld> Level)
 void UMyGameInstance::LoadSpecifiedLevelByName(FName LevelName)
 {
 	UGameplayStatics::OpenLevel(GetWorld(), LevelName, true);
+}
+
+void UMyGameInstance::AddXtraLives()
+{
+	if (PlayerScore >= ScoreForXtraLives)
+	{
+		if (PlayerLives_Current < PlayerLives_Max)
+		{
+			PlayerLives_Current++;
+		}
+		ScoreForXtraLives += ScoreForSubsequentXtraLives;
+		UE_LOG(LogTemp, Warning, TEXT("Score Required: %i"), ScoreForXtraLives);
+		
+	}
 }

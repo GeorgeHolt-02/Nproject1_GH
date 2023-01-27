@@ -3,6 +3,7 @@
 
 #include "Enemy_MuscleGrunt.h"
 #include "ComponentUtils.h"
+#include "MyGameInstance.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "PlayerChar.h"
@@ -38,6 +39,11 @@ void AEnemy_MuscleGrunt::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if(GetGameInstance())
+	{
+		CurrentGameInstance = Cast<UMyGameInstance>(GetGameInstance());
+	}
+	
 	EnemyCollider->OnComponentHit.AddDynamic(this, &AEnemy_MuscleGrunt::OnHit);
 }
 
@@ -169,7 +175,10 @@ void AEnemy_MuscleGrunt::MainBehaviour(float DeltaTime)
 
 	if(CollisionCheck->Component != nullptr)
 	{
-		AttachToComponent(Cast<USceneComponent>(CollisionCheck->Component), FAttachmentTransformRules::KeepWorldTransform);
+		if(CollisionCheck->Component->GetAttachmentRootActor() != Cast<ABaseEnemy>(CollisionCheck->Component->GetAttachmentRootActor()))
+		{
+			AttachToComponent(Cast<USceneComponent>(CollisionCheck->Component), FAttachmentTransformRules::KeepWorldTransform);
+		}
 	}
 	
 	delete CollisionCheck;
@@ -205,7 +214,10 @@ void AEnemy_MuscleGrunt::EnemyGravity(float DeltaTime)
 
 	if(CollisionCheck->Component != nullptr)
 	{
-		AttachToComponent(Cast<USceneComponent>(CollisionCheck->Component), FAttachmentTransformRules::KeepWorldTransform);
+		if(CollisionCheck->Component->GetAttachmentRootActor() != Cast<ABaseEnemy>(CollisionCheck->Component->GetAttachmentRootActor()))
+		{
+			AttachToComponent(Cast<USceneComponent>(CollisionCheck->Component), FAttachmentTransformRules::KeepWorldTransform);
+		}
 	}
 	
 	delete CollisionCheck;
@@ -305,6 +317,11 @@ void AEnemy_MuscleGrunt::OnOverlapStart(UPrimitiveComponent* OverlappedComponent
 			{
 				if((!MyPlayer->bPositioningSweep) && (!bPositioningSweep))
 				{
+					if(CurrentGameInstance)
+					{
+						CurrentGameInstance->EnemyNum = 0;
+						CurrentGameInstance->bCanLoadNextLevel = true;
+					}
 					MyPlayer->Destroy();
 				}
 			}
