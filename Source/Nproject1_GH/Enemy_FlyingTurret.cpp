@@ -2,11 +2,11 @@
 
 
 #include "Enemy_FlyingTurret.h"
-
 #include "Components/BoxComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "PlayerChar.h"
 
 AEnemy_FlyingTurret::AEnemy_FlyingTurret()
 {
@@ -159,6 +159,10 @@ void AEnemy_FlyingTurret::MainBehaviour(float DeltaTime)
 void AEnemy_FlyingTurret::DamageFunction(float Damage)
 {
 	Health_Current -= Damage;
+	if(Player)
+	{
+		Player->MeterDecrementPauseTime = FlashTime_Max;
+	}
 	if (Health_Current <= 0.0f)
 	{
 		Death();

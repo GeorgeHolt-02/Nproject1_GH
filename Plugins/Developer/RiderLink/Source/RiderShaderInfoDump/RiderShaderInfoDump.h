@@ -2,7 +2,7 @@
 
 #include "Modules/ModuleInterface.h"
 
-class RIDERSHADERINFO_API FRiderShaderInfoModule : public IModuleInterface
+class RIDERSHADERINFODUMP_API FRiderShaderInfoDumpModule : public IModuleInterface
 {
 public:
 	virtual void StartupModule() override;

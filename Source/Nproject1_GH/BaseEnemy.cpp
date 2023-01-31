@@ -53,7 +53,7 @@ void ABaseEnemy::BeginPlay()
 
 	if (GetWorld()->GetFirstPlayerController()->GetPawn() != nullptr)
 	{
-		Player = GetWorld()->GetFirstPlayerController()->GetPawn();
+		Player = Cast<APlayerChar>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	}
 
 	Health_Current = Health_Max;
@@ -153,6 +153,10 @@ void ABaseEnemy::MainBehaviour(float DeltaTime)
 void ABaseEnemy::DamageFunction(float Damage)
 {
 	Health_Current -= Damage;
+	if(Player)
+	{
+		Player->MeterDecrementPauseTime = FlashTime_Max;
+	}
 	if (Health_Current <= 0.0f)
 	{
 		Death();
@@ -166,9 +170,9 @@ void ABaseEnemy::Death()
 {
 	if(CurrentGameInstance)
 	{
-		CurrentGameInstance->PlayerScore += PointsToAward;
-		//CurrentGameInstance->ScoreSinceLastXtraLife += PointsToAward;
+		CurrentGameInstance->PlayerScore += (PointsToAward * Player->ScoreMultiplier_Current);
 		CurrentGameInstance->AddXtraLives();
+		Player->MultiplierMeter_Current += Player->MultiplierMeter_IncreaseBy;
 		CurrentGameInstance->EnemyNum--;
 		UE_LOG(LogTemp, Warning, TEXT("Enemy Num2: %i"), CurrentGameInstance->EnemyNum);
 	}

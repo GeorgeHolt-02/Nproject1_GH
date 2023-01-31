@@ -185,6 +185,35 @@ public:
 	//Current game instance
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	class UMyGameInstance* CurrentGameInstance;
+
+	//Score multiplier (max, current and how much to change by, respectively)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	float ScoreMultiplier_Max;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	float ScoreMultiplier_Current;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	float ScoreMultiplier_ChangeBy;
+	
+	//Score multiplier meter (required for next multiplier increase, current and how much to increase by, respectively)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	float MultiplierMeter_NeededForIncrease;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	float MultiplierMeter_Current;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	float MultiplierMeter_IncreaseBy;
+
+	//Time to pause score multiplier meter decrementing for
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	float MeterDecrementPauseTime;
+
+	//Whether or not to reset the meter to 0 or meter max
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool bResetMeter;
+
+	/* Multiplier meter speed coefficient (what we multiply delta time and the score multiplier by to define
+	the meter's depletion speed) */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	float MeterSpeedCoeff;
 	
 protected:
 	
@@ -252,6 +281,9 @@ public:
 	
 	// Called to cause the player to constantly move downwards and gradually gain speed while airborne
 	void PlayerGravity(float DeltaTime);
+
+	// Called to update the multiplier/meter 
+	void UpdateMultiplier(float DeltaTime);
 
 	// Called on a hit
 	UFUNCTION()

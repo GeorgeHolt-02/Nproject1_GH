@@ -1,4 +1,4 @@
-﻿#include "RiderShaderInfo.h"
+﻿#include "RiderShaderInfoDump.h"
 
 #include "HAL/FileManager.h"
 #include "Interfaces/IPluginManager.h"
@@ -6,9 +6,9 @@
 #include "Modules/ModuleManager.h"
 #include "ShaderCore.h"
 
-IMPLEMENT_MODULE(FRiderShaderInfoModule, RiderShaderInfo);
+IMPLEMENT_MODULE(FRiderShaderInfoDumpModule, RiderShaderInfoDump);
 
-void FRiderShaderInfoModule::StartupModule()
+void FRiderShaderInfoDumpModule::StartupModule()
 {
 	const TSharedPtr<IPlugin> Plugin = IPluginManager::Get().FindPlugin(TEXT("RiderLink"));
 	if(!Plugin.IsValid()) return;

@@ -55,7 +55,7 @@ public:
 
 	/** Player character reference */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	APawn* Player;
+	class APlayerChar* Player;
 
 	/** Game instance reference */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)

@@ -20,7 +20,7 @@ UMyGameInstance::UMyGameInstance()
 	bCanLoadNextLevel = false;
 
 	ScoreForFirstXtraLife = 50;
-	ScoreForSubsequentXtraLives = 100;
+	ScoreForSubsequentXtraLives = 200;
 
 	ScoreForXtraLives = ScoreForFirstXtraLife;
 	ScoreSinceLastXtraLife = 0;

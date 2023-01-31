@@ -175,6 +175,7 @@ void AEnemy_MuscleGrunt::MainBehaviour(float DeltaTime)
 
 	if(CollisionCheck->Component != nullptr)
 	{
+		DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		if(CollisionCheck->Component->GetAttachmentRootActor() != Cast<ABaseEnemy>(CollisionCheck->Component->GetAttachmentRootActor()))
 		{
 			AttachToComponent(Cast<USceneComponent>(CollisionCheck->Component), FAttachmentTransformRules::KeepWorldTransform);
@@ -187,6 +188,10 @@ void AEnemy_MuscleGrunt::MainBehaviour(float DeltaTime)
 void AEnemy_MuscleGrunt::DamageFunction(float Damage)
 {
 	Health_Current -= Damage;
+	if(Player)
+	{
+		Player->MeterDecrementPauseTime = FlashTime_Max;
+	}
 	if (Health_Current <= 0.0f)
 	{
 		Death();
@@ -214,6 +219,7 @@ void AEnemy_MuscleGrunt::EnemyGravity(float DeltaTime)
 
 	if(CollisionCheck->Component != nullptr)
 	{
+		DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 		if(CollisionCheck->Component->GetAttachmentRootActor() != Cast<ABaseEnemy>(CollisionCheck->Component->GetAttachmentRootActor()))
 		{
 			AttachToComponent(Cast<USceneComponent>(CollisionCheck->Component), FAttachmentTransformRules::KeepWorldTransform);

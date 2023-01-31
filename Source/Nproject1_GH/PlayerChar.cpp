@@ -22,7 +22,7 @@ APlayerChar::APlayerChar()
 	PlayerCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("PlayerCollider"));
 
 	RootComponent = PlayerCollider;
-
+	
 	// Create the base transform
 	PlayerTransform = CreateDefaultSubobject<USceneComponent>(TEXT("PlayerTransform"));
 	PlayerTransform->SetupAttachment(RootComponent);
@@ -120,6 +120,20 @@ APlayerChar::APlayerChar()
 #pragma endregion
 
 	CurrentGameInstance = nullptr;
+
+	ScoreMultiplier_Max = 2.0f;
+	ScoreMultiplier_Current = 1.0f;
+	ScoreMultiplier_ChangeBy = 0.2f;
+
+	MultiplierMeter_NeededForIncrease = 6.0f;
+	MultiplierMeter_Current = 0.0f;
+	MultiplierMeter_IncreaseBy = 2.0f;
+
+	MeterDecrementPauseTime = 0.0f;
+
+	bResetMeter = false;
+	
+	MeterSpeedCoeff = 1.0f;
 }
 
 // Called when the game starts or when spawned
@@ -170,10 +184,17 @@ void APlayerChar::Tick(float DeltaTime)
 	PlayerDeath();
 
 	UpdateInvulnTimer(DeltaTime);
+
+	UpdateMultiplier(DeltaTime);
 	
 	// GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Green,
 	// FString::Printf(TEXT("PLAYER HEALTH: %f/%f"), CurrentHealth, MaxHealth));
 
+	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::White,
+	FString::Printf(TEXT("MULTIPLIER METER: %f/%f"), MultiplierMeter_Current, MultiplierMeter_NeededForIncrease));
+	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::White,
+	FString::Printf(TEXT("SCORE MULTIPLIER: %f"), ScoreMultiplier_Current));
+	
 	if(CurrentGameInstance)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Green,
@@ -308,8 +329,79 @@ void APlayerChar::PlayerGravity(float DeltaTime)
 	SetActorLocation((GetActorLocation() + (UpVector * DeltaTime)), true);
 }
 
+void APlayerChar::UpdateMultiplier(float DeltaTime)
+{
+	if (MultiplierMeter_Current >= MultiplierMeter_NeededForIncrease)
+	{
+		if(ScoreMultiplier_Current < ScoreMultiplier_Max)
+		{
+			ScoreMultiplier_Current += ScoreMultiplier_ChangeBy;
+			if(ScoreMultiplier_Current >= ScoreMultiplier_Max)
+			{
+				ScoreMultiplier_Current = ScoreMultiplier_Max;
+				MultiplierMeter_Current = MultiplierMeter_NeededForIncrease;
+			}
+			else
+			{
+				bResetMeter = true;
+			}
+		}
+		else
+		{
+			MultiplierMeter_Current = MultiplierMeter_NeededForIncrease;
+		}
+	}
+
+	if(MeterDecrementPauseTime > 0.0f)
+	{
+		MeterDecrementPauseTime -= DeltaTime;
+	}
+
+	if(bResetMeter)
+	{
+		if(MultiplierMeter_Current >= MultiplierMeter_NeededForIncrease)
+		{
+			MultiplierMeter_Current -= MultiplierMeter_NeededForIncrease;
+			bResetMeter = false;
+		}
+		else if (MultiplierMeter_Current <= 0.0f)
+		{
+			MultiplierMeter_Current += MultiplierMeter_NeededForIncrease;
+			bResetMeter = false;
+		}
+	}
+	
+	if(MeterDecrementPauseTime <= 0.0f)
+	{
+		if (ScoreMultiplier_Current > 1.0f || MultiplierMeter_Current > 0.0f)
+		{
+			MultiplierMeter_Current -= (DeltaTime * MeterSpeedCoeff * ScoreMultiplier_Current);
+			if(MultiplierMeter_Current <= 0.0f)
+			{
+				if(ScoreMultiplier_Current > 1.0f)
+				{
+					ScoreMultiplier_Current -= ScoreMultiplier_ChangeBy;
+					if(ScoreMultiplier_Current < 1.0f)
+					{
+						ScoreMultiplier_Current = 1.0f;
+						MultiplierMeter_Current = 0.0f;
+					}
+					else
+					{
+						bResetMeter = true;
+					}
+				}
+				else
+				{
+					MultiplierMeter_Current = 0.0f;
+				}
+			}
+		}
+	}
+}
+
 void APlayerChar::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	FVector NormalImpulse, const FHitResult& HitResult)
+                        FVector NormalImpulse, const FHitResult& HitResult)
 {
 	if(!bPositioningSweep)
 	{
@@ -517,6 +609,8 @@ void APlayerChar::ShotCleanup()
 			if(FVector::Dist(GetActorLocation(), Shot->GetActorLocation()) > MaxProjTravelDistance)
 			{
 				Shot->Destroy();
+				ScoreMultiplier_Current = 1.0f;
+				MultiplierMeter_Current = 0.0f;
 			}
 		}
 	}
