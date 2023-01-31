@@ -84,6 +84,9 @@ public:
 	// Called to cap falling speed
 	void FallSpeedCap();
 
+	// Destroys upon falling into the abyss
+	void FallDeath();
+
 	// Called on a hit
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,

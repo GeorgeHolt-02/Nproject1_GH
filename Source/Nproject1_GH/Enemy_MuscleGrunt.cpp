@@ -69,6 +69,8 @@ void AEnemy_MuscleGrunt::Tick(float DeltaTime)
 	
 	GroundCollision(DeltaTime);
 	CeilingCollision(DeltaTime);
+
+	FallDeath();
 }
 
 void AEnemy_MuscleGrunt::InvulnPeriod(float DeltaTime)
@@ -291,8 +293,30 @@ void AEnemy_MuscleGrunt::FallSpeedCap()
 	}
 }
 
+void AEnemy_MuscleGrunt::FallDeath()
+{
+	if(GetActorLocation().Z > 5000.0f)
+	{
+		if(CurrentGameInstance)
+		{
+			CurrentGameInstance->EnemyNum--;
+			UE_LOG(LogTemp, Warning, TEXT("Enemy Num2: %i"), CurrentGameInstance->EnemyNum);
+		}
+		Destroy();
+	}
+	if(GetActorLocation().Z < -5000.0f)
+	{
+		if(CurrentGameInstance)
+		{
+			CurrentGameInstance->EnemyNum--;
+			UE_LOG(LogTemp, Warning, TEXT("Enemy Num2: %i"), CurrentGameInstance->EnemyNum);
+		}
+		Destroy();
+	}
+}
+
 void AEnemy_MuscleGrunt::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	FVector NormalImpulse, const FHitResult& HitResult)
+                               FVector NormalImpulse, const FHitResult& HitResult)
 {
 	// if(!bPositioningSweep)
 	// {
