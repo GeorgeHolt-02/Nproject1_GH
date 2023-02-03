@@ -155,7 +155,7 @@ void ABaseEnemy::DamageFunction(float Damage)
 	Health_Current -= Damage;
 	if(Player)
 	{
-		Player->MeterDecrementPauseTime = FlashTime_Max;
+		Player->MeterDecrementPauseTime += FlashTime_Max;
 	}
 	if (Health_Current <= 0.0f)
 	{
@@ -170,10 +170,46 @@ void ABaseEnemy::Death()
 {
 	if(CurrentGameInstance)
 	{
-		CurrentGameInstance->PlayerScore += (PointsToAward * Player->ScoreMultiplier_Current);
+		if(Player)
+		{
+			CurrentGameInstance->PlayerScore += (PointsToAward * Player->ScoreMultiplier_Current);
+		}
+		
 		CurrentGameInstance->AddXtraLives();
-		Player->MultiplierMeter_Current += Player->MultiplierMeter_IncreaseBy;
+		
+		if(Player)
+		{
+			Player->MultiplierMeter_Current += Player->MultiplierMeter_IncreaseBy;
+			if (Player->MultiplierMeter_Current >= Player->MultiplierMeter_NeededForIncrease)
+			{
+				if(Player->ScoreMultiplier_Current < Player->ScoreMultiplier_Max)
+				{
+					float i;
+					for(i = Player->MultiplierMeter_NeededForIncrease;
+						i <= Player->MultiplierMeter_Current;
+						i += Player->MultiplierMeter_NeededForIncrease)
+					{
+						Player->ScoreMultiplier_Current += Player->ScoreMultiplier_ChangeBy;
+					}
+					if(Player->ScoreMultiplier_Current >= Player->ScoreMultiplier_Max)
+					{
+						Player->ScoreMultiplier_Current = Player->ScoreMultiplier_Max;
+						Player->MultiplierMeter_Current = Player->MultiplierMeter_NeededForIncrease;
+					}
+					else
+					{
+						Player->MultiplierMeter_Current -= (i - Player->MultiplierMeter_NeededForIncrease);
+					}
+				}
+				else
+				{
+					Player->MultiplierMeter_Current = Player->MultiplierMeter_NeededForIncrease;
+				}
+			}
+		}
+		
 		CurrentGameInstance->EnemyNum--;
+		
 		UE_LOG(LogTemp, Warning, TEXT("Enemy Num2: %i"), CurrentGameInstance->EnemyNum);
 	}
 	Destroy();

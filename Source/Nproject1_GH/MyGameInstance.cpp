@@ -54,10 +54,15 @@ void UMyGameInstance::AddXtraLives()
 	{
 		if (PlayerLives_Current < PlayerLives_Max)
 		{
-			PlayerLives_Current++;
+			int i;
+			for(i = ScoreForXtraLives;
+				i <= PlayerScore;
+				i += ScoreForSubsequentXtraLives)
+			{
+				PlayerLives_Current++;
+				ScoreForXtraLives += ScoreForSubsequentXtraLives;
+			}
 		}
-		ScoreForXtraLives += ScoreForSubsequentXtraLives;
 		UE_LOG(LogTemp, Warning, TEXT("Score Required: %i"), ScoreForXtraLives);
-		
 	}
 }

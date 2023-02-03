@@ -4,6 +4,7 @@
 #include "PlayerShot.h"
 
 #include "BaseEnemy.h"
+#include "PlayerChar.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
 // Sets default values
@@ -28,6 +29,8 @@ APlayerShot::APlayerShot()
 	ShotMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	Damage = 1.0f;
+
+	Player = nullptr;
 }
 
 // Called when the game starts or when spawned
@@ -56,11 +59,37 @@ void APlayerShot::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 {
 	if (IsValid(OtherComp))
 	{
-		Destroy();
+		const ABaseEnemy* MyEnemy = Cast<ABaseEnemy>(OtherComp->GetAttachmentRootActor());
+		if(MyEnemy)
+		{
+			Destroy();
+		}
+		else
+		{
+			if(Player)
+			{
+				Destroy();
+				Player->ScoreMultiplier_Current = 1.0f;
+				Player->MultiplierMeter_Current = 0.0f;
+			}
+		}
 	}
 	else if (IsValid(OtherActor))
 	{
-		Destroy();
+		const ABaseEnemy* MyEnemy = Cast<ABaseEnemy>(OtherActor);
+		if(MyEnemy)
+		{
+			Destroy();
+		}
+		else
+		{
+			if(Player)
+			{
+				Destroy();
+				Player->ScoreMultiplier_Current = 1.0f;
+				Player->MultiplierMeter_Current = 0.0f;
+			}
+		}
 	}
 }
 
@@ -69,10 +98,38 @@ void APlayerShot::OnOverlapStart(UPrimitiveComponent* OverlappedComponent, AActo
 {
 	if (IsValid(OtherComp))
 	{
+		// const ABaseEnemy* MyEnemy = Cast<ABaseEnemy>(OtherComp->GetAttachmentRootActor());
+		// if(MyEnemy)
+		// {
+		// 	Destroy();
+		// }
+		// else
+		// {
+		// 	if(Player)
+		// 	{
+		// 		Destroy();
+		// 		Player->ScoreMultiplier_Current = 1.0f;
+		// 		Player->MultiplierMeter_Current = 0.0f;
+		// 	}
+		// }
 		Destroy();
 	}
 	else if (IsValid(OtherActor))
 	{
+		// const ABaseEnemy* MyEnemy = Cast<ABaseEnemy>(OtherActor);
+		// if(MyEnemy)
+		// {
+		// 	Destroy();
+		// }
+		// else
+		// {
+		// 	if(Player)
+		// 	{
+		// 		Destroy();
+		// 		Player->ScoreMultiplier_Current = 1.0f;
+		// 		Player->MultiplierMeter_Current = 0.0f;
+		// 	}
+		// }
 		Destroy();
 	}
 }
@@ -82,10 +139,38 @@ void APlayerShot::OnOverlapFinish(UPrimitiveComponent* OverlappedComponent, AAct
 {
 	if (IsValid(OtherComp))
 	{
+		// const ABaseEnemy* MyEnemy = Cast<ABaseEnemy>(OtherComp->GetAttachmentRootActor());
+		// if(MyEnemy)
+		// {
+		// 	Destroy();
+		// }
+		// else
+		// {
+		// 	if(Player)
+		// 	{
+		// 		Destroy();
+		// 		Player->ScoreMultiplier_Current = 1.0f;
+		// 		Player->MultiplierMeter_Current = 0.0f;
+		// 	}
+		// }
 		Destroy();
 	}
 	else if (IsValid(OtherActor))
 	{
+		// const ABaseEnemy* MyEnemy = Cast<ABaseEnemy>(OtherActor);
+		// if(MyEnemy)
+		// {
+		// 	Destroy();
+		// }
+		// else
+		// {
+		// 	if(Player)
+		// 	{
+		// 		Destroy();
+		// 		Player->ScoreMultiplier_Current = 1.0f;
+		// 		Player->MultiplierMeter_Current = 0.0f;
+		// 	}
+		// }
 		Destroy();
 	}
 }

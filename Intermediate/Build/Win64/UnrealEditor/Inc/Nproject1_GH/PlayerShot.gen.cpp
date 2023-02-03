@@ -19,6 +19,7 @@ void EmptyLinkFunctionForGeneratedCodePlayerShot() {}
 	ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FHitResult();
 	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UProjectileMovementComponent_NoRegister();
+	NPROJECT1_GH_API UClass* Z_Construct_UClass_APlayerChar_NoRegister();
 // End Cross Module References
 	DEFINE_FUNCTION(APlayerShot::execOnOverlapFinish)
 	{
@@ -309,6 +310,10 @@ void EmptyLinkFunctionForGeneratedCodePlayerShot() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Damage_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_Damage;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Player_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Player;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -357,10 +362,20 @@ void EmptyLinkFunctionForGeneratedCodePlayerShot() {}
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_APlayerShot_Statics::NewProp_Damage = { "Damage", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(APlayerShot, Damage), METADATA_PARAMS(Z_Construct_UClass_APlayerShot_Statics::NewProp_Damage_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_APlayerShot_Statics::NewProp_Damage_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_APlayerShot_Statics::NewProp_Player_MetaData[] = {
+		{ "Category", "PlayerShot" },
+		{ "Comment", "/** Player character reference */" },
+		{ "ModuleRelativePath", "PlayerShot.h" },
+		{ "ToolTip", "Player character reference" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_APlayerShot_Statics::NewProp_Player = { "Player", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(APlayerShot, Player), Z_Construct_UClass_APlayerChar_NoRegister, METADATA_PARAMS(Z_Construct_UClass_APlayerShot_Statics::NewProp_Player_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_APlayerShot_Statics::NewProp_Player_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_APlayerShot_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerShot_Statics::NewProp_ShotMesh,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerShot_Statics::NewProp_ShotMovement,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerShot_Statics::NewProp_Damage,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_APlayerShot_Statics::NewProp_Player,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_APlayerShot_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<APlayerShot>::IsAbstract,
@@ -398,9 +413,9 @@ void EmptyLinkFunctionForGeneratedCodePlayerShot() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_PlayerShot_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_APlayerShot, APlayerShot::StaticClass, TEXT("APlayerShot"), &Z_Registration_Info_UClass_APlayerShot, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APlayerShot), 968493748U) },
+		{ Z_Construct_UClass_APlayerShot, APlayerShot::StaticClass, TEXT("APlayerShot"), &Z_Registration_Info_UClass_APlayerShot, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(APlayerShot), 3309232710U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_PlayerShot_h_2455206368(TEXT("/Script/Nproject1_GH"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_PlayerShot_h_3233252325(TEXT("/Script/Nproject1_GH"),
 		Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_PlayerShot_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_PlayerShot_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

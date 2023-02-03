@@ -331,45 +331,24 @@ void APlayerChar::PlayerGravity(float DeltaTime)
 
 void APlayerChar::UpdateMultiplier(float DeltaTime)
 {
-	if (MultiplierMeter_Current >= MultiplierMeter_NeededForIncrease)
-	{
-		if(ScoreMultiplier_Current < ScoreMultiplier_Max)
-		{
-			ScoreMultiplier_Current += ScoreMultiplier_ChangeBy;
-			if(ScoreMultiplier_Current >= ScoreMultiplier_Max)
-			{
-				ScoreMultiplier_Current = ScoreMultiplier_Max;
-				MultiplierMeter_Current = MultiplierMeter_NeededForIncrease;
-			}
-			else
-			{
-				bResetMeter = true;
-			}
-		}
-		else
-		{
-			MultiplierMeter_Current = MultiplierMeter_NeededForIncrease;
-		}
-	}
-
 	if(MeterDecrementPauseTime > 0.0f)
 	{
 		MeterDecrementPauseTime -= DeltaTime;
 	}
 
-	if(bResetMeter)
-	{
-		if(MultiplierMeter_Current >= MultiplierMeter_NeededForIncrease)
-		{
-			MultiplierMeter_Current -= MultiplierMeter_NeededForIncrease;
-			bResetMeter = false;
-		}
-		else if (MultiplierMeter_Current <= 0.0f)
-		{
-			MultiplierMeter_Current += MultiplierMeter_NeededForIncrease;
-			bResetMeter = false;
-		}
-	}
+	// if(bResetMeter)
+	// {
+	// 	if(MultiplierMeter_Current >= MultiplierMeter_NeededForIncrease)
+	// 	{
+	// 		
+	// 		bResetMeter = false;
+	// 	}
+	// 	else if (MultiplierMeter_Current <= 0.0f)
+	// 	{
+	// 		
+	// 		bResetMeter = false;
+	// 	}
+	// }
 	
 	if(MeterDecrementPauseTime <= 0.0f)
 	{
@@ -388,7 +367,7 @@ void APlayerChar::UpdateMultiplier(float DeltaTime)
 					}
 					else
 					{
-						bResetMeter = true;
+						MultiplierMeter_Current += MultiplierMeter_NeededForIncrease;
 					}
 				}
 				else
@@ -550,6 +529,7 @@ void APlayerChar::Shoot()
 				const FActorSpawnParameters SpawnParams;
 
 				APlayerShot* ShotProjectile = (GetWorld()->SpawnActor<APlayerShot>(ShotBP, ShotLocation, ShotRotation, SpawnParams));
+				ShotProjectile->Player = this;
 				ShotProjectile->Tags.Add(ShotTag);
 			}
 		}

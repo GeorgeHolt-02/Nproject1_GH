@@ -18,7 +18,7 @@ public:
 	/** Shot mesh */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UStaticMeshComponent* ShotMesh;
-
+	
 	/** Projectile movement component */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement")
 	class UProjectileMovementComponent* ShotMovement;
@@ -26,6 +26,10 @@ public:
 	/** The base damage the projectile deals to enemies */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Damage")
 	float Damage;
+
+	/** Player character reference */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	class APlayerChar* Player;
 
 protected:
 	// Called when the game starts or when spawned
