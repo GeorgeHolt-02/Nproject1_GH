@@ -7,4 +7,7 @@ UMySaveGame::UMySaveGame()
 {
 	const FRecord Record;
 	TopTenScores.Init(Record, 10);
+
+	SaveSlotName = FString("TestSaveSlot");
+	UserIndex = 0;
 }

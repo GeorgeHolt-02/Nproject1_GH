@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "MySaveGame.h"
 #include "Widget_GameOver.generated.h"
 
 /**
@@ -21,18 +22,22 @@ public:
 	//The characters the player can enter
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FString Characters;
-	
-	//Initials widget instance
-	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
-	class UTextBlock* Initials;
 
-	//Text block to initialise record text block array with
-	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
-	UTextBlock* InitRecordText;
-
-	//Leaderboards text block array
+	//Array of the top ten highest recorded scores for this copy of this build of the game
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TArray<UTextBlock*> Records;
+	TArray<FRecord> TopTenScores;
+
+	//Save game class to create an object of
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<UMySaveGame> SaveGameBP;
+	
+	//Text block to initialise record text block array with
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	TSubclassOf<class UTextWidget> RecordTextRef;
+	
+	//Leaderboards text block array
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (BindWidget))
+	class UVerticalBox* RecordBox;
 	
 public:
 	virtual void NativeConstruct() override;
