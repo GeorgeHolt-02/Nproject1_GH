@@ -1403,6 +1403,12 @@
     <ClInclude Include="..\..\Source\Nproject1_GH\BaseEnemyProjectile.h">
       <Filter>Source\Nproject1_GH</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\Nproject1_GH\ButtonWidget.cpp">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Nproject1_GH\ButtonWidget.h">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\Nproject1_GH\EnemyProjectile_FlyingTurret.cpp">
       <Filter>Source\Nproject1_GH</Filter>
     </ClCompile>
@@ -1490,10 +1496,22 @@
     <ClInclude Include="..\..\Source\Nproject1_GH\TextWidget.h">
       <Filter>Source\Nproject1_GH</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\Nproject1_GH\Widget_Char.cpp">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Nproject1_GH\Widget_Char.h">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\Nproject1_GH\Widget_GameOver.cpp">
       <Filter>Source\Nproject1_GH</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\Nproject1_GH\Widget_GameOver.h">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Nproject1_GH\Widget_Initial.cpp">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Nproject1_GH\Widget_Initial.h">
       <Filter>Source\Nproject1_GH</Filter>
     </ClInclude>
   </ItemGroup>

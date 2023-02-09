@@ -18,6 +18,8 @@ void EmptyLinkFunctionForGeneratedCodeWidget_GameOver() {}
 	NPROJECT1_GH_API UClass* Z_Construct_UClass_UMySaveGame_NoRegister();
 	NPROJECT1_GH_API UClass* Z_Construct_UClass_UTextWidget_NoRegister();
 	UMG_API UClass* Z_Construct_UClass_UVerticalBox_NoRegister();
+	NPROJECT1_GH_API UClass* Z_Construct_UClass_UWidget_Initial_NoRegister();
+	UMG_API UClass* Z_Construct_UClass_UHorizontalBox_NoRegister();
 // End Cross Module References
 	void UWidget_GameOver::StaticRegisterNativesUWidget_GameOver()
 	{
@@ -54,6 +56,14 @@ void EmptyLinkFunctionForGeneratedCodeWidget_GameOver() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_RecordBox_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_RecordBox;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_InitialRef_MetaData[];
+#endif
+		static const UECodeGen_Private::FClassPropertyParams NewProp_InitialRef;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_InitialsBox_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_InitialsBox;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -100,9 +110,9 @@ void EmptyLinkFunctionForGeneratedCodeWidget_GameOver() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_RecordTextRef_MetaData[] = {
 		{ "Category", "Widget_GameOver" },
-		{ "Comment", "//Text block to initialise record text block array with\n" },
+		{ "Comment", "//Record text reference\n" },
 		{ "ModuleRelativePath", "Widget_GameOver.h" },
-		{ "ToolTip", "Text block to initialise record text block array with" },
+		{ "ToolTip", "Record text reference" },
 	};
 #endif
 	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_RecordTextRef = { "RecordTextRef", nullptr, (EPropertyFlags)0x0014000000010005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWidget_GameOver, RecordTextRef), Z_Construct_UClass_UTextWidget_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_RecordTextRef_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_RecordTextRef_MetaData)) };
@@ -110,13 +120,33 @@ void EmptyLinkFunctionForGeneratedCodeWidget_GameOver() {}
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_RecordBox_MetaData[] = {
 		{ "BindWidget", "" },
 		{ "Category", "Widget_GameOver" },
-		{ "Comment", "//Leaderboards text block array\n" },
+		{ "Comment", "//Leaderboards box\n" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Widget_GameOver.h" },
-		{ "ToolTip", "Leaderboards text block array" },
+		{ "ToolTip", "Leaderboards box" },
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_RecordBox = { "RecordBox", nullptr, (EPropertyFlags)0x001000000009000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWidget_GameOver, RecordBox), Z_Construct_UClass_UVerticalBox_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_RecordBox_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_RecordBox_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_InitialRef_MetaData[] = {
+		{ "Category", "Widget_GameOver" },
+		{ "Comment", "//Initial entry widget reference\n" },
+		{ "ModuleRelativePath", "Widget_GameOver.h" },
+		{ "ToolTip", "Initial entry widget reference" },
+	};
+#endif
+	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_InitialRef = { "InitialRef", nullptr, (EPropertyFlags)0x0014000000010005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWidget_GameOver, InitialRef), Z_Construct_UClass_UWidget_Initial_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_InitialRef_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_InitialRef_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_InitialsBox_MetaData[] = {
+		{ "BindWidget", "" },
+		{ "Category", "Widget_GameOver" },
+		{ "Comment", "//Initials box\n" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Widget_GameOver.h" },
+		{ "ToolTip", "Initials box" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_InitialsBox = { "InitialsBox", nullptr, (EPropertyFlags)0x001000000009000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWidget_GameOver, InitialsBox), Z_Construct_UClass_UHorizontalBox_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_InitialsBox_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_InitialsBox_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UWidget_GameOver_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_Characters,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_TopTenScores_Inner,
@@ -124,6 +154,8 @@ void EmptyLinkFunctionForGeneratedCodeWidget_GameOver() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_SaveGameBP,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_RecordTextRef,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_RecordBox,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_InitialRef,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_GameOver_Statics::NewProp_InitialsBox,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UWidget_GameOver_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UWidget_GameOver>::IsAbstract,
@@ -161,9 +193,9 @@ void EmptyLinkFunctionForGeneratedCodeWidget_GameOver() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_GameOver_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UWidget_GameOver, UWidget_GameOver::StaticClass, TEXT("UWidget_GameOver"), &Z_Registration_Info_UClass_UWidget_GameOver, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWidget_GameOver), 1665949303U) },
+		{ Z_Construct_UClass_UWidget_GameOver, UWidget_GameOver::StaticClass, TEXT("UWidget_GameOver"), &Z_Registration_Info_UClass_UWidget_GameOver, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWidget_GameOver), 2697041983U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_GameOver_h_3941436020(TEXT("/Script/Nproject1_GH"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_GameOver_h_4234353067(TEXT("/Script/Nproject1_GH"),
 		Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_GameOver_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_GameOver_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

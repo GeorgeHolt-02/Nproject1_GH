@@ -4,6 +4,8 @@
 #include "Widget_GameOver.h"
 
 #include "TextWidget.h"
+#include "Widget_Initial.h"
+#include "Components/HorizontalBox.h"
 #include "Components/TextBlock.h"
 #include "Components/VerticalBox.h"
 #include "Kismet/GameplayStatics.h"
@@ -37,6 +39,15 @@ void UWidget_GameOver::NativeConstruct()
 			RecordBox->AddChildToVerticalBox(RecordWidget);
 			UTextWidget* RecordText = Cast<UTextWidget>(RecordWidget);
 			RecordText->SetData((i+1), TopTenScores[i].Name, TopTenScores[i].Score);
+		}
+	}
+
+	if(InitialRef)
+	{
+		for(int i = InitialsBox->GetChildrenCount(); i < 3; i++)
+		{
+			UUserWidget* InitialWidget = CreateWidget(this, InitialRef);
+			InitialsBox->AddChildToHorizontalBox(InitialWidget);
 		}
 	}
 }

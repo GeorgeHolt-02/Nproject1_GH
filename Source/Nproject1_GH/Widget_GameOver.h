@@ -31,15 +31,23 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<UMySaveGame> SaveGameBP;
 	
-	//Text block to initialise record text block array with
+	//Record text reference
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	TSubclassOf<class UTextWidget> RecordTextRef;
 	
-	//Leaderboards text block array
+	//Leaderboards box
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (BindWidget))
 	class UVerticalBox* RecordBox;
+
+	//Initial entry widget reference
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	TSubclassOf<class UWidget_Initial> InitialRef;
 	
-public:
+	//Initials box
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (BindWidget))
+	class UHorizontalBox* InitialsBox;
+	
+protected:
 	virtual void NativeConstruct() override;
 
 	virtual void NativeOnInitialized() override;
