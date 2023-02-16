@@ -4,6 +4,9 @@
 #include "PlayerChar.h"
 
 #include "MyGameInstance.h"
+#include "Widget_GameOver.h"
+#include "Blueprint/UserWidget.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Camera/CameraComponent.h"
 #include "Components/ArrowComponent.h"
 #include "Components/BoxComponent.h"
@@ -412,15 +415,22 @@ void APlayerChar::OnDeath(AActor* DestroyedActor)
 			}
 			else
 			{
-				CurrentGameInstance->PlayerScore = 0;
-				//CurrentGameInstance->ScoreSinceLastXtraLife = 0;
-				CurrentGameInstance->ScoreForXtraLives = CurrentGameInstance->ScoreForFirstXtraLife;
-				if(CurrentGameInstance->Levels.IsValidIndex(0))
+				if(GameOverRef)
 				{
-					CurrentGameInstance->LoadSpecifiedLevel(CurrentGameInstance->Levels[0]);
-					CurrentGameInstance->NextLevelIndex = 1;
+					UWidget_GameOver* GameOverWidget = CreateWidget<UWidget_GameOver>(GetWorld(), GameOverRef);
+					GameOverWidget->AddToViewport(0);
+					UGameplayStatics::SetGamePaused(GetWorld(), true);
 				}
-				CurrentGameInstance->PlayerLives_Current = CurrentGameInstance->PlayerLives_Starting;
+				
+				// CurrentGameInstance->PlayerScore = 0;
+				// //CurrentGameInstance->ScoreSinceLastXtraLife = 0;
+				// CurrentGameInstance->ScoreForXtraLives = CurrentGameInstance->ScoreForFirstXtraLife;
+				// if(CurrentGameInstance->Levels.IsValidIndex(0))
+				// {
+				// 	CurrentGameInstance->LoadSpecifiedLevel(CurrentGameInstance->Levels[0]);
+				// 	CurrentGameInstance->NextLevelIndex = 1;
+				// }
+				// CurrentGameInstance->PlayerLives_Current = CurrentGameInstance->PlayerLives_Starting;
 			}
 			CurrentGameInstance->bCanLoadNextLevel = false;
 		}

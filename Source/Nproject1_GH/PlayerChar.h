@@ -214,6 +214,10 @@ public:
 	the meter's depletion speed) */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float MeterSpeedCoeff;
+
+	// Game over widget reference
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<class UWidget_GameOver> GameOverRef;
 	
 protected:
 	

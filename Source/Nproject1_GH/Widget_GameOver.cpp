@@ -5,6 +5,7 @@
 
 #include "TextWidget.h"
 #include "Widget_Initial.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Components/HorizontalBox.h"
 #include "Components/TextBlock.h"
 #include "Components/VerticalBox.h"
@@ -17,9 +18,9 @@ void UWidget_GameOver::NativeConstruct()
 	TopTenScores.Empty();
 	
 	UMySaveGame* SaveGameInstance = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(SaveGameBP));
-
+	
 	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
-
+	
 	UMySaveGame* LoadGameInstance = Cast<UMySaveGame>(UGameplayStatics::LoadGameFromSlot(SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex));
 	if(LoadGameInstance)
 	{
@@ -27,10 +28,9 @@ void UWidget_GameOver::NativeConstruct()
 		{
 			TopTenScores.Add(LoadGameInstance->TopTenScores[i]);
 		}
+		
 	}
 
-	
-	
 	if(RecordTextRef)
 	{
 		for(int i = RecordBox->GetChildrenCount(); i < 10; i++)
@@ -49,6 +49,22 @@ void UWidget_GameOver::NativeConstruct()
 			UUserWidget* InitialWidget = CreateWidget(this, InitialRef);
 			InitialsBox->AddChildToHorizontalBox(InitialWidget);
 		}
+	}
+
+	//UGameplayStatics::SetGamePaused(GetWorld(), true);
+					
+	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+					
+	if(PlayerController)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Valid"));
+		//GameOverWidget->SetOwningPlayer(PlayerController);
+		PlayerController->SetShowMouseCursor(true);
+		UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(PlayerController, this, EMouseLockMode::DoNotLock);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Not Valid"));
 	}
 }
 
