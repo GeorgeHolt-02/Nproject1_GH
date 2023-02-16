@@ -19,10 +19,6 @@ public:
 	// //Sets default values
 	// UWidget_GameOver();
 
-	//The characters the player can enter
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	FString Characters;
-
 	//Array of the top ten highest recorded scores for this copy of this build of the game
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TArray<FRecord> TopTenScores;
@@ -51,4 +47,5 @@ protected:
 	virtual void NativeConstruct() override;
 
 	virtual void NativeOnInitialized() override;
+	
 };

@@ -3,11 +3,11 @@
 
 #include "Widget_GameOver.h"
 
+#include "ButtonWidget.h"
 #include "TextWidget.h"
 #include "Widget_Initial.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Components/HorizontalBox.h"
-#include "Components/TextBlock.h"
 #include "Components/VerticalBox.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -48,6 +48,7 @@ void UWidget_GameOver::NativeConstruct()
 		{
 			UUserWidget* InitialWidget = CreateWidget(this, InitialRef);
 			InitialsBox->AddChildToHorizontalBox(InitialWidget);
+			//UWidget_Initial* Initial = Cast<UWidget_Initial>(Initial);
 		}
 	}
 
@@ -60,7 +61,7 @@ void UWidget_GameOver::NativeConstruct()
 		UE_LOG(LogTemp, Warning, TEXT("Valid"));
 		//GameOverWidget->SetOwningPlayer(PlayerController);
 		PlayerController->SetShowMouseCursor(true);
-		UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(PlayerController, this, EMouseLockMode::DoNotLock);
+		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PlayerController);
 	}
 	else
 	{

@@ -41,13 +41,33 @@ void EmptyLinkFunctionForGeneratedCodeWidget_Initial() {}
 #endif
 		static const UECodeGen_Private::FClassPropertyParams NewProp_CharRef;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Char_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Char;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_UpArrowRef_MetaData[];
 #endif
 		static const UECodeGen_Private::FClassPropertyParams NewProp_UpArrowRef;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_UpButton_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_UpButton;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_DownArrowRef_MetaData[];
 #endif
 		static const UECodeGen_Private::FClassPropertyParams NewProp_DownArrowRef;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_DownButton_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_DownButton;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Characters_MetaData[];
+#endif
+		static const UECodeGen_Private::FStrPropertyParams NewProp_Characters;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_CharactersIndex_MetaData[];
+#endif
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_CharactersIndex;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -84,6 +104,14 @@ void EmptyLinkFunctionForGeneratedCodeWidget_Initial() {}
 #endif
 	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UWidget_Initial_Statics::NewProp_CharRef = { "CharRef", nullptr, (EPropertyFlags)0x0014000000010005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWidget_Initial, CharRef), Z_Construct_UClass_UWidget_Char_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_CharRef_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_CharRef_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWidget_Initial_Statics::NewProp_Char_MetaData[] = {
+		{ "Category", "Widget_Initial" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Widget_Initial.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UWidget_Initial_Statics::NewProp_Char = { "Char", nullptr, (EPropertyFlags)0x00100000000a000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWidget_Initial, Char), Z_Construct_UClass_UWidget_Char_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_Char_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_Char_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWidget_Initial_Statics::NewProp_UpArrowRef_MetaData[] = {
 		{ "Category", "Widget_Initial" },
 		{ "Comment", "//The up arrow that cycles backwards through the character string\n" },
@@ -93,6 +121,14 @@ void EmptyLinkFunctionForGeneratedCodeWidget_Initial() {}
 #endif
 	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UWidget_Initial_Statics::NewProp_UpArrowRef = { "UpArrowRef", nullptr, (EPropertyFlags)0x0014000000010005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWidget_Initial, UpArrowRef), Z_Construct_UClass_UButtonWidget_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_UpArrowRef_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_UpArrowRef_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWidget_Initial_Statics::NewProp_UpButton_MetaData[] = {
+		{ "Category", "Widget_Initial" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Widget_Initial.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UWidget_Initial_Statics::NewProp_UpButton = { "UpButton", nullptr, (EPropertyFlags)0x00100000000a000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWidget_Initial, UpButton), Z_Construct_UClass_UButtonWidget_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_UpButton_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_UpButton_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWidget_Initial_Statics::NewProp_DownArrowRef_MetaData[] = {
 		{ "Category", "Widget_Initial" },
 		{ "Comment", "//The down arrow that cycles forwards through the character string\n" },
@@ -101,11 +137,42 @@ void EmptyLinkFunctionForGeneratedCodeWidget_Initial() {}
 	};
 #endif
 	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UWidget_Initial_Statics::NewProp_DownArrowRef = { "DownArrowRef", nullptr, (EPropertyFlags)0x0014000000010005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWidget_Initial, DownArrowRef), Z_Construct_UClass_UButtonWidget_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_DownArrowRef_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_DownArrowRef_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWidget_Initial_Statics::NewProp_DownButton_MetaData[] = {
+		{ "Category", "Widget_Initial" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Widget_Initial.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UWidget_Initial_Statics::NewProp_DownButton = { "DownButton", nullptr, (EPropertyFlags)0x00100000000a000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWidget_Initial, DownButton), Z_Construct_UClass_UButtonWidget_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_DownButton_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_DownButton_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWidget_Initial_Statics::NewProp_Characters_MetaData[] = {
+		{ "Category", "Widget_Initial" },
+		{ "Comment", "//The characters the player can enter\n" },
+		{ "ModuleRelativePath", "Widget_Initial.h" },
+		{ "ToolTip", "The characters the player can enter" },
+	};
+#endif
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UWidget_Initial_Statics::NewProp_Characters = { "Characters", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWidget_Initial, Characters), METADATA_PARAMS(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_Characters_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_Characters_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWidget_Initial_Statics::NewProp_CharactersIndex_MetaData[] = {
+		{ "Category", "Widget_Initial" },
+		{ "Comment", "//Current index of the character string\n" },
+		{ "ModuleRelativePath", "Widget_Initial.h" },
+		{ "ToolTip", "Current index of the character string" },
+	};
+#endif
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UWidget_Initial_Statics::NewProp_CharactersIndex = { "CharactersIndex", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWidget_Initial, CharactersIndex), METADATA_PARAMS(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_CharactersIndex_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWidget_Initial_Statics::NewProp_CharactersIndex_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UWidget_Initial_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_Initial_Statics::NewProp_ContentsBox,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_Initial_Statics::NewProp_CharRef,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_Initial_Statics::NewProp_Char,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_Initial_Statics::NewProp_UpArrowRef,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_Initial_Statics::NewProp_UpButton,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_Initial_Statics::NewProp_DownArrowRef,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_Initial_Statics::NewProp_DownButton,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_Initial_Statics::NewProp_Characters,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_Initial_Statics::NewProp_CharactersIndex,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UWidget_Initial_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UWidget_Initial>::IsAbstract,
@@ -143,9 +210,9 @@ void EmptyLinkFunctionForGeneratedCodeWidget_Initial() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_Initial_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UWidget_Initial, UWidget_Initial::StaticClass, TEXT("UWidget_Initial"), &Z_Registration_Info_UClass_UWidget_Initial, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWidget_Initial), 2155337916U) },
+		{ Z_Construct_UClass_UWidget_Initial, UWidget_Initial::StaticClass, TEXT("UWidget_Initial"), &Z_Registration_Info_UClass_UWidget_Initial, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWidget_Initial), 1492873022U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_Initial_h_71721771(TEXT("/Script/Nproject1_GH"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_Initial_h_404005010(TEXT("/Script/Nproject1_GH"),
 		Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_Initial_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_Initial_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
