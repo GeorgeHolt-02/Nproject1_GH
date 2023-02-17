@@ -50,6 +50,12 @@ public:
 	bool bUpPressed;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool bDownPressed;
+
+	//Time until next cycle (max and current, respectively)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	float CycleRate_Max;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	float CycleRate_Current;
 	
 
 protected:
@@ -73,8 +79,5 @@ protected:
 	
 	void CycleDown();
 	void CycleUp();
-
-	UFUNCTION()
-	virtual void InitializeInputComponent() override;
 	
 };

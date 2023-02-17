@@ -8,7 +8,6 @@
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "Components/VerticalBox.h"
-#include "GameFramework/InputSettings.h"
 #include "Kismet/GameplayStatics.h"
 
 void UWidget_Initial::NativeConstruct()
@@ -17,6 +16,12 @@ void UWidget_Initial::NativeConstruct()
 
 	Characters = FString("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.?!'@#%^&*() ");
 	CharactersIndex = 0;
+
+	bUpPressed = false;
+	bDownPressed = false;
+
+	CycleRate_Max = 0.1f;
+	CycleRate_Current = CycleRate_Max;
 	
 	if(UpArrowRef)
 	{
@@ -40,41 +45,52 @@ void UWidget_Initial::NativeConstruct()
 		DownButton = Cast<UButtonWidget>(DownWidget);
 		DownButton->Button->SetRenderTransformAngle(180.0f);
 		DownButton->Button->OnPressed.AddDynamic(this, &UWidget_Initial::DownButtonPressed);
-		UpButton->Button->OnReleased.AddDynamic(this, &UWidget_Initial::UpButtonReleased);
+		DownButton->Button->OnReleased.AddDynamic(this, &UWidget_Initial::DownButtonReleased);
 	}
 }
 
 void UWidget_Initial::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
-	
+
+	CycleRate_Current = CycleRate_Max;
 }
 
 void UWidget_Initial::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 {
 	Super::NativeTick(MyGeometry, InDeltaTime);
 
-	if (bUpPressed)
+	if (UpButton->Button->IsPressed())
 	{
-		CycleUp();
-		//bUpPressed = false;
+		CycleRate_Current = FMath::Clamp(CycleRate_Current - InDeltaTime, 0, 0.1f);
+		if (CycleRate_Current <= 0)
+		{
+			CycleUp();
+			CycleRate_Current = CycleRate_Max;
+		}
 	}
 
-	if(bDownPressed)
+	if (DownButton->Button->IsPressed())
 	{
-		CycleDown();
-		//bDownPressed = false;
+		CycleRate_Current = FMath::Clamp(CycleRate_Current - InDeltaTime, 0, 0.1f);
+		if (CycleRate_Current <= 0)
+		{
+			CycleDown();
+			CycleRate_Current = CycleRate_Max;
+		}
 	}
 }
 
 void UWidget_Initial::UpButtonPressed()
 {
-	bUpPressed = true;
+	CycleUp();
+	CycleRate_Current = CycleRate_Max;
 }
 
 void UWidget_Initial::DownButtonPressed()
 {
-	bDownPressed = true;
+	CycleDown();
+	CycleRate_Current = CycleRate_Max;
 }
 
 void UWidget_Initial::UpButtonReleased()
@@ -115,30 +131,4 @@ void UWidget_Initial::CycleUp()
 		Char->Text->SetText(FText::FromString(Characters.Chr(Characters[CharactersIndex])));
 		UE_LOG(LogTemp, Warning, TEXT("%i"), CharactersIndex);
 	}
-}
-
-void UWidget_Initial::InitializeInputComponent()
-{
-	if ( APlayerController* Controller = GetOwningPlayer() )
-	{
-		// Use the existing PC's input class, or fallback to the project default. We should use the existing class
-		// instead of just the default one because if you have a plugin that has a PC with a different default input
-		// class then this would fail
-		UClass* InputClass = Controller->InputComponent ? Controller->InputComponent->GetClass() : UInputSettings::GetDefaultInputComponentClass();
-		InputComponent = NewObject< UInputComponent >( this, InputClass, NAME_None, RF_Transient );
-		InputComponent->bBlockInput = bStopAction;
-		InputComponent->Priority = Priority;
-		Controller->PushInputComponent( InputComponent );
-
-		check(InputComponent);
-
-		InputComponent->BindAction("NavUp", IE_Pressed, this, &UWidget_Initial::CycleUp);
-		InputComponent->BindAction("NavDown", IE_Pressed, this, &UWidget_Initial::CycleDown);
-	}
-	else
-	{
-		//FMessageLog("PIE").Info(FText::Format(LOCTEXT("NoInputListeningWithoutPlayerController", "Unable to listen to input actions without a player controller in {0}."), FText::FromName(GetClass()->GetFName())));
-	}
-
-	
 }

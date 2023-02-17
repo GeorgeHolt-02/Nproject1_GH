@@ -423,7 +423,7 @@ void APlayerChar::OnDeath(AActor* DestroyedActor)
 				}
 				
 				// CurrentGameInstance->PlayerScore = 0;
-				// //CurrentGameInstance->ScoreSinceLastXtraLife = 0;
+				// CurrentGameInstance->ScoreSinceLastXtraLife = 0;
 				// CurrentGameInstance->ScoreForXtraLives = CurrentGameInstance->ScoreForFirstXtraLife;
 				// if(CurrentGameInstance->Levels.IsValidIndex(0))
 				// {

@@ -42,10 +42,27 @@ public:
 	//Initials box
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (BindWidget))
 	class UHorizontalBox* InitialsBox;
+
+	//Currently-selected initial
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UWidget_Initial* SelectedInitial;
+	
+	//Index determining which initial is highlighted
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int InitialIndex;
 	
 protected:
 	virtual void NativeConstruct() override;
 
 	virtual void NativeOnInitialized() override;
+
+	UFUNCTION()
+	virtual void InitializeInputComponent() override;
+
+	UFUNCTION()
+	void SelectInitial(float Value);
+
+	UFUNCTION()
+	void CharCycle(float Value);
 	
 };

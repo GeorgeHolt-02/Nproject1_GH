@@ -16,7 +16,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define FID_Nproject1_GH_Source_Nproject1_GH_Widget_Initial_h_15_SPARSE_DATA
 #define FID_Nproject1_GH_Source_Nproject1_GH_Widget_Initial_h_15_RPC_WRAPPERS \
  \
-	DECLARE_FUNCTION(execInitializeInputComponent); \
 	DECLARE_FUNCTION(execDownButtonReleased); \
 	DECLARE_FUNCTION(execUpButtonReleased); \
 	DECLARE_FUNCTION(execDownButtonPressed); \
@@ -25,7 +24,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 #define FID_Nproject1_GH_Source_Nproject1_GH_Widget_Initial_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
  \
-	DECLARE_FUNCTION(execInitializeInputComponent); \
 	DECLARE_FUNCTION(execDownButtonReleased); \
 	DECLARE_FUNCTION(execUpButtonReleased); \
 	DECLARE_FUNCTION(execDownButtonPressed); \

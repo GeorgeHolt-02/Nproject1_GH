@@ -7,13 +7,17 @@
 #include "TextWidget.h"
 #include "Widget_Initial.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
+#include "Components/Button.h"
 #include "Components/HorizontalBox.h"
 #include "Components/VerticalBox.h"
+#include "GameFramework/InputSettings.h"
 #include "Kismet/GameplayStatics.h"
 
 void UWidget_GameOver::NativeConstruct()
 {
 	Super::NativeConstruct();
+
+	InitialIndex = 0;
 
 	TopTenScores.Empty();
 	
@@ -50,6 +54,7 @@ void UWidget_GameOver::NativeConstruct()
 			InitialsBox->AddChildToHorizontalBox(InitialWidget);
 			//UWidget_Initial* Initial = Cast<UWidget_Initial>(Initial);
 		}
+		SelectedInitial = Cast<UWidget_Initial>(InitialsBox->GetAllChildren()[0]);
 	}
 
 	//UGameplayStatics::SetGamePaused(GetWorld(), true);
@@ -73,5 +78,61 @@ void UWidget_GameOver::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
+	
+}
+
+void UWidget_GameOver::InitializeInputComponent()
+{
+	if ( APlayerController* Controller = GetOwningPlayer() )
+	{
+		// Use the existing PC's input class, or fallback to the project default. We should use the existing class
+		// instead of just the default one because if you have a plugin that has a PC with a different default input
+		// class then this would fail
+		UClass* InputClass = Controller->InputComponent ? Controller->InputComponent->GetClass() : UInputSettings::GetDefaultInputComponentClass();
+		InputComponent = NewObject< UInputComponent >( this, InputClass, NAME_None, RF_Transient );
+
+		check(InputComponent);
+
+		InputComponent->BindAxis("NavX", this, &UWidget_GameOver::SelectInitial);
+		
+		InputComponent->bBlockInput = bStopAction;
+		InputComponent->Priority = Priority;
+		Controller->PushInputComponent( InputComponent );
+	}
+	else
+	{
+		//FMessageLog("PIE").Info(FText::Format(LOCTEXT("NoInputListeningWithoutPlayerController", "Unable to listen to input actions without a player controller in {0}."), FText::FromName(GetClass()->GetFName())));
+	}
+
+	
+}
+
+void UWidget_GameOver::SelectInitial(float Value)
+{
+	InitialIndex += 1 * FMath::Sign(Value);
+	if(InitialIndex >= InitialsBox->GetChildrenCount())
+	{
+		InitialIndex = 0;
+	}
+	else if (InitialIndex < 0)
+	{
+		InitialIndex = (InitialsBox->GetChildrenCount() - 1);
+	}
+	if(SelectedInitial)
+	{
+		SelectedInitial->UpButton->Button->ColorAndOpacity = FLinearColor(FColor::Green);
+		SelectedInitial->DownButton->Button->ColorAndOpacity = FLinearColor(FColor::Green);
+	}
+	
+	SelectedInitial = Cast<UWidget_Initial>(InitialsBox->GetAllChildren()[InitialIndex]);
+	if(SelectedInitial)
+	{
+		SelectedInitial->UpButton->Button->ColorAndOpacity = FLinearColor(FColor::Cyan);
+		SelectedInitial->DownButton->Button->ColorAndOpacity = FLinearColor(FColor::Cyan);
+	}
+}
+
+void UWidget_GameOver::CharCycle(float Value)
+{
 	
 }
