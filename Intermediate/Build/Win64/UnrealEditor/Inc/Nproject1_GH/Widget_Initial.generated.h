@@ -14,8 +14,24 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define NPROJECT1_GH_Widget_Initial_generated_h
 
 #define FID_Nproject1_GH_Source_Nproject1_GH_Widget_Initial_h_15_SPARSE_DATA
-#define FID_Nproject1_GH_Source_Nproject1_GH_Widget_Initial_h_15_RPC_WRAPPERS
-#define FID_Nproject1_GH_Source_Nproject1_GH_Widget_Initial_h_15_RPC_WRAPPERS_NO_PURE_DECLS
+#define FID_Nproject1_GH_Source_Nproject1_GH_Widget_Initial_h_15_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execInitializeInputComponent); \
+	DECLARE_FUNCTION(execDownButtonReleased); \
+	DECLARE_FUNCTION(execUpButtonReleased); \
+	DECLARE_FUNCTION(execDownButtonPressed); \
+	DECLARE_FUNCTION(execUpButtonPressed);
+
+
+#define FID_Nproject1_GH_Source_Nproject1_GH_Widget_Initial_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execInitializeInputComponent); \
+	DECLARE_FUNCTION(execDownButtonReleased); \
+	DECLARE_FUNCTION(execUpButtonReleased); \
+	DECLARE_FUNCTION(execDownButtonPressed); \
+	DECLARE_FUNCTION(execUpButtonPressed);
+
+
 #define FID_Nproject1_GH_Source_Nproject1_GH_Widget_Initial_h_15_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUWidget_Initial(); \

@@ -61,7 +61,7 @@ void UWidget_GameOver::NativeConstruct()
 		UE_LOG(LogTemp, Warning, TEXT("Valid"));
 		//GameOverWidget->SetOwningPlayer(PlayerController);
 		PlayerController->SetShowMouseCursor(true);
-		UWidgetBlueprintLibrary::SetInputMode_GameOnly(PlayerController);
+		UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(PlayerController);
 	}
 	else
 	{

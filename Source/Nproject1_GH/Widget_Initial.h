@@ -44,11 +44,37 @@ public:
 	//Current index of the character string
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int CharactersIndex;
+
+	//Button press booleans
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool bUpPressed;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool bDownPressed;
 	
 
 protected:
 	virtual void NativeConstruct() override;
 
+	virtual void NativeOnInitialized() override;
+
+	void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+
+	//Button press listeners
+	UFUNCTION()
+	void UpButtonPressed();
+	UFUNCTION()
+	void DownButtonPressed();
+
+	//Button release listeners
+	UFUNCTION()
+	void UpButtonReleased();
+	UFUNCTION()
+	void DownButtonReleased();
+	
 	void CycleDown();
 	void CycleUp();
+
+	UFUNCTION()
+	virtual void InitializeInputComponent() override;
+	
 };
