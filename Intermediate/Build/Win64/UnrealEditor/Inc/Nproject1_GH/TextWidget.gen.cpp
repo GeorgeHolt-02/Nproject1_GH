@@ -101,6 +101,15 @@ void EmptyLinkFunctionForGeneratedCodeTextWidget() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Score_MetaData[];
 #endif
 		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_Score;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ScoreString_MetaData[];
+#endif
+		static const UECodeGen_Private::FStrPropertyParams NewProp_ScoreString;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bCanUpdate_MetaData[];
+#endif
+		static void NewProp_bCanUpdate_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bCanUpdate;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -157,11 +166,35 @@ void EmptyLinkFunctionForGeneratedCodeTextWidget() {}
 	};
 #endif
 	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UTextWidget_Statics::NewProp_Score = { "Score", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UTextWidget, Score), METADATA_PARAMS(Z_Construct_UClass_UTextWidget_Statics::NewProp_Score_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UTextWidget_Statics::NewProp_Score_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UTextWidget_Statics::NewProp_ScoreString_MetaData[] = {
+		{ "Category", "TextWidget" },
+		{ "Comment", "//Score string\n" },
+		{ "ModuleRelativePath", "TextWidget.h" },
+		{ "ToolTip", "Score string" },
+	};
+#endif
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UTextWidget_Statics::NewProp_ScoreString = { "ScoreString", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UTextWidget, ScoreString), METADATA_PARAMS(Z_Construct_UClass_UTextWidget_Statics::NewProp_ScoreString_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UTextWidget_Statics::NewProp_ScoreString_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UTextWidget_Statics::NewProp_bCanUpdate_MetaData[] = {
+		{ "Category", "TextWidget" },
+		{ "Comment", "//Whether or not to update\n" },
+		{ "ModuleRelativePath", "TextWidget.h" },
+		{ "ToolTip", "Whether or not to update" },
+	};
+#endif
+	void Z_Construct_UClass_UTextWidget_Statics::NewProp_bCanUpdate_SetBit(void* Obj)
+	{
+		((UTextWidget*)Obj)->bCanUpdate = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UTextWidget_Statics::NewProp_bCanUpdate = { "bCanUpdate", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(UTextWidget), &Z_Construct_UClass_UTextWidget_Statics::NewProp_bCanUpdate_SetBit, METADATA_PARAMS(Z_Construct_UClass_UTextWidget_Statics::NewProp_bCanUpdate_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UTextWidget_Statics::NewProp_bCanUpdate_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UTextWidget_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTextWidget_Statics::NewProp_Text,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTextWidget_Statics::NewProp_TopTenRanking,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTextWidget_Statics::NewProp_Initials,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTextWidget_Statics::NewProp_Score,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTextWidget_Statics::NewProp_ScoreString,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UTextWidget_Statics::NewProp_bCanUpdate,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UTextWidget_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UTextWidget>::IsAbstract,
@@ -199,9 +232,9 @@ void EmptyLinkFunctionForGeneratedCodeTextWidget() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_TextWidget_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UTextWidget, UTextWidget::StaticClass, TEXT("UTextWidget"), &Z_Registration_Info_UClass_UTextWidget, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UTextWidget), 895040975U) },
+		{ Z_Construct_UClass_UTextWidget, UTextWidget::StaticClass, TEXT("UTextWidget"), &Z_Registration_Info_UClass_UTextWidget, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UTextWidget), 1559008208U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_TextWidget_h_3291598470(TEXT("/Script/Nproject1_GH"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_TextWidget_h_445340021(TEXT("/Script/Nproject1_GH"),
 		Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_TextWidget_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_TextWidget_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

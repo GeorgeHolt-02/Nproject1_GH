@@ -27,10 +27,23 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	FString Initials;
 
-	//Score
+    //Score
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int Score;
 
+	//Score string
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	FString ScoreString;
+
+	//Whether or not to update
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool bCanUpdate;
+
+protected:
+	virtual void NativeConstruct() override;
+	
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+	
 public:
 	UFUNCTION(BlueprintCallable)
 	void SetData(int ranking, FString inits, int points);

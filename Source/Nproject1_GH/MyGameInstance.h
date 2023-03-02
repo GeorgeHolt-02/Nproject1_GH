@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MySaveGame.h"
 #include "Engine/GameInstance.h"
 #include "MyGameInstance.generated.h"
 
@@ -62,6 +63,18 @@ public:
 	/** Whether or not to load next level when EnemyNum <= 0 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	bool bCanLoadNextLevel;
+
+	/** Whether or not to restart whenever the player dies */
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool bCanRestart;
+
+	//Save game class to create an object of
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<UMySaveGame> SaveGameBP;
+	
+	/** Top ten scores */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TArray<FRecord> TopTenScores;
 	
 protected:
 

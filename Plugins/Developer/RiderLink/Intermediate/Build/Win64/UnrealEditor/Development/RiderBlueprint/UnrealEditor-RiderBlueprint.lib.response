@@ -6,6 +6,6 @@
 /NAME:"UnrealEditor-RiderBlueprint.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"D:\2001070\NP1\Github\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\Module.RiderBlueprint.cpp.obj"
-"D:\2001070\NP1\Github\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\Default.rc2.res"
-/OUT:"D:\2001070\NP1\Github\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\UnrealEditor-RiderBlueprint.lib"
+"D:\Geo_Work\Geo_NUA_Work_Year_3\Unit_3b\UE5\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\Module.RiderBlueprint.cpp.obj"
+"D:\Geo_Work\Geo_NUA_Work_Year_3\Unit_3b\UE5\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\Default.rc2.res"
+/OUT:"D:\Geo_Work\Geo_NUA_Work_Year_3\Unit_3b\UE5\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\UnrealEditor-RiderBlueprint.lib"

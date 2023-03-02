@@ -18,4 +18,23 @@ public:
 	//The button itself
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (BindWidget))
 	class UButton* Button;
+
+	//Styles
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FButtonStyle Style_Mouse;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FButtonStyle Style_Normal;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FButtonStyle Style_Hovered;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FButtonStyle Style_Pressed;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FButtonStyle Style_Disabled;
+
+protected:
+	virtual void NativeConstruct() override;
+	
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+
+	void CheckFocus();
 };

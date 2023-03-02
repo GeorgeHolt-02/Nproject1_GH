@@ -14,6 +14,9 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 	ENGINE_API UClass* Z_Construct_UClass_UGameInstance();
 	UPackage* Z_Construct_UPackage__Script_Nproject1_GH();
 	ENGINE_API UClass* Z_Construct_UClass_UWorld_NoRegister();
+	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
+	NPROJECT1_GH_API UClass* Z_Construct_UClass_UMySaveGame_NoRegister();
+	NPROJECT1_GH_API UScriptStruct* Z_Construct_UScriptStruct_FRecord();
 // End Cross Module References
 	DEFINE_FUNCTION(UMyGameInstance::execAddXtraLives)
 	{
@@ -202,6 +205,20 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 #endif
 		static void NewProp_bCanLoadNextLevel_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_bCanLoadNextLevel;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bCanRestart_MetaData[];
+#endif
+		static void NewProp_bCanRestart_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bCanRestart;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_SaveGameBP_MetaData[];
+#endif
+		static const UECodeGen_Private::FClassPropertyParams NewProp_SaveGameBP;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_TopTenScores_Inner;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_TopTenScores_MetaData[];
+#endif
+		static const UECodeGen_Private::FArrayPropertyParams NewProp_TopTenScores;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -331,6 +348,38 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 		((UMyGameInstance*)Obj)->bCanLoadNextLevel = 1;
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel = { "bCanLoadNextLevel", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(UMyGameInstance), &Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel_SetBit, METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanRestart_MetaData[] = {
+		{ "Category", "MyGameInstance" },
+		{ "Comment", "/** Whether or not to restart whenever the player dies */" },
+		{ "ModuleRelativePath", "MyGameInstance.h" },
+		{ "ToolTip", "Whether or not to restart whenever the player dies" },
+	};
+#endif
+	void Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanRestart_SetBit(void* Obj)
+	{
+		((UMyGameInstance*)Obj)->bCanRestart = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanRestart = { "bCanRestart", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(UMyGameInstance), &Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanRestart_SetBit, METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanRestart_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanRestart_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::NewProp_SaveGameBP_MetaData[] = {
+		{ "Category", "MyGameInstance" },
+		{ "Comment", "//Save game class to create an object of\n" },
+		{ "ModuleRelativePath", "MyGameInstance.h" },
+		{ "ToolTip", "Save game class to create an object of" },
+	};
+#endif
+	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_SaveGameBP = { "SaveGameBP", nullptr, (EPropertyFlags)0x0014000000010015, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyGameInstance, SaveGameBP), Z_Construct_UClass_UMySaveGame_NoRegister, Z_Construct_UClass_UClass, METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_SaveGameBP_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_SaveGameBP_MetaData)) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_TopTenScores_Inner = { "TopTenScores", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FRecord, METADATA_PARAMS(nullptr, 0) }; // 646322242
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMyGameInstance_Statics::NewProp_TopTenScores_MetaData[] = {
+		{ "Category", "MyGameInstance" },
+		{ "Comment", "/** Top ten scores */" },
+		{ "ModuleRelativePath", "MyGameInstance.h" },
+		{ "ToolTip", "Top ten scores" },
+	};
+#endif
+	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UMyGameInstance_Statics::NewProp_TopTenScores = { "TopTenScores", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMyGameInstance, TopTenScores), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_TopTenScores_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMyGameInstance_Statics::NewProp_TopTenScores_MetaData)) }; // 646322242
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UMyGameInstance_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Starting,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_PlayerLives_Max,
@@ -345,6 +394,10 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_NextLevelIndex,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_EnemyNum,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanLoadNextLevel,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_bCanRestart,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_SaveGameBP,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_TopTenScores_Inner,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMyGameInstance_Statics::NewProp_TopTenScores,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UMyGameInstance_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UMyGameInstance>::IsAbstract,
@@ -382,9 +435,9 @@ void EmptyLinkFunctionForGeneratedCodeMyGameInstance() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UMyGameInstance, UMyGameInstance::StaticClass, TEXT("UMyGameInstance"), &Z_Registration_Info_UClass_UMyGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMyGameInstance), 387915840U) },
+		{ Z_Construct_UClass_UMyGameInstance, UMyGameInstance::StaticClass, TEXT("UMyGameInstance"), &Z_Registration_Info_UClass_UMyGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMyGameInstance), 1976363452U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_3747397774(TEXT("/Script/Nproject1_GH"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_600591833(TEXT("/Script/Nproject1_GH"),
 		Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MyGameInstance_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

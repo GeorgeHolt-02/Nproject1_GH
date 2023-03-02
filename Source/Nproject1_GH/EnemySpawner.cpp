@@ -74,11 +74,14 @@ void AEnemySpawner::Tick(float DeltaTime)
 			}
 			else
 			{
-				if(CurrentGameInstance->Levels.IsValidIndex(0))
+				if(CurrentGameInstance->bCanRestart)
 				{
-					CurrentGameInstance->LoadSpecifiedLevel(CurrentGameInstance->Levels[0]);
-					CurrentGameInstance->NextLevelIndex = 1;
-					CurrentGameInstance->bCanLoadNextLevel = false;
+					if(CurrentGameInstance->Levels.IsValidIndex(0))
+					{
+						CurrentGameInstance->LoadSpecifiedLevel(CurrentGameInstance->Levels[0]);
+						CurrentGameInstance->NextLevelIndex = 1;
+						CurrentGameInstance->bCanLoadNextLevel = false;
+					}
 				}
 			}
 			CurrentGameInstance->EnemyNum = 0;

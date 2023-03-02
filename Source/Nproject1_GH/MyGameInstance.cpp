@@ -18,6 +18,7 @@ UMyGameInstance::UMyGameInstance()
 	EnemyNum = 0;
 	
 	bCanLoadNextLevel = false;
+	bCanRestart = true;
 
 	ScoreForFirstXtraLife = 50;
 	ScoreForSubsequentXtraLives = 200;
@@ -30,6 +31,21 @@ void UMyGameInstance::Init()
 {
 	Super::Init();
 
+	UMySaveGame* SaveGameInstance = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(SaveGameBP));
+	if(SaveGameInstance)
+	{
+		UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
+	
+		UMySaveGame* LoadGameInstance = Cast<UMySaveGame>(UGameplayStatics::LoadGameFromSlot(SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex));
+		if(LoadGameInstance)
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				TopTenScores.Add(LoadGameInstance->TopTenScores[i]);
+			}
+		}
+	}
+	
 	PlayerLives_Current = PlayerLives_Starting;
 	
 	PlayerScore = 0;

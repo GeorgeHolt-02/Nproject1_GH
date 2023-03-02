@@ -4,45 +4,74 @@
 #include "Widget_GameOver.h"
 
 #include "ButtonWidget.h"
+#include "MyGameInstance.h"
 #include "TextWidget.h"
 #include "Widget_Initial.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Components/Button.h"
 #include "Components/HorizontalBox.h"
+#include "Components/TextBlock.h"
 #include "Components/VerticalBox.h"
-#include "GameFramework/InputSettings.h"
 #include "Kismet/GameplayStatics.h"
 
 void UWidget_GameOver::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	InitialIndex = 0;
+	RecordIndex = NULL;
+	PlayerRecord = nullptr;
 
+	GameResetTimer = 3.0f;
+	bResetTimerActive = false;
+	
 	TopTenScores.Empty();
 	
-	UMySaveGame* SaveGameInstance = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(SaveGameBP));
-	
-	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
-	
-	UMySaveGame* LoadGameInstance = Cast<UMySaveGame>(UGameplayStatics::LoadGameFromSlot(SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex));
-	if(LoadGameInstance)
+	CurrentGameInstance = Cast<UMyGameInstance>(GetGameInstance());
+	if(CurrentGameInstance)
 	{
-		for (int i = 0; i < 10; i++)
-		{
-			TopTenScores.Add(LoadGameInstance->TopTenScores[i]);
-		}
+		TopTenScores.Append(CurrentGameInstance->TopTenScores);
 		
+		if (CurrentGameInstance->PlayerScore > TopTenScores.Last().Score)
+		{
+			int i;
+			for (i = (TopTenScores.Num() - 1); i > 0; i--)
+			{
+				if(CurrentGameInstance->PlayerScore <= TopTenScores[i-1].Score)
+				{
+					break;
+				}
+			}
+			FRecord NewRecord;
+			NewRecord.Name = FString("AAA");
+			NewRecord.Score = CurrentGameInstance->PlayerScore;
+			TopTenScores.Insert(NewRecord, i);
+			TopTenScores.Pop(true);
+			RecordIndex = i;
+		}
 	}
 
 	if(RecordTextRef)
 	{
 		for(int i = RecordBox->GetChildrenCount(); i < 10; i++)
 		{
-			UUserWidget* RecordWidget = CreateWidget(this, RecordTextRef);
+			UTextWidget* RecordWidget = CreateWidget<UTextWidget>(this, RecordTextRef);
 			RecordBox->AddChildToVerticalBox(RecordWidget);
-			UTextWidget* RecordText = Cast<UTextWidget>(RecordWidget);
-			RecordText->SetData((i+1), TopTenScores[i].Name, TopTenScores[i].Score);
+			RecordWidget->SetData((i+1), TopTenScores[i].Name, TopTenScores[i].Score);
+			if(RecordIndex != NULL)
+			{
+				if(i == RecordIndex)
+				{
+					PlayerRecord = RecordWidget;
+					if(i <= 0)
+					{
+						PlayerRecord->Text->SetColorAndOpacity(FSlateColor(FColor::Yellow));
+					}
+					else
+					{
+						PlayerRecord->Text->SetColorAndOpacity(FSlateColor(FColor::Green));
+					}
+				}
+			}
 		}
 	}
 
@@ -50,89 +79,98 @@ void UWidget_GameOver::NativeConstruct()
 	{
 		for(int i = InitialsBox->GetChildrenCount(); i < 3; i++)
 		{
-			UUserWidget* InitialWidget = CreateWidget(this, InitialRef);
+			UWidget_Initial* InitialWidget = CreateWidget<UWidget_Initial>(this, InitialRef);
 			InitialsBox->AddChildToHorizontalBox(InitialWidget);
-			//UWidget_Initial* Initial = Cast<UWidget_Initial>(Initial);
+			InitialsArray.Add(InitialWidget);
 		}
 		SelectedInitial = Cast<UWidget_Initial>(InitialsBox->GetAllChildren()[0]);
 	}
 
+	if(FinishButtonRef)
+	{
+		UUserWidget* FinishButtonWidget = CreateWidget(this, FinishButtonRef);
+		FinishButtonBox->AddChildToVerticalBox(FinishButtonWidget);
+		FinishButton = Cast<UButtonWidget>(FinishButtonWidget);
+		FinishButton->Button->OnPressed.AddDynamic(this, &UWidget_GameOver::FinishEntry);
+	}
+	
 	//UGameplayStatics::SetGamePaused(GetWorld(), true);
 					
-	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
-					
+	PlayerController = GetWorld()->GetFirstPlayerController();
+	
 	if(PlayerController)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Valid"));
-		//GameOverWidget->SetOwningPlayer(PlayerController);
+		SetOwningPlayer(PlayerController);
 		PlayerController->SetShowMouseCursor(true);
-		UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(PlayerController);
+		UWidgetBlueprintLibrary::SetInputMode_UIOnlyEx(PlayerController, this, EMouseLockMode::DoNotLock);
 	}
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Not Valid"));
+	}
+	
+	SelectedInitial->DownButton->Button->SetKeyboardFocus();
+}
+
+void UWidget_GameOver::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+{
+	Super::NativeTick(MyGeometry, InDeltaTime);
+
+	if(PlayerRecord)
+	{
+		PlayerRecord->Initials = FString("");
+		for(int i = 0; i < InitialsArray.Num(); i++)
+		{
+			PlayerRecord->Initials += InitialsArray[i]->Characters.Chr(InitialsArray[i]->Characters[InitialsArray[i]->CharactersIndex]);
+		}
+	}
+
+	if(bResetTimerActive)
+	{
+		GameResetTimer -= InDeltaTime;
+	}
+
+	if(GameResetTimer <= 0.0f)
+	{
+		if(CurrentGameInstance)
+		{
+			CurrentGameInstance->PlayerScore = 0;
+			CurrentGameInstance->ScoreSinceLastXtraLife = 0;
+			CurrentGameInstance->ScoreForXtraLives = CurrentGameInstance->ScoreForFirstXtraLife;
+			if(CurrentGameInstance->Levels.IsValidIndex(0))
+			{
+				CurrentGameInstance->LoadSpecifiedLevel(CurrentGameInstance->Levels[0]);
+				CurrentGameInstance->NextLevelIndex = 1;
+			}
+			CurrentGameInstance->PlayerLives_Current = CurrentGameInstance->PlayerLives_Starting;
+			CurrentGameInstance->bCanRestart = true;
+			PlayerController->SetShowMouseCursor(false);
+			UWidgetBlueprintLibrary::SetInputMode_GameOnly(PlayerController);
+			RemoveFromViewport();
+		}
 	}
 }
 
 void UWidget_GameOver::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
-
 	
 }
 
-void UWidget_GameOver::InitializeInputComponent()
+void UWidget_GameOver::FinishEntry()
 {
-	if ( APlayerController* Controller = GetOwningPlayer() )
+	UE_LOG(LogTemp, Warning, TEXT("Saved?"));
+	UMySaveGame* SaveGameInstance = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(SaveGameBP));
+	if(SaveGameInstance)
 	{
-		// Use the existing PC's input class, or fallback to the project default. We should use the existing class
-		// instead of just the default one because if you have a plugin that has a PC with a different default input
-		// class then this would fail
-		UClass* InputClass = Controller->InputComponent ? Controller->InputComponent->GetClass() : UInputSettings::GetDefaultInputComponentClass();
-		InputComponent = NewObject< UInputComponent >( this, InputClass, NAME_None, RF_Transient );
-
-		check(InputComponent);
-
-		InputComponent->BindAxis("NavX", this, &UWidget_GameOver::SelectInitial);
-		
-		InputComponent->bBlockInput = bStopAction;
-		InputComponent->Priority = Priority;
-		Controller->PushInputComponent( InputComponent );
-	}
-	else
-	{
-		//FMessageLog("PIE").Info(FText::Format(LOCTEXT("NoInputListeningWithoutPlayerController", "Unable to listen to input actions without a player controller in {0}."), FText::FromName(GetClass()->GetFName())));
+		SaveGameInstance->TopTenScores.Empty();
+		SaveGameInstance->TopTenScores.Append(TopTenScores);
+		UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
 	}
 
-	
-}
+	bResetTimerActive = true;
 
-void UWidget_GameOver::SelectInitial(float Value)
-{
-	InitialIndex += 1 * FMath::Sign(Value);
-	if(InitialIndex >= InitialsBox->GetChildrenCount())
-	{
-		InitialIndex = 0;
-	}
-	else if (InitialIndex < 0)
-	{
-		InitialIndex = (InitialsBox->GetChildrenCount() - 1);
-	}
-	if(SelectedInitial)
-	{
-		SelectedInitial->UpButton->Button->ColorAndOpacity = FLinearColor(FColor::Green);
-		SelectedInitial->DownButton->Button->ColorAndOpacity = FLinearColor(FColor::Green);
-	}
-	
-	SelectedInitial = Cast<UWidget_Initial>(InitialsBox->GetAllChildren()[InitialIndex]);
-	if(SelectedInitial)
-	{
-		SelectedInitial->UpButton->Button->ColorAndOpacity = FLinearColor(FColor::Cyan);
-		SelectedInitial->DownButton->Button->ColorAndOpacity = FLinearColor(FColor::Cyan);
-	}
-}
-
-void UWidget_GameOver::CharCycle(float Value)
-{
-	
+	FinishButton->RemoveFromParent();
+	//FinishButton->Button->OnPressed.RemoveAll(this);
 }

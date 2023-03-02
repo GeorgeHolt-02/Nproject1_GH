@@ -11,7 +11,7 @@
 #include "Components/ArrowComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/InputComponent.h"
-#include "Engine/SkeletalMeshSocket.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -410,27 +410,38 @@ void APlayerChar::OnDeath(AActor* DestroyedActor)
 		{
 			if(CurrentGameInstance->PlayerLives_Current > 0)
 			{
-				CurrentGameInstance->LoadSpecifiedLevelByName(FName(GetWorld()->GetCurrentLevel()->GetFullName()));
 				CurrentGameInstance->PlayerLives_Current--;
+				if (CurrentGameInstance->bCanRestart)
+				{
+					CurrentGameInstance->LoadSpecifiedLevelByName(FName(GetWorld()->GetCurrentLevel()->GetFullName()));
+				}
 			}
 			else
 			{
-				if(GameOverRef)
+				if(CurrentGameInstance->PlayerScore > CurrentGameInstance->TopTenScores.Last().Score)
 				{
-					UWidget_GameOver* GameOverWidget = CreateWidget<UWidget_GameOver>(GetWorld(), GameOverRef);
-					GameOverWidget->AddToViewport(0);
-					UGameplayStatics::SetGamePaused(GetWorld(), true);
+					if(GameOverRef)
+					{
+						CurrentGameInstance->bCanRestart = false;
+						UWidget_GameOver* GameOverWidget = CreateWidget<UWidget_GameOver>(GetWorld(), GameOverRef);
+						GameOverWidget->AddToViewport(0);
+						//UGameplayStatics::SetGamePaused(GetWorld(), true);
+					}
 				}
-				
-				// CurrentGameInstance->PlayerScore = 0;
-				// CurrentGameInstance->ScoreSinceLastXtraLife = 0;
-				// CurrentGameInstance->ScoreForXtraLives = CurrentGameInstance->ScoreForFirstXtraLife;
-				// if(CurrentGameInstance->Levels.IsValidIndex(0))
-				// {
-				// 	CurrentGameInstance->LoadSpecifiedLevel(CurrentGameInstance->Levels[0]);
-				// 	CurrentGameInstance->NextLevelIndex = 1;
-				// }
-				// CurrentGameInstance->PlayerLives_Current = CurrentGameInstance->PlayerLives_Starting;
+				else
+				{
+					GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::Red, FString::Printf(TEXT("GAME OVER!!")));
+
+					CurrentGameInstance->PlayerScore = 0;
+					CurrentGameInstance->ScoreSinceLastXtraLife = 0;
+					CurrentGameInstance->ScoreForXtraLives = CurrentGameInstance->ScoreForFirstXtraLife;
+					if(CurrentGameInstance->Levels.IsValidIndex(0))
+					{
+						CurrentGameInstance->LoadSpecifiedLevel(CurrentGameInstance->Levels[0]);
+						CurrentGameInstance->NextLevelIndex = 1;
+					}
+					CurrentGameInstance->PlayerLives_Current = CurrentGameInstance->PlayerLives_Starting;
+				}
 			}
 			CurrentGameInstance->bCanLoadNextLevel = false;
 		}

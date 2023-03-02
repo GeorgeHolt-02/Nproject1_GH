@@ -114,7 +114,6 @@ void UWidget_Initial::CycleDown()
 	if(Characters.IsValidIndex(CharactersIndex))
 	{
 		Char->Text->SetText(FText::FromString(Characters.Chr(Characters[CharactersIndex])));
-		UE_LOG(LogTemp, Warning, TEXT("%i"), CharactersIndex);
 	}
 }
 
@@ -129,6 +128,5 @@ void UWidget_Initial::CycleUp()
 	if(Characters.IsValidIndex(CharactersIndex))
 	{
 		Char->Text->SetText(FText::FromString(Characters.Chr(Characters[CharactersIndex])));
-		UE_LOG(LogTemp, Warning, TEXT("%i"), CharactersIndex);
 	}
 }
