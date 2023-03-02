@@ -222,11 +222,19 @@ public:
 	//"High score" (Score needed to reach leaderboards, or player personal best)
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int HighScore;
+
+	//HUD
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<class UWidget_PlayerHUD> PlayerHUDref;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UWidget_PlayerHUD* PlayerHUD;
 	
 protected:
 	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	/** Movement input functions */
 	//(forwards/backwards)

@@ -1514,5 +1514,11 @@
     <ClInclude Include="..\..\Source\Nproject1_GH\Widget_Initial.h">
       <Filter>Source\Nproject1_GH</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\Nproject1_GH\Widget_PlayerHUD.cpp">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Nproject1_GH\Widget_PlayerHUD.h">
+      <Filter>Source\Nproject1_GH</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

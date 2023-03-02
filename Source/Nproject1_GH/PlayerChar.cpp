@@ -5,6 +5,7 @@
 
 #include "MyGameInstance.h"
 #include "Widget_GameOver.h"
+#include "Widget_PlayerHUD.h"
 #include "Blueprint/UserWidget.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Camera/CameraComponent.h"
@@ -139,6 +140,9 @@ APlayerChar::APlayerChar()
 	bResetMeter = false;
 	
 	MeterSpeedCoeff = 1.0f;
+	
+	PlayerHUDref = nullptr;
+	PlayerHUD = nullptr;
 }
 
 // Called when the game starts or when spawned
@@ -174,6 +178,26 @@ void APlayerChar::BeginPlay()
 	
 	PlayerCollider->OnComponentHit.AddDynamic(this, &APlayerChar::OnHit);
 	OnDestroyed.AddDynamic(this, &APlayerChar::OnDeath);
+
+	if(IsLocallyControlled() && PlayerHUDref)
+	{
+		APlayerController* Player_Controller = GetController<APlayerController>();
+		check(Player_Controller);
+		PlayerHUD = CreateWidget<UWidget_PlayerHUD>(Player_Controller, PlayerHUDref);
+		check(PlayerHUD);
+		PlayerHUD->AddToPlayerScreen();
+	}
+}
+
+void APlayerChar::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	if(PlayerHUD)
+	{
+		PlayerHUD->RemoveFromParent();
+		PlayerHUD = nullptr;
+	}
+	
+	Super::EndPlay(EndPlayReason);
 }
 
 // Called every frame
@@ -207,30 +231,30 @@ void APlayerChar::Tick(float DeltaTime)
 	// GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Green,
 	// FString::Printf(TEXT("PLAYER HEALTH: %f/%f"), CurrentHealth, MaxHealth));
 
-	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::White,
-	FString::Printf(TEXT("MULTIPLIER METER: %f/%f"), MultiplierMeter_Current, MultiplierMeter_NeededForIncrease));
-	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::White,
-	FString::Printf(TEXT("SCORE MULTIPLIER: %f"), ScoreMultiplier_Current));
-	
-	if(CurrentGameInstance)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Green,
-	FString::Printf(TEXT("LIVES: %i"), CurrentGameInstance->PlayerLives_Current));
-		GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Yellow,
-	FString::Printf(TEXT("SCORE: %i"), CurrentGameInstance->PlayerScore));
-		GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Yellow,
-	FString::Printf(TEXT("HISCORE: %i"), FMath::Max(HighScore, CurrentGameInstance->PlayerScore)));
-		
-		// UE_LOG(LogTemp, Warning, TEXT("%i"), CurrentGameInstance->EnemyNum);
-		// if(CurrentGameInstance->bCanLoadNextLevel)
-		// {
-		// 	UE_LOG(LogTemp, Warning, TEXT("true"));
-		// }
-		// else
-		// {
-		// 	UE_LOG(LogTemp, Warning, TEXT("false"));
-		// }
-	}
+	// GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::White,
+	// FString::Printf(TEXT("MULTIPLIER METER: %f/%f"), MultiplierMeter_Current, MultiplierMeter_NeededForIncrease));
+	// GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::White,
+	// FString::Printf(TEXT("SCORE MULTIPLIER: %f"), ScoreMultiplier_Current));
+	//
+	// if(CurrentGameInstance)
+	// {
+	// 	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Green,
+	// FString::Printf(TEXT("LIVES: %i"), CurrentGameInstance->PlayerLives_Current));
+	// 	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Yellow,
+	// FString::Printf(TEXT("SCORE: %i"), CurrentGameInstance->PlayerScore));
+	// 	GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Yellow,
+	// FString::Printf(TEXT("HISCORE: %i"), FMath::Max(HighScore, CurrentGameInstance->PlayerScore)));
+	// 	
+	// 	// UE_LOG(LogTemp, Warning, TEXT("%i"), CurrentGameInstance->EnemyNum);
+	// 	// if(CurrentGameInstance->bCanLoadNextLevel)
+	// 	// {
+	// 	// 	UE_LOG(LogTemp, Warning, TEXT("true"));
+	// 	// }
+	// 	// else
+	// 	// {
+	// 	// 	UE_LOG(LogTemp, Warning, TEXT("false"));
+	// 	// }
+	// }
 
 	// if (Anim_bHasFired == true)
 	// {
@@ -374,6 +398,10 @@ void APlayerChar::UpdateMultiplier(float DeltaTime)
 		if (ScoreMultiplier_Current > 1.0f || MultiplierMeter_Current > 0.0f)
 		{
 			MultiplierMeter_Current -= (DeltaTime * MeterSpeedCoeff * ScoreMultiplier_Current);
+			if(PlayerHUD)
+			{
+				PlayerHUD->SetMultiplierBuildUp(MultiplierMeter_Current, MultiplierMeter_NeededForIncrease);
+			}
 			if(MultiplierMeter_Current <= 0.0f)
 			{
 				if(ScoreMultiplier_Current > 1.0f)
@@ -395,6 +423,12 @@ void APlayerChar::UpdateMultiplier(float DeltaTime)
 				}
 			}
 		}
+	}
+
+	if(PlayerHUD)
+	{
+		PlayerHUD->SetMultiplier(ScoreMultiplier_Current);
+		PlayerHUD->SetMultiplierBuildUp(MultiplierMeter_Current, MultiplierMeter_NeededForIncrease);
 	}
 }
 
@@ -462,7 +496,11 @@ void APlayerChar::OnDeath(AActor* DestroyedActor)
 			CurrentGameInstance->bCanLoadNextLevel = false;
 		}
 		
-		
+		if(PlayerHUD)
+		{
+			PlayerHUD->SetPlayerScore(CurrentGameInstance->PlayerScore);
+			PlayerHUD->SetLives(CurrentGameInstance->PlayerLives_Current);
+		}
 	}
 	//UGameplayStatics::OpenLevel(GetWorld(), FName(GetWorld()->GetCurrentLevel()->GetFullName()), true);
 }

@@ -5,6 +5,7 @@
 
 #include "MyGameInstance.h"
 #include "PlayerChar.h"
+#include "Widget_PlayerHUD.h"
 #include "Components/BoxComponent.h"
 
 // Sets default values
@@ -207,7 +208,17 @@ void ABaseEnemy::Death()
 				}
 			}
 		}
-		
+
+		if(Player)
+		{
+			if(Player->PlayerHUD)
+			{
+				Player->PlayerHUD->SetHighScore(FMath::Max(CurrentGameInstance->PlayerScore, Player->HighScore));
+				Player->PlayerHUD->SetPlayerScore(CurrentGameInstance->PlayerScore);
+				Player->PlayerHUD->SetMultiplier(Player->ScoreMultiplier_Current);
+				Player->PlayerHUD->SetMultiplierBuildUp(Player->MultiplierMeter_Current, Player->MultiplierMeter_NeededForIncrease);
+			}
+		}
 		CurrentGameInstance->EnemyNum--;
 		
 		UE_LOG(LogTemp, Warning, TEXT("Enemy Num2: %i"), CurrentGameInstance->EnemyNum);
