@@ -33,6 +33,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TArray<FRecord> TopTenScores;
 
+	//Player's personal best
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int PlayerPB;
+
 #pragma region Save Game ID Variables
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)

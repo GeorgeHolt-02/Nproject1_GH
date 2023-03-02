@@ -218,6 +218,10 @@ public:
 	// Game over widget reference
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<class UWidget_GameOver> GameOverRef;
+
+	//"High score" (Score needed to reach leaderboards, or player personal best)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int HighScore;
 	
 protected:
 	

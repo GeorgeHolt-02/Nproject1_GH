@@ -3,6 +3,8 @@
 
 #include "Widget_GameOver.h"
 
+#include <string>
+
 #include "ButtonWidget.h"
 #include "MyGameInstance.h"
 #include "TextWidget.h"
@@ -23,9 +25,10 @@ void UWidget_GameOver::NativeConstruct()
 
 	GameResetTimer = 3.0f;
 	bResetTimerActive = false;
+	CountdownTime = 20.0f;
 	
+	CountdownTextBlock->SetText(FText::FromString(FString::Printf(TEXT("%.2f"), CountdownTime)));
 	TopTenScores.Empty();
-	
 	CurrentGameInstance = Cast<UMyGameInstance>(GetGameInstance());
 	if(CurrentGameInstance)
 	{
@@ -45,7 +48,10 @@ void UWidget_GameOver::NativeConstruct()
 			NewRecord.Name = FString("AAA");
 			NewRecord.Score = CurrentGameInstance->PlayerScore;
 			TopTenScores.Insert(NewRecord, i);
-			TopTenScores.Pop(true);
+			if(TopTenScores.Num() > 10)
+			{
+				TopTenScores.Pop(true);
+			}
 			RecordIndex = i;
 		}
 	}
@@ -93,6 +99,8 @@ void UWidget_GameOver::NativeConstruct()
 		FinishButton = Cast<UButtonWidget>(FinishButtonWidget);
 		FinishButton->Button->OnPressed.AddDynamic(this, &UWidget_GameOver::FinishEntry);
 	}
+
+	BG_Button->OnPressed.AddDynamic(this, &UWidget_GameOver::ResetButtonKeyboardFocus);
 	
 	//UGameplayStatics::SetGamePaused(GetWorld(), true);
 					
@@ -126,6 +134,18 @@ void UWidget_GameOver::NativeTick(const FGeometry& MyGeometry, float InDeltaTime
 		}
 	}
 
+	if(CountdownTime > 0.0f)
+	{
+		CountdownTime -= InDeltaTime;
+		if(CountdownTime <= 0.0f)
+		{
+			CountdownTime = 0.0f;
+			FinishEntry();
+		}
+	}
+
+	CountdownTextBlock->SetText(FText::FromString(FString::Printf(TEXT("%.2f"), CountdownTime)));
+	
 	if(bResetTimerActive)
 	{
 		GameResetTimer -= InDeltaTime;
@@ -161,16 +181,47 @@ void UWidget_GameOver::NativeOnInitialized()
 void UWidget_GameOver::FinishEntry()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Saved?"));
-	UMySaveGame* SaveGameInstance = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(SaveGameBP));
-	if(SaveGameInstance)
+	
+	UMySaveGame* LeaderboardsSave = Cast<UMySaveGame>(UGameplayStatics::LoadGameFromSlot(FString("TestSaveSlot"), 0));
+	if(LeaderboardsSave)
 	{
-		SaveGameInstance->TopTenScores.Empty();
-		SaveGameInstance->TopTenScores.Append(TopTenScores);
-		UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
+		FRecord NewRecord;
+		NewRecord.Name = PlayerRecord->Initials;
+		NewRecord.Score = PlayerRecord->Score;
+		LeaderboardsSave->TopTenScores.Insert(NewRecord, RecordIndex);
+		if(LeaderboardsSave->TopTenScores.Num() > 10)
+		{
+			LeaderboardsSave->TopTenScores.Pop(true);
+		}
+		if (LeaderboardsSave->PlayerPB == NULL || NewRecord.Score > LeaderboardsSave->PlayerPB)
+		{
+			LeaderboardsSave->PlayerPB = NewRecord.Score;
+		}
+		
+		if(CurrentGameInstance)
+		{
+			CurrentGameInstance->TopTenScores.Insert(NewRecord, RecordIndex);
+			if(CurrentGameInstance->TopTenScores.Num() > 10)
+			{
+				CurrentGameInstance->TopTenScores.Pop(true);
+			}
+			if (CurrentGameInstance->PlayerPB == NULL || NewRecord.Score > CurrentGameInstance->PlayerPB)
+			{
+				CurrentGameInstance->PlayerPB = NewRecord.Score;
+			}
+		}
+		UGameplayStatics::SaveGameToSlot(LeaderboardsSave, LeaderboardsSave->SaveSlotName, LeaderboardsSave->UserIndex);
 	}
-
+	
 	bResetTimerActive = true;
 
 	FinishButton->RemoveFromParent();
+	InitialsBox->RemoveFromParent();
+	CountdownTextBlock->RemoveFromParent();
 	//FinishButton->Button->OnPressed.RemoveAll(this);
+}
+
+void UWidget_GameOver::ResetButtonKeyboardFocus()
+{
+	SelectedInitial->DownButton->Button->SetKeyboardFocus();
 }

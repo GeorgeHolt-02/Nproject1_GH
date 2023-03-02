@@ -115,6 +115,10 @@ template<> NPROJECT1_GH_API UScriptStruct* StaticStruct<FRecord>()
 #endif
 		static const UECodeGen_Private::FArrayPropertyParams NewProp_TopTenScores;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PlayerPB_MetaData[];
+#endif
+		static const UECodeGen_Private::FUnsizedIntPropertyParams NewProp_PlayerPB;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_SaveSlotName_MetaData[];
 #endif
 		static const UECodeGen_Private::FStrPropertyParams NewProp_SaveSlotName;
@@ -147,6 +151,15 @@ template<> NPROJECT1_GH_API UScriptStruct* StaticStruct<FRecord>()
 #endif
 	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UMySaveGame_Statics::NewProp_TopTenScores = { "TopTenScores", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMySaveGame, TopTenScores), EArrayPropertyFlags::None, METADATA_PARAMS(Z_Construct_UClass_UMySaveGame_Statics::NewProp_TopTenScores_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMySaveGame_Statics::NewProp_TopTenScores_MetaData)) }; // 646322242
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMySaveGame_Statics::NewProp_PlayerPB_MetaData[] = {
+		{ "Category", "MySaveGame" },
+		{ "Comment", "//Player's personal best\n" },
+		{ "ModuleRelativePath", "MySaveGame.h" },
+		{ "ToolTip", "Player's personal best" },
+	};
+#endif
+	const UECodeGen_Private::FUnsizedIntPropertyParams Z_Construct_UClass_UMySaveGame_Statics::NewProp_PlayerPB = { "PlayerPB", nullptr, (EPropertyFlags)0x0010000000020005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UMySaveGame, PlayerPB), METADATA_PARAMS(Z_Construct_UClass_UMySaveGame_Statics::NewProp_PlayerPB_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UMySaveGame_Statics::NewProp_PlayerPB_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UMySaveGame_Statics::NewProp_SaveSlotName_MetaData[] = {
 		{ "Category", "MySaveGame" },
 		{ "ModuleRelativePath", "MySaveGame.h" },
@@ -163,6 +176,7 @@ template<> NPROJECT1_GH_API UScriptStruct* StaticStruct<FRecord>()
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UMySaveGame_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMySaveGame_Statics::NewProp_TopTenScores_Inner,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMySaveGame_Statics::NewProp_TopTenScores,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMySaveGame_Statics::NewProp_PlayerPB,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMySaveGame_Statics::NewProp_SaveSlotName,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UMySaveGame_Statics::NewProp_UserIndex,
 	};
@@ -206,9 +220,9 @@ template<> NPROJECT1_GH_API UScriptStruct* StaticStruct<FRecord>()
 		{ FRecord::StaticStruct, Z_Construct_UScriptStruct_FRecord_Statics::NewStructOps, TEXT("Record"), &Z_Registration_Info_UScriptStruct_Record, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FRecord), 646322242U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MySaveGame_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UMySaveGame, UMySaveGame::StaticClass, TEXT("UMySaveGame"), &Z_Registration_Info_UClass_UMySaveGame, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMySaveGame), 2202388037U) },
+		{ Z_Construct_UClass_UMySaveGame, UMySaveGame::StaticClass, TEXT("UMySaveGame"), &Z_Registration_Info_UClass_UMySaveGame, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMySaveGame), 2010375543U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MySaveGame_h_966851259(TEXT("/Script/Nproject1_GH"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MySaveGame_h_2565430399(TEXT("/Script/Nproject1_GH"),
 		Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MySaveGame_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MySaveGame_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MySaveGame_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_MySaveGame_h_Statics::ScriptStructInfo),
 		nullptr, 0);

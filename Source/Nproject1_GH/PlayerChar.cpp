@@ -113,6 +113,8 @@ APlayerChar::APlayerChar()
 
 	bPositioningSweep = false;
 
+	HighScore = 0;
+
 #pragma region ANIMATION VARIABLES
 
 	Anim_MovementInput = FVector2D(0.0f, 0.0f);
@@ -147,6 +149,18 @@ void APlayerChar::BeginPlay()
 	if(GetGameInstance())
 	{
 		CurrentGameInstance = Cast<UMyGameInstance>(GetGameInstance());
+	}
+
+	if(CurrentGameInstance)
+	{
+		if(CurrentGameInstance->PlayerPB != NULL)
+		{
+			HighScore = CurrentGameInstance->PlayerPB;
+		}
+		else
+		{
+			HighScore = CurrentGameInstance->TopTenScores.Last().Score;
+		}
 	}
 	
 	if (BlasterMesh)
@@ -204,6 +218,8 @@ void APlayerChar::Tick(float DeltaTime)
 	FString::Printf(TEXT("LIVES: %i"), CurrentGameInstance->PlayerLives_Current));
 		GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Yellow,
 	FString::Printf(TEXT("SCORE: %i"), CurrentGameInstance->PlayerScore));
+		GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Yellow,
+	FString::Printf(TEXT("HISCORE: %i"), FMath::Max(HighScore, CurrentGameInstance->PlayerScore)));
 		
 		// UE_LOG(LogTemp, Warning, TEXT("%i"), CurrentGameInstance->EnemyNum);
 		// if(CurrentGameInstance->bCanLoadNextLevel)

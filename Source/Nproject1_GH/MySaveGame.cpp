@@ -10,4 +10,5 @@ UMySaveGame::UMySaveGame()
 
 	SaveSlotName = FString("TestSaveSlot");
 	UserIndex = 0;
+	PlayerPB = NULL;
 }

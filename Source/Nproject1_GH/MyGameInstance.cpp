@@ -25,23 +25,38 @@ UMyGameInstance::UMyGameInstance()
 
 	ScoreForXtraLives = ScoreForFirstXtraLife;
 	ScoreSinceLastXtraLife = 0;
+
+	PlayerPB = NULL;
 }
 
 void UMyGameInstance::Init()
 {
 	Super::Init();
-
-	UMySaveGame* SaveGameInstance = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(SaveGameBP));
-	if(SaveGameInstance)
-	{
-		UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
 	
-		UMySaveGame* LoadGameInstance = Cast<UMySaveGame>(UGameplayStatics::LoadGameFromSlot(SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex));
-		if(LoadGameInstance)
+	UMySaveGame* LeaderboardsSave = Cast<UMySaveGame>(UGameplayStatics::LoadGameFromSlot(FString("TestSaveSlot"), 0));
+	if(LeaderboardsSave)
+	{
+		TopTenScores.Empty();
+		
+		for (int i = 0; i < 10; i++)
 		{
+			TopTenScores.Add(LeaderboardsSave->TopTenScores[i]);
+		}
+
+		PlayerPB = LeaderboardsSave->PlayerPB;
+	}
+	else
+	{
+		LeaderboardsSave = Cast<UMySaveGame>(UGameplayStatics::CreateSaveGameObject(SaveGameBP));
+		if(LeaderboardsSave)
+		{
+			UGameplayStatics::SaveGameToSlot(LeaderboardsSave, LeaderboardsSave->SaveSlotName, LeaderboardsSave->UserIndex);
+
+			TopTenScores.Empty();
+			
 			for (int i = 0; i < 10; i++)
 			{
-				TopTenScores.Add(LoadGameInstance->TopTenScores[i]);
+				TopTenScores.Add(LeaderboardsSave->TopTenScores[i]);
 			}
 		}
 	}

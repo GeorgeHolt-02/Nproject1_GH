@@ -14,8 +14,18 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define NPROJECT1_GH_Widget_GameOver_generated_h
 
 #define FID_Nproject1_GH_Source_Nproject1_GH_Widget_GameOver_h_17_SPARSE_DATA
-#define FID_Nproject1_GH_Source_Nproject1_GH_Widget_GameOver_h_17_RPC_WRAPPERS
-#define FID_Nproject1_GH_Source_Nproject1_GH_Widget_GameOver_h_17_RPC_WRAPPERS_NO_PURE_DECLS
+#define FID_Nproject1_GH_Source_Nproject1_GH_Widget_GameOver_h_17_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execResetButtonKeyboardFocus); \
+	DECLARE_FUNCTION(execFinishEntry);
+
+
+#define FID_Nproject1_GH_Source_Nproject1_GH_Widget_GameOver_h_17_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execResetButtonKeyboardFocus); \
+	DECLARE_FUNCTION(execFinishEntry);
+
+
 #define FID_Nproject1_GH_Source_Nproject1_GH_Widget_GameOver_h_17_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUWidget_GameOver(); \

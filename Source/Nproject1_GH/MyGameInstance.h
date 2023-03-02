@@ -75,6 +75,10 @@ public:
 	/** Top ten scores */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TArray<FRecord> TopTenScores;
+
+	//Player's personal best
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int PlayerPB;
 	
 protected:
 

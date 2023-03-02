@@ -93,6 +93,14 @@ public:
 	//Player controller reference
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	APlayerController* PlayerController;
+
+	//Name entry countdown timer
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	float CountdownTime;
+
+	//Countdown text block
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, meta = (BindWidget))
+	class UTextBlock* CountdownTextBlock;
 	
 protected:
 	virtual void NativeConstruct() override;
@@ -102,5 +110,9 @@ protected:
 	virtual void NativeOnInitialized() override;
 
 public:
+	UFUNCTION()
 	void FinishEntry();
+
+	UFUNCTION()
+	void ResetButtonKeyboardFocus();
 };
