@@ -400,18 +400,26 @@ void APlayerChar::UpdateMultiplier(float DeltaTime)
 			MultiplierMeter_Current -= (DeltaTime * MeterSpeedCoeff * ScoreMultiplier_Current);
 			if(MultiplierMeter_Current <= 0.0f)
 			{
+				// if(ScoreMultiplier_Current > 1.0f)
+				// {
+				// 	ScoreMultiplier_Current = FMath::Clamp((ScoreMultiplier_Current - ScoreMultiplier_ChangeBy), 1.0f, ScoreMultiplier_Max);
+				// 	if(ScoreMultiplier_Current < 1.0f)
+				// 	{
+				// 		MultiplierMeter_Current = 0.0f;
+				// 	}
+				// 	else
+				// 	{
+				// 		MultiplierMeter_Current += MultiplierMeter_NeededForIncrease;
+				// 	}
+				// }
+				// else
+				// {
+				// 	MultiplierMeter_Current = 0.0f;
+				// }
 				if(ScoreMultiplier_Current > 1.0f)
 				{
-					ScoreMultiplier_Current -= ScoreMultiplier_ChangeBy;
-					if(ScoreMultiplier_Current < 1.0f)
-					{
-						ScoreMultiplier_Current = 1.0f;
-						MultiplierMeter_Current = 0.0f;
-					}
-					else
-					{
-						MultiplierMeter_Current += MultiplierMeter_NeededForIncrease;
-					}
+					ScoreMultiplier_Current = FMath::Clamp((ScoreMultiplier_Current - ScoreMultiplier_ChangeBy), 1.0f, ScoreMultiplier_Max);
+					MultiplierMeter_Current += MultiplierMeter_NeededForIncrease;
 				}
 				else
 				{
@@ -425,6 +433,7 @@ void APlayerChar::UpdateMultiplier(float DeltaTime)
 	{
 		PlayerHUD->SetMultiplier(ScoreMultiplier_Current);
 		PlayerHUD->SetMultiplierBuildUp(MultiplierMeter_Current, MultiplierMeter_NeededForIncrease);
+		PlayerHUD->SetMultiplierCanvasOpacity(ScoreMultiplier_Current);
 	}
 }
 

@@ -89,7 +89,7 @@ void UWidget_PlayerHUD::SetMultiplierBuildUp(float CurrentMeter, float MaxMeter)
 
 void UWidget_PlayerHUD::SetMultiplierCanvasOpacity(float CurrentMultiplier)
 {
-	if(MultiplierBuildupBar->Percent > 0.0f || CurrentMultiplier)
+	if((MultiplierBuildupBar->Percent) > 0.0f || (CurrentMultiplier > 1.0f))
 	{
 		MultiplierCanvas->SetRenderOpacity(1.0f);
 	}
