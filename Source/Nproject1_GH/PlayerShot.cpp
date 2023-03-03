@@ -2,9 +2,9 @@
 
 
 #include "PlayerShot.h"
-
 #include "BaseEnemy.h"
 #include "PlayerChar.h"
+#include "Widget_PlayerHUD.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
 // Sets default values
@@ -29,7 +29,6 @@ APlayerShot::APlayerShot()
 	ShotMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	Damage = 1.0f;
-
 	Player = nullptr;
 }
 
@@ -71,6 +70,12 @@ void APlayerShot::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 				Destroy();
 				Player->ScoreMultiplier_Current = 1.0f;
 				Player->MultiplierMeter_Current = 0.0f;
+				if(Player->PlayerHUD)
+				{
+					Player->PlayerHUD->SetMultiplier(Player->ScoreMultiplier_Current);
+					Player->PlayerHUD->SetMultiplierBuildUp(Player->MultiplierMeter_Current, Player->MultiplierMeter_NeededForIncrease);
+					Player->PlayerHUD->SetMultiplierCanvasOpacity(Player->ScoreMultiplier_Current);
+				}
 			}
 		}
 	}
@@ -88,6 +93,12 @@ void APlayerShot::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 				Destroy();
 				Player->ScoreMultiplier_Current = 1.0f;
 				Player->MultiplierMeter_Current = 0.0f;
+				if(Player->PlayerHUD)
+				{
+					Player->PlayerHUD->SetMultiplier(Player->ScoreMultiplier_Current);
+					Player->PlayerHUD->SetMultiplierBuildUp(Player->MultiplierMeter_Current, Player->MultiplierMeter_NeededForIncrease);
+					Player->PlayerHUD->SetMultiplierCanvasOpacity(Player->ScoreMultiplier_Current);
+				}
 			}
 		}
 	}

@@ -217,6 +217,8 @@ void ABaseEnemy::Death()
 				Player->PlayerHUD->SetPlayerScore(CurrentGameInstance->PlayerScore);
 				Player->PlayerHUD->SetMultiplier(Player->ScoreMultiplier_Current);
 				Player->PlayerHUD->SetMultiplierBuildUp(Player->MultiplierMeter_Current, Player->MultiplierMeter_NeededForIncrease);
+				Player->PlayerHUD->SetLives(CurrentGameInstance->PlayerLives_Current);
+				Player->PlayerHUD->SetMultiplierCanvasOpacity(Player->ScoreMultiplier_Current);
 			}
 		}
 		CurrentGameInstance->EnemyNum--;

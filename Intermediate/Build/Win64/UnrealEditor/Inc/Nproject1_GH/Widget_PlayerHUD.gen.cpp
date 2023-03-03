@@ -15,9 +15,18 @@ void EmptyLinkFunctionForGeneratedCodeWidget_PlayerHUD() {}
 	UPackage* Z_Construct_UPackage__Script_Nproject1_GH();
 	UMG_API UClass* Z_Construct_UClass_UTextBlock_NoRegister();
 	UMG_API UClass* Z_Construct_UClass_UProgressBar_NoRegister();
+	UMG_API UClass* Z_Construct_UClass_UCanvasPanel_NoRegister();
 	NPROJECT1_GH_API UClass* Z_Construct_UClass_APlayerChar_NoRegister();
 	NPROJECT1_GH_API UClass* Z_Construct_UClass_UMyGameInstance_NoRegister();
 // End Cross Module References
+	DEFINE_FUNCTION(UWidget_PlayerHUD::execSetMultiplierCanvasOpacity)
+	{
+		P_GET_PROPERTY(FFloatProperty,Z_Param_CurrentMultiplier);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->SetMultiplierCanvasOpacity(Z_Param_CurrentMultiplier);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UWidget_PlayerHUD::execSetMultiplierBuildUp)
 	{
 		P_GET_PROPERTY(FFloatProperty,Z_Param_CurrentMeter);
@@ -67,6 +76,7 @@ void EmptyLinkFunctionForGeneratedCodeWidget_PlayerHUD() {}
 			{ "SetLives", &UWidget_PlayerHUD::execSetLives },
 			{ "SetMultiplier", &UWidget_PlayerHUD::execSetMultiplier },
 			{ "SetMultiplierBuildUp", &UWidget_PlayerHUD::execSetMultiplierBuildUp },
+			{ "SetMultiplierCanvasOpacity", &UWidget_PlayerHUD::execSetMultiplierCanvasOpacity },
 			{ "SetPlayerScore", &UWidget_PlayerHUD::execSetPlayerScore },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -205,6 +215,38 @@ void EmptyLinkFunctionForGeneratedCodeWidget_PlayerHUD() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierCanvasOpacity_Statics
+	{
+		struct Widget_PlayerHUD_eventSetMultiplierCanvasOpacity_Parms
+		{
+			float CurrentMultiplier;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_CurrentMultiplier;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierCanvasOpacity_Statics::NewProp_CurrentMultiplier = { "CurrentMultiplier", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(Widget_PlayerHUD_eventSetMultiplierCanvasOpacity_Parms, CurrentMultiplier), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierCanvasOpacity_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierCanvasOpacity_Statics::NewProp_CurrentMultiplier,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierCanvasOpacity_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Widget_PlayerHUD.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierCanvasOpacity_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UWidget_PlayerHUD, nullptr, "SetMultiplierCanvasOpacity", nullptr, nullptr, sizeof(Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierCanvasOpacity_Statics::Widget_PlayerHUD_eventSetMultiplierCanvasOpacity_Parms), Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierCanvasOpacity_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierCanvasOpacity_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierCanvasOpacity_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierCanvasOpacity_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierCanvasOpacity()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierCanvasOpacity_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_UWidget_PlayerHUD_SetPlayerScore_Statics
 	{
 		struct Widget_PlayerHUD_eventSetPlayerScore_Parms
@@ -270,6 +312,10 @@ void EmptyLinkFunctionForGeneratedCodeWidget_PlayerHUD() {}
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_MultiplierBuildupBar;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_MultiplierCanvas_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_MultiplierCanvas;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Player_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_Player;
@@ -290,6 +336,7 @@ void EmptyLinkFunctionForGeneratedCodeWidget_PlayerHUD() {}
 		{ &Z_Construct_UFunction_UWidget_PlayerHUD_SetLives, "SetLives" }, // 3525151314
 		{ &Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplier, "SetMultiplier" }, // 2838784192
 		{ &Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierBuildUp, "SetMultiplierBuildUp" }, // 1992728879
+		{ &Z_Construct_UFunction_UWidget_PlayerHUD_SetMultiplierCanvasOpacity, "SetMultiplierCanvasOpacity" }, // 1873037365
 		{ &Z_Construct_UFunction_UWidget_PlayerHUD_SetPlayerScore, "SetPlayerScore" }, // 952764683
 	};
 #if WITH_METADATA
@@ -355,6 +402,17 @@ void EmptyLinkFunctionForGeneratedCodeWidget_PlayerHUD() {}
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UWidget_PlayerHUD_Statics::NewProp_MultiplierBuildupBar = { "MultiplierBuildupBar", nullptr, (EPropertyFlags)0x0010000000090009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWidget_PlayerHUD, MultiplierBuildupBar), Z_Construct_UClass_UProgressBar_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UWidget_PlayerHUD_Statics::NewProp_MultiplierBuildupBar_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWidget_PlayerHUD_Statics::NewProp_MultiplierBuildupBar_MetaData)) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWidget_PlayerHUD_Statics::NewProp_MultiplierCanvas_MetaData[] = {
+		{ "BindWidget", "" },
+		{ "Category", "Widget_PlayerHUD" },
+		{ "Comment", "/* Canvas for the multiplier widgets */" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Widget_PlayerHUD.h" },
+		{ "ToolTip", "Canvas for the multiplier widgets" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UWidget_PlayerHUD_Statics::NewProp_MultiplierCanvas = { "MultiplierCanvas", nullptr, (EPropertyFlags)0x0010000000090009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UWidget_PlayerHUD, MultiplierCanvas), Z_Construct_UClass_UCanvasPanel_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UWidget_PlayerHUD_Statics::NewProp_MultiplierCanvas_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UWidget_PlayerHUD_Statics::NewProp_MultiplierCanvas_MetaData)) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UWidget_PlayerHUD_Statics::NewProp_Player_MetaData[] = {
 		{ "Category", "Widget_PlayerHUD" },
 		{ "Comment", "/* Player character reference */" },
@@ -378,6 +436,7 @@ void EmptyLinkFunctionForGeneratedCodeWidget_PlayerHUD() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_PlayerHUD_Statics::NewProp_LivesTextBlock,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_PlayerHUD_Statics::NewProp_MultiplierTextBlock,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_PlayerHUD_Statics::NewProp_MultiplierBuildupBar,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_PlayerHUD_Statics::NewProp_MultiplierCanvas,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_PlayerHUD_Statics::NewProp_Player,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UWidget_PlayerHUD_Statics::NewProp_CurrentGameInstance,
 	};
@@ -417,9 +476,9 @@ void EmptyLinkFunctionForGeneratedCodeWidget_PlayerHUD() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_PlayerHUD_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UWidget_PlayerHUD, UWidget_PlayerHUD::StaticClass, TEXT("UWidget_PlayerHUD"), &Z_Registration_Info_UClass_UWidget_PlayerHUD, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWidget_PlayerHUD), 3746747802U) },
+		{ Z_Construct_UClass_UWidget_PlayerHUD, UWidget_PlayerHUD::StaticClass, TEXT("UWidget_PlayerHUD"), &Z_Registration_Info_UClass_UWidget_PlayerHUD, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UWidget_PlayerHUD), 4107806997U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_PlayerHUD_h_2130378050(TEXT("/Script/Nproject1_GH"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_PlayerHUD_h_1637984608(TEXT("/Script/Nproject1_GH"),
 		Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_PlayerHUD_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Nproject1_GH_Source_Nproject1_GH_Widget_PlayerHUD_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

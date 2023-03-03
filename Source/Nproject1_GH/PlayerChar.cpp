@@ -398,10 +398,6 @@ void APlayerChar::UpdateMultiplier(float DeltaTime)
 		if (ScoreMultiplier_Current > 1.0f || MultiplierMeter_Current > 0.0f)
 		{
 			MultiplierMeter_Current -= (DeltaTime * MeterSpeedCoeff * ScoreMultiplier_Current);
-			if(PlayerHUD)
-			{
-				PlayerHUD->SetMultiplierBuildUp(MultiplierMeter_Current, MultiplierMeter_NeededForIncrease);
-			}
 			if(MultiplierMeter_Current <= 0.0f)
 			{
 				if(ScoreMultiplier_Current > 1.0f)
@@ -666,6 +662,12 @@ void APlayerChar::ShotCleanup()
 				Shot->Destroy();
 				ScoreMultiplier_Current = 1.0f;
 				MultiplierMeter_Current = 0.0f;
+				if(PlayerHUD)
+				{
+					PlayerHUD->SetMultiplier(ScoreMultiplier_Current);
+					PlayerHUD->SetMultiplierBuildUp(MultiplierMeter_Current, MultiplierMeter_NeededForIncrease);
+					PlayerHUD->SetMultiplierCanvasOpacity(ScoreMultiplier_Current);
+				}
 			}
 		}
 	}

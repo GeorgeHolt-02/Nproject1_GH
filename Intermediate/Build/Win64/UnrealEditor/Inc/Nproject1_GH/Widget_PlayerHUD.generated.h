@@ -16,6 +16,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define FID_Nproject1_GH_Source_Nproject1_GH_Widget_PlayerHUD_h_15_SPARSE_DATA
 #define FID_Nproject1_GH_Source_Nproject1_GH_Widget_PlayerHUD_h_15_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execSetMultiplierCanvasOpacity); \
 	DECLARE_FUNCTION(execSetMultiplierBuildUp); \
 	DECLARE_FUNCTION(execSetMultiplier); \
 	DECLARE_FUNCTION(execSetLives); \
@@ -25,6 +26,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 #define FID_Nproject1_GH_Source_Nproject1_GH_Widget_PlayerHUD_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execSetMultiplierCanvasOpacity); \
 	DECLARE_FUNCTION(execSetMultiplierBuildUp); \
 	DECLARE_FUNCTION(execSetMultiplier); \
 	DECLARE_FUNCTION(execSetLives); \

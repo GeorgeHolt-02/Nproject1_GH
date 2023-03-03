@@ -35,6 +35,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
 	class UProgressBar* MultiplierBuildupBar;
 
+	/* Canvas for the multiplier widgets */
+	UPROPERTY(EditDefaultsOnly, meta = (BindWidget))
+	class UCanvasPanel* MultiplierCanvas;
+
 	/* Player character reference */
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	class APlayerChar* Player;
@@ -58,4 +62,6 @@ public:
 	void SetMultiplier(float CurrentMultiplier);
 	UFUNCTION()
 	void SetMultiplierBuildUp(float CurrentMeter, float MaxMeter);
+	UFUNCTION()
+	void SetMultiplierCanvasOpacity(float CurrentMultiplier);
 };
