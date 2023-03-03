@@ -227,7 +227,7 @@ void APlayerChar::Tick(float DeltaTime)
 	UpdateInvulnTimer(DeltaTime);
 
 	UpdateMultiplier(DeltaTime);
-	
+		
 	// GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Green,
 	// FString::Printf(TEXT("PLAYER HEALTH: %f/%f"), CurrentHealth, MaxHealth));
 

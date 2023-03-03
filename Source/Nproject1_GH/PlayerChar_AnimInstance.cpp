@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ // Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PlayerChar_AnimInstance.h"
@@ -26,8 +26,10 @@ void UPlayerChar_AnimInstance::UpdateAnimationProperties()
 		{
 			MovementInput = (FMath::Abs(MyPlayerChar->Anim_MovementInput.X) + FMath::Abs(MyPlayerChar->Anim_MovementInput.Y));
 			bInAir = MyPlayerChar->Anim_bInAir;
-			bHasFired = MyPlayerChar->Anim_bHasFired;
 			bHasJumped = MyPlayerChar->Anim_bHasJumped;
+			bHasFired = MyPlayerChar->Anim_bHasFired;
+			MyPlayerChar->Anim_bHasJumped = false;
+			MyPlayerChar->Anim_bHasFired = false;
 		}
 	}
 }
