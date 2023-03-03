@@ -83,16 +83,12 @@ void UMyGameInstance::AddXtraLives()
 {
 	if (PlayerScore >= ScoreForXtraLives)
 	{
-		if (PlayerLives_Current < PlayerLives_Max)
+		for(int i = ScoreForXtraLives;
+			i <= PlayerScore;
+			i += ScoreForSubsequentXtraLives)
 		{
-			int i;
-			for(i = ScoreForXtraLives;
-				i <= PlayerScore;
-				i += ScoreForSubsequentXtraLives)
-			{
-				PlayerLives_Current++;
-				ScoreForXtraLives += ScoreForSubsequentXtraLives;
-			}
+			PlayerLives_Current = FMath::Clamp((PlayerLives_Current + 1), 0, PlayerLives_Max);
+			ScoreForXtraLives += ScoreForSubsequentXtraLives;
 		}
 		UE_LOG(LogTemp, Warning, TEXT("Score Required: %i"), ScoreForXtraLives);
 	}
