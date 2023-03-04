@@ -165,19 +165,19 @@ public:
 #pragma region ANIMATION VARIABLES
 
 	//Ground movement input
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Animation")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animation")
 	FVector2D Anim_MovementInput;
-
+	
 	//Whether or not the shoot button has been pressed
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Animation")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animation")
 	bool Anim_bHasFired;
 
 	//Whether or not the player has just jumped
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Animation")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animation")
 	bool Anim_bHasJumped;
 
 	//Whether or not the player is currently in mid-air
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Animation")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Animation")
 	bool Anim_bInAir;
 
 #pragma endregion

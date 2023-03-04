@@ -28,8 +28,15 @@ void UPlayerChar_AnimInstance::UpdateAnimationProperties()
 			bInAir = MyPlayerChar->Anim_bInAir;
 			bHasJumped = MyPlayerChar->Anim_bHasJumped;
 			bHasFired = MyPlayerChar->Anim_bHasFired;
-			MyPlayerChar->Anim_bHasJumped = false;
-			MyPlayerChar->Anim_bHasFired = false;
+			if (MyPlayerChar->Anim_bHasFired == true)
+			{
+				MyPlayerChar->Anim_bHasFired = false;
+			}
+			if (MyPlayerChar->Anim_bHasJumped == true)
+			{
+				MyPlayerChar->Anim_bHasJumped = false;
+			}
+			
 		}
 	}
 }

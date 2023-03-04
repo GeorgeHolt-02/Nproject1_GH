@@ -6,6 +6,11 @@
 /NAME:"UnrealEditor-RiderLink.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"D:\2001070\NP1\Github\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\Module.RiderLink.cpp.obj"
-"D:\2001070\NP1\Github\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\Default.rc2.res"
-/OUT:"D:\2001070\NP1\Github\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\UnrealEditor-RiderLink.lib"
+"D:\Geo_Work\Geo_NUA_Work_Year_3\Unit_3b\UE5\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\Module.RiderLink.cpp.obj"
+"D:\Geo_Work\Geo_NUA_Work_Year_3\Unit_3b\UE5\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\ProtocolFactory.cpp.obj"
+"D:\Geo_Work\Geo_NUA_Work_Year_3\Unit_3b\UE5\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\RiderLink.cpp.obj"
+"D:\Geo_Work\Geo_NUA_Work_Year_3\Unit_3b\UE5\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\BlueprintReference.Generated.cpp.obj"
+"D:\Geo_Work\Geo_NUA_Work_Year_3\Unit_3b\UE5\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\UE4Library.Generated.cpp.obj"
+"D:\Geo_Work\Geo_NUA_Work_Year_3\Unit_3b\UE5\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\RdEditorModel.Generated.cpp.obj"
+"D:\Geo_Work\Geo_NUA_Work_Year_3\Unit_3b\UE5\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\Default.rc2.res"
+/OUT:"D:\Geo_Work\Geo_NUA_Work_Year_3\Unit_3b\UE5\Nproject1_GH\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\UnrealEditor-RiderLink.lib"

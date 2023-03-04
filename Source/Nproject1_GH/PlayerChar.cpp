@@ -256,13 +256,17 @@ void APlayerChar::Tick(float DeltaTime)
 	// 	// }
 	// }
 
-	// if (Anim_bHasFired == true)
+	// if(bUpdateAnimBools)
 	// {
-	// 	Anim_bHasFired = false;
-	// }
-	// if (Anim_bHasJumped == true)
-	// {
-	// 	Anim_bHasJumped = false;
+	// 	if (Anim_bHasFired == true)
+	// 	{
+	// 		Anim_bHasFired = false;
+	// 	}
+	// 	if (Anim_bHasJumped == true)
+	// 	{
+	// 		Anim_bHasJumped = false;
+	// 	}
+	// 	bUpdateAnimBools = false;
 	// }
 }
 
