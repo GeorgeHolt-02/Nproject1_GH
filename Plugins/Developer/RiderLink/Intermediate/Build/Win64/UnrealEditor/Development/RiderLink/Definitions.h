@@ -49,8 +49,8 @@
 #define NDEBUG 1
 #define UE_BUILD_DEVELOPMENT 1
 #define UE_IS_ENGINE_MODULE 0
-#define UE_PROJECT_NAME Nproject1_GH
-#define UE_TARGET_NAME Nproject1_GHEditor
+#define UE_PROJECT_NAME Nproject2_GH
+#define UE_TARGET_NAME Nproject2_GHEditor
 #define ENABLE_LOG_FILE 0
 #define UE_MODULE_NAME "RiderLink"
 #define UE_PLUGIN_NAME "RiderLink"
