@@ -26,15 +26,3 @@ Plugins/Developer/RiderLink/Resources/checksum
 *.dmp
 *.png
 *.db
-*.target
-*.target
-*.exe
-*.bin
-*.dll
-*.pdb
-*.uhtmanifest
-*.uhtpath
-*.deps
-*.vcxproj
-*.filters
-*.user
