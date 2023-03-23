@@ -1,11 +1,11 @@
 {
     "Version": "1.1",
     "Data": {
-        "Source": "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject2_gh\\plugins\\developer\\riderlink\\source\\rd\\rd.cpp",
+        "Source": "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\plugins\\developer\\riderlink\\source\\rd\\rd.cpp",
         "ProvidedModule": "",
         "Includes": [
-            "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject2_gh\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\unrealeditor\\development\\rd\\definitions.h",
-            "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject2_gh\\plugins\\developer\\riderlink\\source\\rd\\rd.h",
+            "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\unrealeditor\\development\\rd\\definitions.h",
+            "d:\\geo_work\\geo_nua_work_year_3\\unit_3b\\ue5\\nproject1_gh\\plugins\\developer\\riderlink\\source\\rd\\rd.h",
             "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\core\\public\\logging\\logmacros.h",
             "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\core\\public\\coretypes.h",
             "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\core\\public\\hal\\platform.h",
